@@ -15,6 +15,7 @@
 		C61B33841FA1161B006CAC0D /* PictationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B33831FA1161B006CAC0D /* PictationTests.swift */; };
 		C61B338F1FA1161B006CAC0D /* PictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B338E1FA1161B006CAC0D /* PictationUITests.swift */; };
 		C666C3A61FA1E0C200C6E562 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */; };
+		C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C61B338E1FA1161B006CAC0D /* PictationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictationUITests.swift; sourceTree = "<group>"; };
 		C61B33901FA1161B006CAC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
+		C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginnerLevelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				C61B33701FA1161B006CAC0D /* ViewController.swift */,
 				C61B33721FA1161B006CAC0D /* Main.storyboard */,
 				C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */,
+				C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */,
 				C61B33751FA1161B006CAC0D /* Assets.xcassets */,
 				C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */,
 				C61B337A1FA1161B006CAC0D /* Info.plist */,
@@ -265,6 +268,7 @@
 				C666C3A61FA1E0C200C6E562 /* LevelViewController.swift in Sources */,
 				C61B33711FA1161B006CAC0D /* ViewController.swift in Sources */,
 				C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */,
+				C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,37 @@ import UIKit
 
 class LevelViewController: UIViewController {
 
+    @IBOutlet weak var beginnerButton: UIButton!
+    
+    @IBOutlet weak var intermediateButton: UIButton!
+    
+    @IBOutlet weak var advancedButton: UIButton!
+    
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBAction func buttonHandler(button: UIButton) {
+        switch button {
+       case beginnerButton:
+            beginnerButtonHandler(sender: button)
+        case intermediateButton:
+            beginnerButtonHandler(sender: button)
+        case advancedButton:
+            beginnerButtonHandler(sender: button)
+        case backButton:
+            backButtonHandler(sender: button)
+        default:
+            break
+        }
+    }
+    @IBAction func beginnerButtonHandler(sender: UIButton) {
+        performSegue(withIdentifier: "toBeginnerSegue", sender: self)
+    }
+    
+    @IBAction func backButtonHandler(sender: UIButton) {
+        performSegue(withIdentifier: "segueBackToViewController", sender: self)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
