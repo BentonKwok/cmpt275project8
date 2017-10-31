@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class BeginnerLevelViewController: UIViewController {
+import AVFoundation
+class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
     var currenctSelectedWord = ""
@@ -36,7 +36,36 @@ class BeginnerLevelViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    //text-to-speech
+    let mySynthesizer = AVSpeechSynthesizer()
+    var myUtterence = AVSpeechUtterance(string: "This assignment is so much fun and I really enjoy doing it!")
+    var wasPaused = false;
+    @IBAction func stopAudioButton(_ sender: UIButton) {
+        self.mySynthesizer.stopSpeaking(at: .immediate)
+        
+    }
+    @IBAction func playAudioButton(_ sender: UIButton) {
+        if(wasPaused==true)
+        {
+            self.mySynthesizer.continueSpeaking()
+            wasPaused=false;
+        }
+        else
+        {
+            myUtterence = AVSpeechUtterance(string: outputSentenceText.text!);
+            // myUtterence.rate = AVSpeechUtteranceMinimumSpeechRate
+            myUtterence.rate = 0.52
+            myUtterence.voice = AVSpeechSynthesisVoice(language: "en-us")
+            myUtterence.pitchMultiplier = 1.5 //between 0.5 and 2.0. Default is 1.0.
+            mySynthesizer.speak(myUtterence)
+            // Do any additional setup after loading the view, typically from a nib.
+        }
+    }
+    @IBAction func pauseAudioButton(_ sender: UIButton) {
+        self.mySynthesizer.pauseSpeaking(at: .word)
+        wasPaused = true;
+    }
     /*
     // MARK: - Navigation
 
