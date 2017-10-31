@@ -280,7 +280,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "swiftgen xcassets -p xcassets_swift4.stencil Pictation/Assets.xcassets/ -o Pictation/Images.swift";
+			shellScript = "if hash swiftgen; then\nswiftgen xcassets -p xcassets_swift4.stencil Pictation/Assets.xcassets/ -o Pictation/Images.swift\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
