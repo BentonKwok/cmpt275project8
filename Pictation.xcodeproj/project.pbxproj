@@ -16,6 +16,10 @@
 		C61B338F1FA1161B006CAC0D /* PictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B338E1FA1161B006CAC0D /* PictationUITests.swift */; };
 		C666C3A61FA1E0C200C6E562 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */; };
 		C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */; };
+		C6A0DBC31FA6D3FC00E15AD1 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBC21FA6D3FC00E15AD1 /* ContainerViewController.swift */; };
+		C6A0DBC81FA70EB600E15AD1 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBC71FA70EB600E15AD1 /* Images.swift */; };
+		C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBCB1FA721E200E15AD1 /* myCell.swift */; };
+		C6A0DBCE1FA7DD5B00E15AD1 /* subjects in Resources */ = {isa = PBXBuildFile; fileRef = C6A0DBCD1FA7DD5B00E15AD1 /* subjects */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		C61B33901FA1161B006CAC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginnerLevelViewController.swift; sourceTree = "<group>"; };
+		C6A0DBC21FA6D3FC00E15AD1 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		C6A0DBC71FA70EB600E15AD1 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		C6A0DBCB1FA721E200E15AD1 /* myCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = myCell.swift; path = ../myCell.swift; sourceTree = "<group>"; };
+		C6A0DBCD1FA7DD5B00E15AD1 /* subjects */ = {isa = PBXFileReference; lastKnownFileType = folder; name = subjects; path = ../../../Downloads/subjects; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,13 +109,17 @@
 		C61B336D1FA1161B006CAC0D /* Pictation */ = {
 			isa = PBXGroup;
 			children = (
+				C6A0DBCD1FA7DD5B00E15AD1 /* subjects */,
+				C6A0DBCB1FA721E200E15AD1 /* myCell.swift */,
 				C61B336E1FA1161B006CAC0D /* AppDelegate.swift */,
+				C6A0DBC71FA70EB600E15AD1 /* Images.swift */,
 				C61B33701FA1161B006CAC0D /* ViewController.swift */,
 				C61B33721FA1161B006CAC0D /* Main.storyboard */,
 				C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */,
 				C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */,
-				C61B33751FA1161B006CAC0D /* Assets.xcassets */,
+				C6A0DBC21FA6D3FC00E15AD1 /* ContainerViewController.swift */,
 				C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */,
+				C61B33751FA1161B006CAC0D /* Assets.xcassets */,
 				C61B337A1FA1161B006CAC0D /* Info.plist */,
 			);
 			path = Pictation;
@@ -138,6 +150,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C61B33931FA1161B006CAC0D /* Build configuration list for PBXNativeTarget "Pictation" */;
 			buildPhases = (
+				C6A0DBC61FA70D0900E15AD1 /* Swiftgen */,
 				C61B33671FA1161B006CAC0D /* Sources */,
 				C61B33681FA1161B006CAC0D /* Frameworks */,
 				C61B33691FA1161B006CAC0D /* Resources */,
@@ -241,6 +254,7 @@
 				C61B33791FA1161B006CAC0D /* LaunchScreen.storyboard in Resources */,
 				C61B33761FA1161B006CAC0D /* Assets.xcassets in Resources */,
 				C61B33741FA1161B006CAC0D /* Main.storyboard in Resources */,
+				C6A0DBCE1FA7DD5B00E15AD1 /* subjects in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,14 +274,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C6A0DBC61FA70D0900E15AD1 /* Swiftgen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftgen;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swiftgen xcassets -p xcassets_swift4.stencil Pictation/Assets.xcassets/ -o Pictation/Images.swift";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C61B33671FA1161B006CAC0D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C666C3A61FA1E0C200C6E562 /* LevelViewController.swift in Sources */,
+				C6A0DBC81FA70EB600E15AD1 /* Images.swift in Sources */,
 				C61B33711FA1161B006CAC0D /* ViewController.swift in Sources */,
+				C6A0DBC31FA6D3FC00E15AD1 /* ContainerViewController.swift in Sources */,
 				C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */,
+				C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */,
 				C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

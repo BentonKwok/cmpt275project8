@@ -1,32 +1,14 @@
 //
-//  BeginnerLevelViewController.swift
+//  myCell.swift
 //  Pictation
 //
-//  Created by Benton on 2017-10-26.
+//  Created by Benton on 2017-10-30.
 //  Copyright © 2017 Benton. All rights reserved.
 //
 
 import UIKit
 
-class BeginnerLevelViewController: UIViewController {
-
-    var currenctSelectedWord = ""
-    @IBOutlet weak var OutputSentence: UITextField!
-    
-    @IBOutlet weak var imageView: UIImageView!
-//    @IBAction func make(_ sender: Any) {
-//        if (OutputSentence.text != nil) {
-//            OutputSentence.text = currenctSelectedWord
-//        }
-//    }
-//    @IBAction func apple(_ sender: Any) {
-//        currenctSelectedWord = "Apple"
-//        imageView.image = UIImage(named: "apple")
-//    }
-//    @IBAction func cucumber(_ sender: Any) {
-//        currenctSelectedWord = "Cucumber"
-//        imageView.image = UIImage(named: "cucumber")
-//    }
+class myCell: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +20,7 @@ class BeginnerLevelViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     /*
     // MARK: - Navigation
