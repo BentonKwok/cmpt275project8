@@ -50,7 +50,19 @@ struct {{colorType}} {
 {% macro enumBlock assets sp %}
 {{sp}}  {% call casesBlock assets sp %}
 {{sp}}  {% if not param.noAllValues %}
+
 {{sp}}  // swiftlint:disable trailing_comma
+{{sp}}  static let allColors: [{{colorType}}] = [
+{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
+{{sp}}    {% call allValuesBlock assets "color" "" sp2 %}
+{{sp}}  ]
+{{sp}}  static let allImages: [{{imageType}}] = [
+{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
+{{sp}}    {% call allValuesBlock assets "image" "" sp2 %}
+{{sp}}  ]
+{{sp}}  // swiftlint:enable trailing_comma
+{{sp}}  @available(*, deprecated, renamed: "allImages")
+{{sp}}  static let allValues: [{{enumName}}Type] = allImages
 {{sp}}  {% endif %}
 {% endmacro %}
 {% macro casesBlock assets sp %}
@@ -63,13 +75,14 @@ struct {{colorType}} {
 {{sp}}  enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
 {{sp}}    {% set sp2 %}{{sp}}  {% endset %}
 {{sp}}    {% call casesBlock asset.items sp2 %}
+
+{{sp}}    static let allImages: [{{imageType}}] = [
+{{sp}}      {% set sp3 %}{{sp2}}  {% endset %}
+{{sp}}      {% call allValuesBlock asset.items "image" "" sp3 %}
+{{sp}}    ]
 {{sp}}  }
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
-{{sp}}  static let allWords: [{{imageType}}] = [
-{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
-{{sp}}    {% call allValuesBlock assets "image" "" sp2 %}
-{{sp}}  ]
 {% endmacro %}
 {% macro allValuesBlock assets filter prefix sp %}
 {{sp}}  {% for asset in assets %}

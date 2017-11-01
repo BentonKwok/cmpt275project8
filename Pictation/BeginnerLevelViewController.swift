@@ -93,7 +93,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
 extension BeginnerLevelViewController : UICollectionViewDataSource {
     /// Number of section and items in each section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Asset.allWords.count
+        return Asset.Images.allImages.count
     }
     
     /// Create cell for each item

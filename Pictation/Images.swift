@@ -48,37 +48,47 @@ enum Asset {
     enum Objects {
       static let apple = ImageAsset(name: "apple")
       static let cucumber = ImageAsset(name: "cucumber")
-      static let allWords: [ImageAsset] = [
+
+      static let allImages: [ImageAsset] = [
         apple,
         cucumber,
       ]
     }
     enum Subjects {
       static let me = ImageAsset(name: "me")
-      static let allWords: [ImageAsset] = [
+
+      static let allImages: [ImageAsset] = [
         me,
       ]
     }
     enum Verbs {
       static let eat = ImageAsset(name: "eat")
-      static let allWords: [ImageAsset] = [
+
+      static let allImages: [ImageAsset] = [
         eat,
       ]
     }
-    static let allWords: [ImageAsset] = [
+
+    static let allImages: [ImageAsset] = [
       Objects.apple,
       Objects.cucumber,
       Subjects.me,
       Verbs.eat,
     ]
   }
-  static let allWords: [ImageAsset] = [
+
+  // swiftlint:disable trailing_comma
+  static let allColors: [ColorAsset] = [
+  ]
+  static let allImages: [ImageAsset] = [
     Images.Objects.apple,
     Images.Objects.cucumber,
     Images.Subjects.me,
     Images.Verbs.eat,
   ]
-  // swiftlint:disable trailing_comma
+  // swiftlint:enable trailing_comma
+  @available(*, deprecated, renamed: "allImages")
+  static let allValues: [AssetType] = allImages
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
