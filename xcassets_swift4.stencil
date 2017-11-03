@@ -75,6 +75,11 @@ struct {{colorType}} {
 {{sp}}  enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
 {{sp}}    {% set sp2 %}{{sp}}  {% endset %}
 {{sp}}    {% call casesBlock asset.items sp2 %}
+
+{{sp}}    static let allImages: [{{imageType}}] = [
+{{sp}}      {% set sp3 %}{{sp2}}  {% endset %}
+{{sp}}      {% call allValuesBlock asset.items "image" "" sp3 %}
+{{sp}}    ]
 {{sp}}  }
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
