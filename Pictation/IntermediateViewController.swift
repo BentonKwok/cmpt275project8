@@ -1,12 +1,26 @@
 import UIKit
+import AVFoundation
 
-class IntermediateViewController: UIViewController {
+class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     //MARK: Properties
     @IBOutlet weak var collectionView: UICollectionView!
-    var currenctSelectedWord = ""
     @IBOutlet weak var outputSentenceText: UITextField!
-    var selectedImage: UIImage!
     @IBOutlet weak var sentenceImages: ImageDisplay!
+    
+    var allImages:[UIImage]!
+    var allTitles:[String]!
+    
+    var subjectImagesUrlArray:[URL]!
+    var objectImagesUrlArray:[URL]!
+    var verbImagesUrlArray:[URL]!
+    var allImagesUrlArray:[URL]!
+    
+    var selectedImage: UIImage!
+    var currenctSelectedWord = ""
+    
+    let SUBJECT_FOLDER_NAME = "subjects"
+    let OBJECT_FOLDER_NAME = "objects"
+    let VERB_FOLDER_NAME = "verbs"
     
    // @IBAction func makeButtonHandler(_ sender: UIButton) {
     @IBAction func makeButtonHandler(_ sender: UIButton) {
@@ -28,10 +42,91 @@ class IntermediateViewController: UIViewController {
         outputSentenceText.text = currenctSelectedWord
         self.sentenceImages.reset()
     }
+    //Remove strings after seeing the key word.
+    //Example: passing in helloworld, world
+    //will return: hello
+    func removeLastComponentOfString(_ originalString: String, _ stringToBeRemoved: String) -> String {
+        if (stringToBeRemoved != "") {
+            var trimmedString = ""
+            if let index = originalString.range(of: stringToBeRemoved)?.lowerBound {
+                let substring = originalString[..<(index)]
+                trimmedString = String(substring)
+            }
+            return trimmedString
+        } else {
+            return originalString
+        }
+    }
+    
+    //Return all the file names as an Arary [String] under folder at folderPath
+    fileprivate func getTitleArrays(_ folderPath: String) -> [String] {
+        var titleArray = [String]()
+        do {
+            titleArray = try FileManager.default.contentsOfDirectory(atPath: folderPath)
+        } catch {
+            print("Error at getting contents of directory = \(folderPath)")
+        }
+        return titleArray
+    }
+    
+    //Return all the images as an Array [UIImages] under folder at folderPath
+    fileprivate func getImageArrays(_ folderPath: String, _ titleArray : [String], _ imageUrlArray : [URL]) -> [UIImage] {
+        var imageArray = [UIImage]()
+        var imageIndex = 0
+        for _ in titleArray {
+            let data = NSData(contentsOf: imageUrlArray[imageIndex])
+            let image = UIImage(data: data! as Data)
+            imageArray.append(image!)
+            imageIndex = imageIndex + 1
+        }
+        return imageArray
+    }
+    
+    //Return the folder path by getting the file path of first image, and then remove its last componenet to get its folder path
+    //Example: Passing in User/subjects/eat.jpg will return
+    //User/subjects
+    func getFolderPathWithoutLastComponent(imageUrlArray : [URL]) -> String {
+        if (imageUrlArray[0].absoluteString != "" ) {
+            let firstImagePath = imageUrlArray[0].path
+            let firstImageNSPath = firstImagePath as NSString
+            let stringToBeRemoved = firstImageNSPath.lastPathComponent as String
+            return removeLastComponentOfString(firstImagePath, stringToBeRemoved)
+        } else {
+            return ""
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        //Getting all the image folder paths as URL arrays [URL]
+        //There are THREE folders, subjects, objects, verbs
+        subjectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: SUBJECT_FOLDER_NAME)!
+        objectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: OBJECT_FOLDER_NAME)!
+        verbImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: VERB_FOLDER_NAME)!
+        
+        allImagesUrlArray = subjectImagesUrlArray + objectImagesUrlArray
+        allImagesUrlArray = allImagesUrlArray + verbImagesUrlArray
+        
+        let subjectFolderPath = getFolderPathWithoutLastComponent(imageUrlArray: subjectImagesUrlArray)
+        let objectFolderPath = getFolderPathWithoutLastComponent(imageUrlArray: objectImagesUrlArray)
+        let verbFolderPath = getFolderPathWithoutLastComponent(imageUrlArray: verbImagesUrlArray)
+        
+        //Getting all the file names of each folder and put them in String arrays [String]
+        let subjectTitles = getTitleArrays(subjectFolderPath)
+        let objectTitles = getTitleArrays(objectFolderPath)
+        let verbTitles = getTitleArrays(verbFolderPath)
+        
+        //Getting all the images of each foler and put them in UIImages arrays [UIImage]
+        let subjectImages = getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
+        let objectImages = getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
+        let verbImages = getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
+        
+        allTitles = subjectTitles + objectTitles
+        allTitles = allTitles + verbTitles
+        
+        allImages = subjectImages + objectImages
+        allImages = allImages + verbImages
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,6 +134,38 @@ class IntermediateViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //text-to-speech
+    let mySynthesizer = AVSpeechSynthesizer()
+    var myUtterence = AVSpeechUtterance(string: "This assignment is so much fun and I really enjoy doing it!")
+    var wasPaused = false;
+    
+    @IBAction func stopAudioButton(_ sender: UIButton) {
+        self.mySynthesizer.stopSpeaking(at: .immediate)
+    }
+    
+    @IBAction func playAudioButton(_ sender: UIButton) {
+        if(wasPaused==true)
+        {
+            self.mySynthesizer.continueSpeaking()
+            wasPaused=false;
+        }
+        else
+        {
+            myUtterence = AVSpeechUtterance(string: outputSentenceText.text!);
+            // myUtterence.rate = AVSpeechUtteranceMinimumSpeechRate
+            myUtterence.rate = 0.52
+            myUtterence.voice = AVSpeechSynthesisVoice(language: "en-us")
+            myUtterence.pitchMultiplier = 1.5 //between 0.5 and 2.0. Default is 1.0.
+            mySynthesizer.speak(myUtterence)
+            // Do any additional setup after loading the view, typically from a nib.
+        }
+    }
+    
+    //@IBAction func pauseAudioButton(_ sender: UIButton) {
+    @IBAction func pauseAudioButton(_ sender: UIButton) {
+        self.mySynthesizer.pauseSpeaking(at: .word)
+        wasPaused = true;
+    }
     /*
      // MARK: - Navigation
      
@@ -48,6 +175,7 @@ class IntermediateViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
     
 }
 
