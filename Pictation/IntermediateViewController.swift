@@ -194,17 +194,17 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
 extension IntermediateViewController : UICollectionViewDataSource {
     /// Number of section and items in each section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Asset.allImages.count
+        return allImages.count
     }
     
     /// Create cell for each item
     // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
-        cell.buttonCell.setBackgroundImage(Asset.allImages[indexPath.row].image, for: .normal)
+        cell.buttonCell.setBackgroundImage(allImages[indexPath.row], for: .normal)
         cell.buttonHandler = { [weak self] button in
-            self?.currenctSelectedWord = Asset.allImages[indexPath.row].name
-            self?.selectedImage = Asset.allImages[indexPath.row].image
+            self?.currenctSelectedWord = (self?.removeLastComponentOfString((self?.allTitles[indexPath.row])!, ".jpg"))!
+            self?.selectedImage = self?.allImages[indexPath.row]
             
             //adds images and text to subview at the top
             self?.sentenceImages.addImage(newImage: (self?.selectedImage), newText : (self?.currenctSelectedWord), maxSubViews: 3)
