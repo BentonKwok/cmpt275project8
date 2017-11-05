@@ -1,11 +1,3 @@
-  //
-//  IntermediateViewController.swift
-//  Pictation
-//
-//  Created by Jameson Roy on 2017-11-01.
-//  Copyright © 2017 Benton. All rights reserved.
-//
-
 import UIKit
 
 class IntermediateViewController: UIViewController {

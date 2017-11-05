@@ -1,15 +1,7 @@
-//
-//  BeginnerLevelViewController.swift
-//  Pictation
-//
-//  Created by Benton on 2017-10-26.
-//  Copyright © 2017 Benton. All rights reserved.
-//
-
 import UIKit
 import AVFoundation
 class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var selectedImage: UIImageView!
@@ -27,13 +19,13 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     let SUBJECT_FOLDER_NAME = "subjects"
     let OBJECT_FOLDER_NAME = "objects"
     let VERB_FOLDER_NAME = "verbs"
-
+    
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         if (currenctSelectedWord != "") {
             outputSentenceText.text = currenctSelectedWord
         }
     }
-   
+    
     @IBAction func restartButtonHandler(_ sender: UIButton) {
         currenctSelectedWord = ""
         selectedImage.image = nil
@@ -43,13 +35,17 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     //Remove strings after seeing the key word.
     //Example: passing in helloworld, world
     //will return: hello
-    fileprivate func removeLastComponentOfString(_ originalString: String, _ stringToBeRemoved: String) -> String {
-        var trimmedString = ""
-        if let index = originalString.range(of: stringToBeRemoved)?.lowerBound {
-            let substring = originalString[..<(index)]
-            trimmedString = String(substring)
+    func removeLastComponentOfString(_ originalString: String, _ stringToBeRemoved: String) -> String {
+        if (stringToBeRemoved != "") {
+            var trimmedString = ""
+            if let index = originalString.range(of: stringToBeRemoved)?.lowerBound {
+                let substring = originalString[..<(index)]
+                trimmedString = String(substring)
+            }
+            return trimmedString
+        } else {
+            return originalString
         }
-        return trimmedString
     }
     
     //Return all the file names as an Arary [String] under folder at folderPath
@@ -118,7 +114,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         allImages = subjectImages + objectImages
         allImages = allImages + verbImages
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -154,15 +150,15 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         wasPaused = true;
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 /// Collection View data

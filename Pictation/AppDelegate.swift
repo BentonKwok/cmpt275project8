@@ -1,11 +1,3 @@
- //
-//  AppDelegate.swift
-//  Pictation
-//
-//  Created by Benton on 2017-10-25.
-//  Copyright © 2017 Benton. All rights reserved.
-//
-// trying stuff here... - Benton
 import UIKit
 
 @UIApplicationMain

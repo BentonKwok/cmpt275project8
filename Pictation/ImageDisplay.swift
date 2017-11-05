@@ -1,11 +1,3 @@
-//
-//  ImageDispaly.swift
-//  Pictation
-//
-//  Created by Jameson Roy on 10/29/17.
-//  Copyright © 2017 Benton. All rights reserved.
-//
-
 import UIKit
 
 /* A UIStackView subclass to implement the displayed images at the top of

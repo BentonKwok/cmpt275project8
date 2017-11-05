@@ -1,11 +1,3 @@
-//
-//  LevelViewController.swift
-//  Pictation
-//
-//  Created by Benton on 2017-10-26.
-//  Copyright © 2017 Benton. All rights reserved.
-//
-
 import UIKit
 
 class LevelViewController: UIViewController {
