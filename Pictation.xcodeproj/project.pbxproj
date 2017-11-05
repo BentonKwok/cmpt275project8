@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		452D39641FAA2A1C00C4850E /* IntermediateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */; };
+		45672A811FA8F15300BCC811 /* ImageDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45672A801FA8F15200BCC811 /* ImageDisplay.swift */; };
 		C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B336E1FA1161B006CAC0D /* AppDelegate.swift */; };
 		C61B33711FA1161B006CAC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B33701FA1161B006CAC0D /* ViewController.swift */; };
 		C61B33741FA1161B006CAC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61B33721FA1161B006CAC0D /* Main.storyboard */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateViewController.swift; sourceTree = "<group>"; };
+		45672A801FA8F15200BCC811 /* ImageDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDisplay.swift; sourceTree = "<group>"; };
 		C61B336B1FA1161B006CAC0D /* Pictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pictation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61B336E1FA1161B006CAC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C61B33701FA1161B006CAC0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -111,7 +115,11 @@
 		C61B336D1FA1161B006CAC0D /* Pictation */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				C6D58C1B1FAE9516005C9CF3 /* AllImages */,
+=======
+				45672A801FA8F15200BCC811 /* ImageDisplay.swift */,
+>>>>>>> e05f7ec7daddbf9796f5d77159bb27618fa3511b
 				C6A0DBCB1FA721E200E15AD1 /* myCell.swift */,
 				C61B336E1FA1161B006CAC0D /* AppDelegate.swift */,
 				C6A0DBC71FA70EB600E15AD1 /* Images.swift */,
@@ -122,6 +130,7 @@
 				C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */,
 				C61B33751FA1161B006CAC0D /* Assets.xcassets */,
 				C61B337A1FA1161B006CAC0D /* Info.plist */,
+				452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */,
 			);
 			path = Pictation;
 			sourceTree = "<group>";
@@ -310,6 +319,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C666C3A61FA1E0C200C6E562 /* LevelViewController.swift in Sources */,
+				45672A811FA8F15300BCC811 /* ImageDisplay.swift in Sources */,
+				452D39641FAA2A1C00C4850E /* IntermediateViewController.swift in Sources */,
 				C6A0DBC81FA70EB600E15AD1 /* Images.swift in Sources */,
 				C61B33711FA1161B006CAC0D /* ViewController.swift in Sources */,
 				C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */,

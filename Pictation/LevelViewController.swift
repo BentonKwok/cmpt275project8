@@ -23,7 +23,7 @@ class LevelViewController: UIViewController {
        case beginnerButton:
             beginnerButtonHandler(sender: button)
         case intermediateButton:
-            beginnerButtonHandler(sender: button)
+            intermediateButtonHandler(sender: button)
         case advancedButton:
             beginnerButtonHandler(sender: button)
         case backButton:
@@ -35,7 +35,9 @@ class LevelViewController: UIViewController {
     @IBAction func beginnerButtonHandler(sender: UIButton) {
         performSegue(withIdentifier: "toBeginnerSegue", sender: self)
     }
-    
+    func intermediateButtonHandler(sender: UIButton){
+        performSegue(withIdentifier: "toIntermediateSegue", sender: self)
+    }
     @IBAction func backButtonHandler(sender: UIButton) {
         performSegue(withIdentifier: "segueBackToViewController", sender: self)
     }
