@@ -40,6 +40,9 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         outputSentenceText.text = currenctSelectedWord
     }
     
+    //Remove strings after seeing the key word.
+    //Example: passing in helloworld, world
+    //will return: hello
     fileprivate func removeLastComponentOfString(_ originalString: String, _ stringToBeRemoved: String) -> String {
         var trimmedString = ""
         if let index = originalString.range(of: stringToBeRemoved)?.lowerBound {
@@ -49,6 +52,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         return trimmedString
     }
     
+    //Return all the file names as an Arary [String] under folder at folderPath
     fileprivate func getTitleArrays(_ folderPath: String) -> [String] {
         var titleArray = [String]()
         do {
@@ -59,6 +63,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         return titleArray
     }
     
+    //Return all the images as an Array [UIImages] under folder at folderPath
     fileprivate func getImageArrays(_ folderPath: String, _ titleArray : [String], _ imageUrlArray : [URL]) -> [UIImage] {
         var imageArray = [UIImage]()
         var imageIndex = 0
@@ -71,6 +76,9 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         return imageArray
     }
     
+    //Return the folder path by getting the file path of first image, and then remove its last componenet to get its folder path
+    //Example: Passing in User/subjects/eat.jpg will return
+    //User/subjects
     func getFolderPath(imageUrlArray : [URL]) -> String {
         let firstImagePath = imageUrlArray[0].path
         let firstImageNSPath = firstImagePath as NSString
@@ -78,26 +86,11 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         return removeLastComponentOfString(firstImagePath, stringToBeRemoved)
     }
     
-//    fileprivate func populateImageAndTiltleArray(_ folderPath: String){
-//        do{
-//            images.removeAll()
-//            var imageIndex = 0
-//            titles = try
-//                FileManager.default.contentsOfDirectory(atPath: folderPath)
-//            for _ in titles{
-//                let data = NSData(contentsOf: imageUrlArray[imageIndex])
-//                let image = UIImage(data: data! as Data)
-//                images.append(image!)
-//                imageIndex = imageIndex + 1
-//            }
-//        }catch{
-//            print("Error")
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Getting all the image folder paths as URL arrays [URL]
+        //There are THREE folders, subjects, objects, verbs
         subjectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: SUBJECT_FOLDER_NAME)!
         objectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: OBJECT_FOLDER_NAME)!
         verbImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: VERB_FOLDER_NAME)!
@@ -109,10 +102,12 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         let objectFolderPath = getFolderPath(imageUrlArray: objectImagesUrlArray)
         let verbFolderPath = getFolderPath(imageUrlArray: verbImagesUrlArray)
         
+        //Getting all the file names of each folder and put them in String arrays [String]
         let subjectTitles = getTitleArrays(subjectFolderPath)
         let objectTitles = getTitleArrays(objectFolderPath)
         let verbTitles = getTitleArrays(verbFolderPath)
         
+        //Getting all the images of each foler and put them in UIImages arrays [UIImage]
         let subjectImages = getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
         let objectImages = getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
         let verbImages = getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
