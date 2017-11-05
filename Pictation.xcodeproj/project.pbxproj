@@ -114,12 +114,8 @@
 		};
 		C61B336D1FA1161B006CAC0D /* Pictation */ = {
 			isa = PBXGroup;
-			children = (
-<<<<<<< HEAD
-				C6D58C1B1FAE9516005C9CF3 /* AllImages */,
-=======
+			children = (				C6D58C1B1FAE9516005C9CF3 /* AllImages */,
 				45672A801FA8F15200BCC811 /* ImageDisplay.swift */,
->>>>>>> e05f7ec7daddbf9796f5d77159bb27618fa3511b
 				C6A0DBCB1FA721E200E15AD1 /* myCell.swift */,
 				C61B336E1FA1161B006CAC0D /* AppDelegate.swift */,
 				C6A0DBC71FA70EB600E15AD1 /* Images.swift */,
