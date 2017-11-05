@@ -11,14 +11,22 @@ import AVFoundation
 class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var currenctSelectedWord = ""
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var selectedImage: UIImageView!
     
+    var allImages:[UIImage]!
+    var allTitles:[String]!
     
-    var imagesDirectoryPath:String!
-    var images:[UIImage]!
-    var titles:[String]!
+    var subjectImagesUrlArray:[URL]!
+    var objectImagesUrlArray:[URL]!
+    var verbImagesUrlArray:[URL]!
+    var allImagesUrlArray:[URL]!
+    
+    var currenctSelectedWord = ""
+    
+    let SUBJECT_FOLDER_NAME = "subjects"
+    let OBJECT_FOLDER_NAME = "objects"
+    let VERB_FOLDER_NAME = "verbs"
 
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         if (currenctSelectedWord != "") {
@@ -31,44 +39,89 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         selectedImage.image = nil
         outputSentenceText.text = currenctSelectedWord
     }
+    
+    fileprivate func removeLastComponentOfString(_ originalString: String, _ stringToBeRemoved: String) -> String {
+        var trimmedString = ""
+        if let index = originalString.range(of: stringToBeRemoved)?.lowerBound {
+            let substring = originalString[..<(index)]
+            trimmedString = String(substring)
+        }
+        return trimmedString
+    }
+    
+    fileprivate func getTitleArrays(_ folderPath: String) -> [String] {
+        var titleArray = [String]()
+        do {
+            titleArray = try FileManager.default.contentsOfDirectory(atPath: folderPath)
+        } catch {
+            print("Error at getting contents of directory = \(folderPath)")
+        }
+        return titleArray
+    }
+    
+    fileprivate func getImageArrays(_ folderPath: String, _ titleArray : [String], _ imageUrlArray : [URL]) -> [UIImage] {
+        var imageArray = [UIImage]()
+        var imageIndex = 0
+        for _ in titleArray {
+            let data = NSData(contentsOf: imageUrlArray[imageIndex])
+            let image = UIImage(data: data! as Data)
+            imageArray.append(image!)
+            imageIndex = imageIndex + 1
+        }
+        return imageArray
+    }
+    
+    func getFolderPath(imageUrlArray : [URL]) -> String {
+        let firstImagePath = imageUrlArray[0].path
+        let firstImageNSPath = firstImagePath as NSString
+        let stringToBeRemoved = firstImageNSPath.lastPathComponent as String
+        return removeLastComponentOfString(firstImagePath, stringToBeRemoved)
+    }
+    
+//    fileprivate func populateImageAndTiltleArray(_ folderPath: String){
+//        do{
+//            images.removeAll()
+//            var imageIndex = 0
+//            titles = try
+//                FileManager.default.contentsOfDirectory(atPath: folderPath)
+//            for _ in titles{
+//                let data = NSData(contentsOf: imageUrlArray[imageIndex])
+//                let image = UIImage(data: data! as Data)
+//                images.append(image!)
+//                imageIndex = imageIndex + 1
+//            }
+//        }catch{
+//            print("Error")
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        images = []
+        subjectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: SUBJECT_FOLDER_NAME)!
+        objectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: OBJECT_FOLDER_NAME)!
+        verbImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: VERB_FOLDER_NAME)!
         
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        // Get the Document directory path
-        let documentDirectorPath:String = paths[0]
-        // Create a new path for the new images folder
-        imagesDirectoryPath = documentDirectorPath + "/Images"
-        var objcBool:ObjCBool = true
-        let isExist = FileManager.default.fileExists(atPath: imagesDirectoryPath, isDirectory: &objcBool)
-        // If the folder with the given path doesn't exist already, create it
-        if isExist == false{
-            do{
-                try FileManager.default.createDirectory(atPath: imagesDirectoryPath, withIntermediateDirectories: true, attributes: nil)
-            }catch{
-                print("Something went wrong while creating a new folder")
-            }
-        }
+        allImagesUrlArray = subjectImagesUrlArray + objectImagesUrlArray
+        allImagesUrlArray = allImagesUrlArray + verbImagesUrlArray
         
-        func refreshTable(){
-            do{
-                images.removeAll()
-                titles = try
-                    FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath)
-                for image in titles{
-                    let data = FileManager.default.contents(atPath: imagesDirectoryPath + "/\(image)")
-                    let image = UIImage(data: data!)
-                    images.append(image!)
-                }
-            }catch{
-                print("Error")
-            }
-        }
+        let subjectFolderPath = getFolderPath(imageUrlArray: subjectImagesUrlArray)
+        let objectFolderPath = getFolderPath(imageUrlArray: objectImagesUrlArray)
+        let verbFolderPath = getFolderPath(imageUrlArray: verbImagesUrlArray)
         
-        refreshTable()
-        // Do any additional setup after loading the view.
+        let subjectTitles = getTitleArrays(subjectFolderPath)
+        let objectTitles = getTitleArrays(objectFolderPath)
+        let verbTitles = getTitleArrays(verbFolderPath)
+        
+        let subjectImages = getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
+        let objectImages = getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
+        let verbImages = getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
+        
+        allTitles = subjectTitles + objectTitles
+        allTitles = allTitles + verbTitles
+        
+        allImages = subjectImages + objectImages
+        allImages = allImages + verbImages
     }
 
     override func didReceiveMemoryWarning() {
@@ -117,6 +170,28 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
 
 }
 
+/// Collection View data
+extension BeginnerLevelViewController : UICollectionViewDataSource {
+    /// Number of section and items in each section
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return allImages.count
+    }
+    
+    /// Create cell for each item
+    // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
+        cell.buttonCell.setBackgroundImage(allImages[indexPath.row], for: .normal)
+        cell.buttonHandler = { [weak self] button in
+            self?.currenctSelectedWord = (self?.removeLastComponentOfString((self?.allTitles[indexPath.row])!, ".jpg"))!
+            self?.selectedImage.image = self?.allImages[indexPath.row]
+            
+            print("bentonk: buttonHandler on item: \(indexPath.item) selected")
+        }
+        return cell
+    }
+}
+
 /// Collection View Impl
 //extension BeginnerLevelViewController : UICollectionViewDelegate {
 //    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
@@ -127,27 +202,3 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
 //        print("styuen: item: \(indexPath.item) was selected")
 //    }
 //}
-
-/// Collection View data
-extension BeginnerLevelViewController : UICollectionViewDataSource {
-    /// Number of section and items in each section
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-    
-    /// Create cell for each item
-    // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
-        cell.buttonCell.setBackgroundImage(images[indexPath.row], for: .normal)
-        cell.buttonHandler = { [weak self] button in
-            self?.currenctSelectedWord = (self?.titles[indexPath.row])!
-            self?.selectedImage.image = self?.images[indexPath.row]
-            
-            print("bentonk: buttonHandler on item: \(indexPath.item) selected")
-        }
-        //cell.buttonCell.setAttributedTitle(NSAttributedString.init(string: "test"), for: .normal)
-        
-        return cell
-    }
-}
