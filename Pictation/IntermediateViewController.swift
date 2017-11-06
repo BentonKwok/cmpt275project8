@@ -6,9 +6,13 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var sentenceImages: ImageDisplay!
+    @IBOutlet weak var picturePanelState: UITextField!
     
-    var allImages:[UIImage]!
-    var allTitles:[String]!
+    var allImages:[[UIImage]]! = [[UIImage](), [UIImage](), [UIImage](), [UIImage]()]
+    var allTitles:[[String]]! = [[String](), [String](), [String](), [String]()]
+    
+    var currentImages:[UIImage]!
+    var currentTitles:[String]!
     
     var subjectImagesUrlArray:[URL]!
     var objectImagesUrlArray:[URL]!
@@ -17,10 +21,12 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     
     var selectedImage: UIImage!
     var currenctSelectedWord = ""
+    var currentPanel = ""
     
     let SUBJECT_FOLDER_NAME = "subjects"
     let OBJECT_FOLDER_NAME = "objects"
     let VERB_FOLDER_NAME = "verbs"
+    var collectionViewClick = 0
     
    // @IBAction func makeButtonHandler(_ sender: UIButton) {
     @IBAction func makeButtonHandler(_ sender: UIButton) {
@@ -41,6 +47,13 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         selectedImage = nil
         outputSentenceText.text = currenctSelectedWord
         self.sentenceImages.reset()
+        self.collectionViewClick = 0
+        
+        currentTitles = allTitles[collectionViewClick]
+        currentImages = allImages[collectionViewClick]
+        collectionView.reloadData()
+        currentPanel = "subject"
+        picturePanelState.text = currentPanel
     }
     //Remove strings after seeing the key word.
     //Example: passing in helloworld, world
@@ -122,11 +135,17 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         let objectImages = getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
         let verbImages = getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
         
-        allTitles = subjectTitles + objectTitles
-        allTitles = allTitles + verbTitles
+        allTitles[0] = subjectTitles
+        allTitles[1] = verbTitles
+        allTitles[2] = objectTitles
+        //allTitles = allTitles + verbTitles
         
-        allImages = subjectImages + objectImages
-        allImages = allImages + verbImages
+        allImages[0] = subjectImages
+        allImages[1] = verbImages
+        allImages[2] = objectImages
+        
+        currentImages = allImages[collectionViewClick]
+        currentTitles = allTitles[collectionViewClick]
     }
     
     override func didReceiveMemoryWarning() {
@@ -194,22 +213,40 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
 extension IntermediateViewController : UICollectionViewDataSource {
     /// Number of section and items in each section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allImages.count
+        //return allImages.count
+        return currentImages.count
     }
     
     /// Create cell for each item
     // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
-        cell.buttonCell.setBackgroundImage(allImages[indexPath.row], for: .normal)
+        cell.buttonCell.setBackgroundImage(allImages[collectionViewClick][indexPath.row], for: .normal)
         cell.buttonHandler = { [weak self] button in
-            self?.currenctSelectedWord = (self?.removeLastComponentOfString((self?.allTitles[indexPath.row])!, ".jpg"))!
-            self?.selectedImage = self?.allImages[indexPath.row]
+            self?.currenctSelectedWord = (self?.removeLastComponentOfString((self?.allTitles[(self?.collectionViewClick)!][indexPath.row])!, ".jpg"))!
+            self?.selectedImage = self?.allImages[(self?.collectionViewClick)!][indexPath.row]
             
             //adds images and text to subview at the top
             self?.sentenceImages.addImage(newImage: (self?.selectedImage), newText : (self?.currenctSelectedWord), maxSubViews: 3)
+            if((self?.collectionViewClick)! < 2){
+                self?.collectionViewClick = ((self?.collectionViewClick)! + 1)
+            }
 
+            self?.currentTitles = self?.allTitles[(self?.collectionViewClick)!]
+            self?.currentImages = self?.allImages[(self?.collectionViewClick)!]
+            collectionView.reloadData()
             
+            switch (self?.collectionViewClick)!{
+            case 0:
+                self?.currentPanel = "subject"
+            case 1:
+                self?.currentPanel = "verb"
+            case 2:
+                self?.currentPanel = "object"
+            default:
+                self?.currentPanel = "subject"
+            }
+            self?.picturePanelState.text = self?.currentPanel
             //print("bentonk: buttonHandler on item: \(indexPath.item) selected")
         }
         //cell.buttonCell.setAttributedTitle(NSAttributedString.init(string: "test"), for: .normal)
