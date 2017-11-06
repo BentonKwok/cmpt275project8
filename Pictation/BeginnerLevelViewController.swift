@@ -117,6 +117,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         
         allImages = subjectImages + objectImages
         allImages = allImages + verbImages
+        
     }
     
     override func didReceiveMemoryWarning() {

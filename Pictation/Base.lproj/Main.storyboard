@@ -126,10 +126,36 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gq6-M0-8ca">
-                                <rect key="frame" x="-6" y="683" width="748" height="436"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1X-gu-V6h">
+                                <rect key="frame" x="576" y="76" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Pause"/>
+                                <connections>
+                                    <action selector="pauseAudioButton:" destination="k9T-gN-1uI" eventType="touchUpInside" id="GqU-Rq-Kis"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUu-e8-E2e">
+                                <rect key="frame" x="695" y="76" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Stop"/>
+                                <connections>
+                                    <action selector="stopAudioButton:" destination="k9T-gN-1uI" eventType="touchUpInside" id="e8A-Eo-z5d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8m-kJ-Fdm">
+                                <rect key="frame" x="638" y="76" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="playAudioButton:" destination="k9T-gN-1uI" eventType="touchUpInside" id="Xa8-BI-csy"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gq6-M0-8ca">
+                                <rect key="frame" x="10" y="578" width="748" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="436" id="dNo-yI-L9G"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oM7-3p-wGo">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -172,34 +198,12 @@
                                     <outlet property="delegate" destination="k9T-gN-1uI" id="VWs-h0-Pjs"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1X-gu-V6h">
-                                <rect key="frame" x="576" y="76" width="42" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pause"/>
-                                <connections>
-                                    <action selector="pauseAudioButton:" destination="k9T-gN-1uI" eventType="touchUpInside" id="GqU-Rq-Kis"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUu-e8-E2e">
-                                <rect key="frame" x="695" y="76" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Stop"/>
-                                <connections>
-                                    <action selector="stopAudioButton:" destination="k9T-gN-1uI" eventType="touchUpInside" id="e8A-Eo-z5d"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8m-kJ-Fdm">
-                                <rect key="frame" x="638" y="76" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                    <action selector="playAudioButton:" destination="k9T-gN-1uI" eventType="touchUpInside" id="Xa8-BI-csy"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eG5-jY-ANL" firstAttribute="bottom" secondItem="cfO-w8-SvC" secondAttribute="bottom" constant="694" id="2uj-bx-rbm"/>
+                            <constraint firstItem="eG5-jY-ANL" firstAttribute="bottom" secondItem="gq6-M0-8ca" secondAttribute="bottom" constant="10" id="CSJ-sf-p1a"/>
+                            <constraint firstItem="gq6-M0-8ca" firstAttribute="leading" secondItem="eG5-jY-ANL" secondAttribute="leading" constant="10" id="GHa-cU-uV9"/>
                             <constraint firstItem="W52-gk-50V" firstAttribute="top" secondItem="eG5-jY-ANL" secondAttribute="top" constant="180" id="M24-hE-um1"/>
                             <constraint firstItem="W52-gk-50V" firstAttribute="leading" secondItem="eG5-jY-ANL" secondAttribute="leading" constant="705" id="RVt-dN-gYB"/>
                             <constraint firstItem="eG5-jY-ANL" firstAttribute="trailing" secondItem="W52-gk-50V" secondAttribute="trailing" constant="26" id="gFm-U5-JYG"/>
@@ -211,6 +215,7 @@
                             <constraint firstItem="S3U-ym-ifh" firstAttribute="leading" secondItem="eG5-jY-ANL" secondAttribute="leading" constant="30" id="pKk-5B-efl"/>
                             <constraint firstItem="GH1-R8-VeX" firstAttribute="leading" secondItem="eG5-jY-ANL" secondAttribute="leading" constant="295" id="pyo-bN-5hD"/>
                             <constraint firstItem="cfO-w8-SvC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UWa-hS-7WV" secondAttribute="leading" constant="20" symbolic="YES" id="rTH-iC-TcZ"/>
+                            <constraint firstItem="eG5-jY-ANL" firstAttribute="trailing" secondItem="gq6-M0-8ca" secondAttribute="trailing" constant="10" id="zQr-TO-EFv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eG5-jY-ANL"/>
                     </view>
