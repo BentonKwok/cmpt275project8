@@ -146,6 +146,9 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         
         currentImages = allImages[collectionViewClick]
         currentTitles = allTitles[collectionViewClick]
+        
+        currentPanel = "subject"
+        picturePanelState.text = currentPanel
     }
     
     override func didReceiveMemoryWarning() {
