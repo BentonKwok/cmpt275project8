@@ -11,13 +11,11 @@
 		45672A811FA8F15300BCC811 /* ImageDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45672A801FA8F15200BCC811 /* ImageDisplay.swift */; };
 		5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1478801FB059F000A617DB /* CameraViewController.swift */; };
 		C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B336E1FA1161B006CAC0D /* AppDelegate.swift */; };
-		C61B33711FA1161B006CAC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B33701FA1161B006CAC0D /* ViewController.swift */; };
 		C61B33741FA1161B006CAC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61B33721FA1161B006CAC0D /* Main.storyboard */; };
 		C61B33761FA1161B006CAC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C61B33751FA1161B006CAC0D /* Assets.xcassets */; };
 		C61B33791FA1161B006CAC0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */; };
 		C61B33841FA1161B006CAC0D /* PictationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B33831FA1161B006CAC0D /* PictationTests.swift */; };
 		C61B338F1FA1161B006CAC0D /* PictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B338E1FA1161B006CAC0D /* PictationUITests.swift */; };
-		C666C3A61FA1E0C200C6E562 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */; };
 		C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */; };
 		C6A0DBC81FA70EB600E15AD1 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBC71FA70EB600E15AD1 /* Images.swift */; };
 		C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBCB1FA721E200E15AD1 /* myCell.swift */; };
@@ -25,6 +23,8 @@
 		C6D58C181FAE9484005C9CF3 /* verbs in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C161FAE9484005C9CF3 /* verbs */; };
 		C6D58C1A1FAE948C005C9CF3 /* subjects in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C191FAE948B005C9CF3 /* subjects */; };
 		C6D58C1D1FAEA8A5005C9CF3 /* BeginnerLevelViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D58C1C1FAEA8A5005C9CF3 /* BeginnerLevelViewControllerTest.swift */; };
+		CD4C4FF51FBA430200F271ED /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C4FF41FBA430200F271ED /* UsersViewController.swift */; };
+		CD5593F51FBA22BB008C5301 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5593F41FBA22BB008C5301 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,6 @@
 		5A1478801FB059F000A617DB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C61B336B1FA1161B006CAC0D /* Pictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pictation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61B336E1FA1161B006CAC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C61B33701FA1161B006CAC0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C61B33731FA1161B006CAC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C61B33751FA1161B006CAC0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C61B33781FA1161B006CAC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -61,7 +60,6 @@
 		C61B338A1FA1161B006CAC0D /* PictationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61B338E1FA1161B006CAC0D /* PictationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictationUITests.swift; sourceTree = "<group>"; };
 		C61B33901FA1161B006CAC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginnerLevelViewController.swift; sourceTree = "<group>"; };
 		C6A0DBC71FA70EB600E15AD1 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		C6A0DBCB1FA721E200E15AD1 /* myCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = myCell.swift; path = ../myCell.swift; sourceTree = "<group>"; };
@@ -69,6 +67,8 @@
 		C6D58C161FAE9484005C9CF3 /* verbs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = verbs; sourceTree = "<group>"; };
 		C6D58C191FAE948B005C9CF3 /* subjects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = subjects; sourceTree = "<group>"; };
 		C6D58C1C1FAEA8A5005C9CF3 /* BeginnerLevelViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginnerLevelViewControllerTest.swift; sourceTree = "<group>"; };
+		CD4C4FF41FBA430200F271ED /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		CD5593F41FBA22BB008C5301 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,15 +124,16 @@
 				C6A0DBCB1FA721E200E15AD1 /* myCell.swift */,
 				C61B336E1FA1161B006CAC0D /* AppDelegate.swift */,
 				C6A0DBC71FA70EB600E15AD1 /* Images.swift */,
-				C61B33701FA1161B006CAC0D /* ViewController.swift */,
 				C61B33721FA1161B006CAC0D /* Main.storyboard */,
 				5A1478801FB059F000A617DB /* CameraViewController.swift */,
 				C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */,
 				C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */,
+				CD5593F41FBA22BB008C5301 /* SettingsViewController.swift */,
 				C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */,
 				C61B33751FA1161B006CAC0D /* Assets.xcassets */,
 				C61B337A1FA1161B006CAC0D /* Info.plist */,
 				452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */,
+				CD4C4FF41FBA430200F271ED /* UsersViewController.swift */,
 			);
 			path = Pictation;
 			sourceTree = "<group>";
@@ -321,15 +322,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C666C3A61FA1E0C200C6E562 /* LevelViewController.swift in Sources */,
 				45672A811FA8F15300BCC811 /* ImageDisplay.swift in Sources */,
 				452D39641FAA2A1C00C4850E /* IntermediateViewController.swift in Sources */,
 				C6A0DBC81FA70EB600E15AD1 /* Images.swift in Sources */,
-				C61B33711FA1161B006CAC0D /* ViewController.swift in Sources */,
 				C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */,
 				C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */,
+				CD4C4FF51FBA430200F271ED /* UsersViewController.swift in Sources */,
 				C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */,
 				5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */,
+				CD5593F51FBA22BB008C5301 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
