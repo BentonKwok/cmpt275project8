@@ -36,7 +36,7 @@ class SettingsViewController: UITableViewController  {
     }
     
     @IBAction func logout(_ sender: UIButton) {
-        performSegue(withIdentifier: "toUsers", sender: self)
+        performSegue(withIdentifier: "toUserFromSettings", sender: self)
     }
     // MARK: - Navigation
 
