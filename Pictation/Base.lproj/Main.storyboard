@@ -69,6 +69,14 @@
                                     <segue destination="k9T-gN-1uI" kind="show" id="HXf-Au-mBU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7j-Op-vea">
+                                <rect key="frame" x="361" y="909" width="74" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <segue destination="yPQ-Xq-dO4" kind="show" id="4A7-Gv-Pcg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -90,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YWi-w6-Mxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="62"/>
+            <point key="canvasLocation" x="1142.96875" y="61.523437499999993"/>
         </scene>
         <!--Beginner Level View Controller-->
         <scene sceneID="w32-zs-sxK">
@@ -222,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSN-Rl-W11" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2377" y="-520"/>
+            <point key="canvasLocation" x="2376.5625" y="-520.3125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yz6-Xg-6dH">
@@ -405,6 +413,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59z-0j-we9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2334.375" y="762.890625"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="Nn4-uf-yeR">
+            <objects>
+                <viewController id="yPQ-Xq-dO4" customClass="CameraViewController" customModule="Pictation" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T8J-lE-92d"/>
+                        <viewControllerLayoutGuide type="bottom" id="MNn-jl-6hD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MOp-nn-Rba">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJH-3j-Klj">
+                                <rect key="frame" x="0.0" y="94" width="768" height="635"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.079345412549999994" green="0.03536928818" blue="0.01830756478" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RzK-Aj-4fL">
+                                <rect key="frame" x="-5" y="840" width="779" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.2434546481" green="0.36354454520000001" blue="0.7909440445" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Photo Library">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="photoDirectoryButton:" destination="yPQ-Xq-dO4" eventType="touchUpInside" id="UhN-zO-q6X"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXb-7S-qq3">
+                                <rect key="frame" x="0.0" y="781" width="768" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.2434546481" green="0.36354454520000001" blue="0.7909440445" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="Camera">
+                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraButton:" destination="yPQ-Xq-dO4" eventType="touchUpInside" id="Wqi-7h-OSG"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LoI-Lf-32d">
+                                <rect key="frame" x="0.0" y="28" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.2352643311" green="0.2353112996" blue="0.2352613509" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Add a Picture" id="uvY-CY-Wv3"/>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hrc-d7-Ryn">
+                                <rect key="frame" x="361" y="913" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="storePictureButton:" destination="yPQ-Xq-dO4" eventType="touchUpInside" id="Ocy-eZ-6Bs"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.88554757829999997" green="0.90085828300000004" blue="0.96722656490000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="10S-Y4-e5q"/>
+                    </view>
+                    <connections>
+                        <outlet property="myImageView" destination="hJH-3j-Klj" id="oBh-qe-V34"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yf9-zC-pPs" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1143" y="-603"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
