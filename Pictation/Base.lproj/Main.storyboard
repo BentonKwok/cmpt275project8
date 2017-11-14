@@ -344,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59z-0j-we9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1904" y="260"/>
+            <point key="canvasLocation" x="1672.65625" y="324.609375"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="oEz-dm-PT1">
@@ -535,7 +535,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LBc-jJ-fQO"/>
         <segue reference="rv6-lD-qnG"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -6,7 +6,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var sentenceImages: ImageDisplay!
-    @IBOutlet weak var picturePanelState: UITextField!
+    @IBOutlet weak var subjectPanelState: UITextField!
     @IBOutlet weak var verbPanelState: UITextField!
     @IBOutlet weak var objectPanelState: UITextField!
     
@@ -24,7 +24,6 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     
     var selectedImage: UIImage!
     var currenctSelectedWord = ""
-    var currentPanel = ""
     
     let SUBJECT_FOLDER_NAME = "subjects"
     let OBJECT_FOLDER_NAME = "objects"
@@ -56,8 +55,8 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         currentTitles = allTitles[collectionViewClick]
         currentImages = allImages[collectionViewClick]
         collectionView.reloadData()
-        picturePanelState.text = SUBJECT_FOLDER_NAME
-        picturePanelState.font = UIFont.boldSystemFont(ofSize: (picturePanelState.font?.pointSize)!)
+        subjectPanelState.text = SUBJECT_FOLDER_NAME
+        subjectPanelState.font = UIFont.boldSystemFont(ofSize: (subjectPanelState.font?.pointSize)!)
         verbPanelState.text = VERB_FOLDER_NAME
         verbPanelState.font = UIFont.systemFont(ofSize: (verbPanelState.font?.pointSize)!, weight:.light)
         objectPanelState.text = OBJECT_FOLDER_NAME
@@ -163,10 +162,10 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         currentImages = allImages[collectionViewClick]
         currentTitles = allTitles[collectionViewClick]
      
-        picturePanelState.text = SUBJECT_FOLDER_NAME
+        subjectPanelState.text = SUBJECT_FOLDER_NAME
         verbPanelState.text = VERB_FOLDER_NAME
         objectPanelState.text = OBJECT_FOLDER_NAME
-        picturePanelState.font = UIFont.boldSystemFont(ofSize: (picturePanelState.font?.pointSize)! + 5)
+        subjectPanelState.font = UIFont.boldSystemFont(ofSize: (subjectPanelState.font?.pointSize)! + 5)
         
     }
     
@@ -259,28 +258,45 @@ extension IntermediateViewController : UICollectionViewDataSource {
             collectionView.reloadData()
             
             switch (self?.collectionViewClick)!{
-            case 0: // counter for clicks
-                self?.picturePanelState.font = UIFont.boldSystemFont(ofSize: 22)
+            case 0: //subject
+                //bolding words to emphasize selection
+                self?.subjectPanelState.font = UIFont.systemFont(ofSize: 22, weight:.bold)
+                self?.subjectPanelState.textColor = UIColor.black
+                
+                //changing font and colour to give it the faded look
                 self?.verbPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.light)
-                //self?.currentPanel = "subject"
-            case 1:
-                self?.picturePanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
-                self?.verbPanelState.font = UIFont.boldSystemFont(ofSize: (self?.picturePanelState.font?.pointSize)! + 5)
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
-                //self?.currentPanel = "verb"
-            case 2:
-                self?.picturePanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
-                self?.verbPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
-                self?.objectPanelState.font = UIFont.boldSystemFont(ofSize: (self?.picturePanelState.font?.pointSize)! + 5)
-                //self?.currentPanel = "object"
+                self?.verbPanelState.textColor = UIColor.lightGray
+                self?.objectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.objectPanelState.textColor = UIColor.lightGray
+            case 1: //verb
+                //bolding words to emphasize selection
+                self?.verbPanelState.font = UIFont.systemFont(ofSize: 22, weight:.bold)
+                self?.verbPanelState.textColor = UIColor.black
+                
+                //changing font and colour to give it the faded look
+                self?.subjectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.subjectPanelState.textColor = UIColor.lightGray
+                self?.objectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.objectPanelState.textColor = UIColor.lightGray
+            case 2://object
+                //bolding words to emphasize selection
+                self?.objectPanelState.font = UIFont.systemFont(ofSize: 22, weight:.bold)
+                self?.objectPanelState.textColor = UIColor.black
+                
+                // changing font and colour to give it the faded look
+                self?.subjectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.subjectPanelState.textColor = UIColor.lightGray
+                self?.verbPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.verbPanelState.textColor = UIColor.lightGray
             default:
-                self?.picturePanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
-                self?.verbPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
-                //self?.currentPanel = "subject"
+                //default will have a faded look
+                self?.subjectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.subjectPanelState.textColor = UIColor.lightGray
+                self?.verbPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.verbPanelState.textColor = UIColor.lightGray
+                self?.objectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.objectPanelState.textColor = UIColor.lightGray
             }
-            //self?.picturePanelState.text = self?.currentPanel
             //print("bentonk: buttonHandler on item: \(indexPath.item) selected")
         }
         //cell.buttonCell.setAttributedTitle(NSAttributedString.init(string: "test"), for: .normal)
