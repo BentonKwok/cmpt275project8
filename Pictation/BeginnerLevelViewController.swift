@@ -86,8 +86,16 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         }
     }
     
+    //Settings button handler
+    @objc func settingsTapped(){
+        performSegue(withIdentifier: "settingsFromBeginner", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Add Settings button to navigation bar
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
         
         //Getting all the image folder paths as URL arrays [URL]
         //There are THREE folders, subjects, objects, verbs
