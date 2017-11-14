@@ -7,6 +7,9 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var sentenceImages: ImageDisplay!
     @IBOutlet weak var picturePanelState: UITextField!
+    @IBOutlet weak var verbPanelState: UITextField!
+    @IBOutlet weak var objectPanelState: UITextField!
+    
     
     var allImages:[[UIImage]]! = [[UIImage](), [UIImage](), [UIImage](), [UIImage]()]
     var allTitles:[[String]]! = [[String](), [String](), [String](), [String]()]
@@ -27,13 +30,14 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     let OBJECT_FOLDER_NAME = "objects"
     let VERB_FOLDER_NAME = "verbs"
     var collectionViewClick = 0
+
     
    // @IBAction func makeButtonHandler(_ sender: UIButton) {
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         //A check to make sure selectedText is not accessed when it doesn't have elements yet
         if (currenctSelectedWord != "") {
             var sentence : String = ""
-            for i in 0...(self.sentenceImages.selectedText.count-1){
+            for i in 0...(self.sentenceImages.selectedText.count-1){    
                 sentence += self.sentenceImages.selectedText[i]
                 sentence += " "
             }
@@ -52,8 +56,12 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         currentTitles = allTitles[collectionViewClick]
         currentImages = allImages[collectionViewClick]
         collectionView.reloadData()
-        currentPanel = "subject"
-        picturePanelState.text = currentPanel
+        picturePanelState.text = SUBJECT_FOLDER_NAME
+        picturePanelState.font = UIFont.boldSystemFont(ofSize: (picturePanelState.font?.pointSize)!)
+        verbPanelState.text = VERB_FOLDER_NAME
+        verbPanelState.font = UIFont.systemFont(ofSize: (verbPanelState.font?.pointSize)!, weight:.light)
+        objectPanelState.text = OBJECT_FOLDER_NAME
+        objectPanelState.font = UIFont.systemFont(ofSize: (objectPanelState.font?.pointSize)!, weight:.light)
     }
     //Remove strings after seeing the key word.
     //Example: passing in helloworld, world
@@ -146,9 +154,12 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         
         currentImages = allImages[collectionViewClick]
         currentTitles = allTitles[collectionViewClick]
+     
+        picturePanelState.text = SUBJECT_FOLDER_NAME
+        verbPanelState.text = VERB_FOLDER_NAME
+        objectPanelState.text = OBJECT_FOLDER_NAME
+        picturePanelState.font = UIFont.boldSystemFont(ofSize: (picturePanelState.font?.pointSize)! + 5)
         
-        currentPanel = "subject"
-        picturePanelState.text = currentPanel
     }
     
     override func didReceiveMemoryWarning() {
@@ -240,16 +251,28 @@ extension IntermediateViewController : UICollectionViewDataSource {
             collectionView.reloadData()
             
             switch (self?.collectionViewClick)!{
-            case 0:
-                self?.currentPanel = "subject"
+            case 0: // counter for clicks
+                self?.picturePanelState.font = UIFont.boldSystemFont(ofSize: 22)
+                self?.verbPanelState.font = UIFont.systemFont(ofSize: 14, weight:.thin)
+                self?.objectPanelState.font = UIFont.systemFont(ofSize: 14, weight:.light)
+                //self?.currentPanel = "subject"
             case 1:
-                self?.currentPanel = "verb"
+                self?.picturePanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
+                self?.verbPanelState.font = UIFont.boldSystemFont(ofSize: (self?.picturePanelState.font?.pointSize)! + 5)
+                self?.objectPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
+                //self?.currentPanel = "verb"
             case 2:
-                self?.currentPanel = "object"
+                self?.picturePanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
+                self?.verbPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
+                self?.objectPanelState.font = UIFont.boldSystemFont(ofSize: (self?.picturePanelState.font?.pointSize)! + 5)
+                //self?.currentPanel = "object"
             default:
-                self?.currentPanel = "subject"
+                self?.picturePanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
+                self?.verbPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
+                self?.objectPanelState.font = UIFont.systemFont(ofSize: (self?.picturePanelState.font?.pointSize)!, weight:.light)
+                //self?.currentPanel = "subject"
             }
-            self?.picturePanelState.text = self?.currentPanel
+            //self?.picturePanelState.text = self?.currentPanel
             //print("bentonk: buttonHandler on item: \(indexPath.item) selected")
         }
         //cell.buttonCell.setAttributedTitle(NSAttributedString.init(string: "test"), for: .normal)
