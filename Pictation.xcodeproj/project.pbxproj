@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		452D39641FAA2A1C00C4850E /* IntermediateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */; };
 		45672A811FA8F15300BCC811 /* ImageDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45672A801FA8F15200BCC811 /* ImageDisplay.swift */; };
+		5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1478801FB059F000A617DB /* CameraViewController.swift */; };
 		C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B336E1FA1161B006CAC0D /* AppDelegate.swift */; };
 		C61B33741FA1161B006CAC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61B33721FA1161B006CAC0D /* Main.storyboard */; };
 		C61B33761FA1161B006CAC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C61B33751FA1161B006CAC0D /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateViewController.swift; sourceTree = "<group>"; };
 		45672A801FA8F15200BCC811 /* ImageDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDisplay.swift; sourceTree = "<group>"; };
+		5A1478801FB059F000A617DB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C61B336B1FA1161B006CAC0D /* Pictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pictation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61B336E1FA1161B006CAC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C61B33731FA1161B006CAC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,6 +125,8 @@
 				C61B336E1FA1161B006CAC0D /* AppDelegate.swift */,
 				C6A0DBC71FA70EB600E15AD1 /* Images.swift */,
 				C61B33721FA1161B006CAC0D /* Main.storyboard */,
+				5A1478801FB059F000A617DB /* CameraViewController.swift */,
+				C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */,
 				C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */,
 				CD5593F41FBA22BB008C5301 /* SettingsViewController.swift */,
 				C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */,
@@ -325,6 +329,7 @@
 				C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */,
 				CD4C4FF51FBA430200F271ED /* UsersViewController.swift in Sources */,
 				C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */,
+				5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */,
 				CD5593F51FBA22BB008C5301 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
