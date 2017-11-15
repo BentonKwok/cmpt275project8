@@ -6,7 +6,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var sentenceImages: ImageDisplay!
-    @IBOutlet weak var subjectPanelState: UITextField!
+    @IBOutlet weak var subjectPanelState: UILabel!
     @IBOutlet weak var verbPanelState: UITextField!
     @IBOutlet weak var objectPanelState: UITextField!
     
@@ -56,7 +56,6 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         currentImages = allImages[collectionViewClick]
         collectionView.reloadData()
         subjectPanelState.text = SUBJECT_FOLDER_NAME
-        subjectPanelState.font = UIFont.boldSystemFont(ofSize: (subjectPanelState.font?.pointSize)!)
         verbPanelState.text = VERB_FOLDER_NAME
         verbPanelState.font = UIFont.systemFont(ofSize: (verbPanelState.font?.pointSize)!, weight:.light)
         objectPanelState.text = OBJECT_FOLDER_NAME

@@ -9,7 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-<<<<<<< HEAD
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -19,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWD-oz-VB8">
-                                <rect key="frame" x="361.5" y="497" width="45.5" height="30"/>
+                                <rect key="frame" x="361.5" y="453" width="45.5" height="74"/>
                                 <state key="normal" title="Guest"/>
                                 <connections>
                                     <segue destination="XeY-gh-sji" kind="show" identifier="toLevelViewSegue" id="HRM-E0-MKU"/>
@@ -49,21 +48,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdX-W1-lAx">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdX-W1-lAx">
                                 <rect key="frame" x="321" y="323" width="127" height="30"/>
                                 <state key="normal" title="Intermediate Level"/>
                                 <connections>
                                     <segue destination="ZfP-XQ-GJu" kind="show" identifier="toIntermediateSegue" id="M89-ub-1cL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hg-sG-NKd">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hg-sG-NKd">
                                 <rect key="frame" x="334" y="165" width="101" height="30"/>
                                 <state key="normal" title="Beginner Level"/>
                                 <connections>
                                     <segue destination="k9T-gN-1uI" kind="show" identifier="toBeginnerSegue" id="dW3-IL-hrE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKB-IN-Dbv">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKB-IN-Dbv">
                                 <rect key="frame" x="330" y="497" width="108" height="30"/>
                                 <state key="normal" title="Advanced Level"/>
                                 <connections>
@@ -385,13 +384,6 @@
                                     <constraint firstAttribute="width" constant="140" id="2zj-RE-HY3"/>
                                 </constraints>
                             </stackView>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WkM-N6-iza">
-                                <rect key="frame" x="239" y="497" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DFO-mF-OcK">
                                 <rect key="frame" x="335" y="497" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -406,6 +398,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fk-Ca-HzI">
+                                <rect key="frame" x="246" y="497" width="89" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -429,14 +428,14 @@
                         <outlet property="collectionView" destination="WIl-B9-Gwj" id="u6A-k9-qEx"/>
                         <outlet property="objectPanelState" destination="6Wd-d2-CRO" id="sK6-Ke-rQc"/>
                         <outlet property="outputSentenceText" destination="XAh-eu-VYf" id="t2b-ve-3cB"/>
-                        <outlet property="picturePanelState" destination="WkM-N6-iza" id="KCY-Ye-tng"/>
                         <outlet property="sentenceImages" destination="FmA-4c-trw" id="99U-FL-jZz"/>
+                        <outlet property="subjectPanelState" destination="4Fk-Ca-HzI" id="MWi-U6-XGC"/>
                         <outlet property="verbPanelState" destination="DFO-mF-OcK" id="nVq-aA-gog"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59z-0j-we9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1672.65625" y="324.609375"/>
+            <point key="canvasLocation" x="1830.46875" y="496.28906249999994"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="oEz-dm-PT1">
@@ -624,7 +623,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQo-Yn-Gsu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2482.8125" y="-517.3828125"/>
-<<<<<<< HEAD
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="Nn4-uf-yeR">
@@ -698,6 +696,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="2U3-2p-Ijy"/>
         <segue reference="rv6-lD-qnG"/>
     </inferredMetricsTieBreakers>
 </document>
