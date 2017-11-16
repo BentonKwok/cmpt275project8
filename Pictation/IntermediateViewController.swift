@@ -127,7 +127,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         currentTitles = allTitles[collectionViewClick]
      
         //setting display of PicturePanel
-        subjectPanelState.text = SUBJECT_FOLDER_NAME
+        subjectPanelState.text = Constants.SUBJECT_FOLDER_NAME
         subjectPanelState.layer.borderWidth = 2.0
         subjectPanelState.layer.cornerRadius = 8
         subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSizeBolded), weight: .bold)
