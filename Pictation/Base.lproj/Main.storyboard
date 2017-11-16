@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -98,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YWi-w6-Mxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142.96875" y="61.523437499999993"/>
+            <point key="canvasLocation" x="1042" y="277"/>
         </scene>
         <!--Beginner Level View Controller-->
         <scene sceneID="w32-zs-sxK">
@@ -116,7 +116,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W52-gk-50V">
-                                <rect key="frame" x="705" y="200" width="37" height="30"/>
+                                <rect key="frame" x="705" y="244" width="37" height="30"/>
                                 <state key="normal" title="Make"/>
                                 <connections>
                                     <action selector="makeButtonHandler:" destination="k9T-gN-1uI" eventType="touchUpInside" id="L3K-3q-1ls"/>
@@ -455,11 +455,12 @@
                         <outlet property="sentenceImages" destination="FmA-4c-trw" id="99U-FL-jZz"/>
                         <outlet property="subjectPanelState" destination="4Fk-Ca-HzI" id="MWi-U6-XGC"/>
                         <outlet property="verbPanelState" destination="qz2-pM-nSw" id="Bpe-tf-foU"/>
+                        <segue destination="b3d-vN-0LF" kind="show" identifier="settingsFromIntermediate" id="Keq-Pd-tLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59z-0j-we9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1830.46875" y="496.28906249999994"/>
+            <point key="canvasLocation" x="1105" y="1131"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="oEz-dm-PT1">
@@ -612,7 +613,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74e-g6-IoK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1480" y="-517"/>
+            <point key="canvasLocation" x="1765" y="-541"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="7rW-I5-Eus">
@@ -722,6 +723,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="LBc-jJ-fQO"/>
         <segue reference="2U3-2p-Ijy"/>
-        <segue reference="rv6-lD-qnG"/>
+        <segue reference="MpU-hq-Oov"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,7 +9,7 @@
 import XCTest
 @testable import Pictation
 
-class BeginnerLevelViewControllerTest: XCTestCase {
+class UtilHelperTest: XCTestCase {
     let beginnerView = BeginnerLevelViewController()
     
     override func setUp() {
@@ -23,19 +23,19 @@ class BeginnerLevelViewControllerTest: XCTestCase {
     }
     
     func test_removeLastComponentOfString_happyPath_returnsCorrectStrings() {
-        let actualResult = beginnerView.removeLastComponentOfString("test123", "123")
+        let actualResult = UtilHelper.removeLastComponentOfString("test123", "123")
         let expectedResult = "test"
         XCTAssertEqual(actualResult, expectedResult)
     }
 
     func test_removeLastComponentOfString_emptyString_returnsCorrectStrings() {
-        let actualResult = beginnerView.removeLastComponentOfString("test123", "")
+        let actualResult = UtilHelper.removeLastComponentOfString("test123", "")
         let expectedResult = "test123"
         XCTAssertEqual(actualResult, expectedResult)
     }
     
     func test_removeLastComponentOfString_repeatedCase_returnsCorrectStrings() {
-        let actualResult = beginnerView.removeLastComponentOfString("e1e1e1e1e1", "1")
+        let actualResult = UtilHelper.removeLastComponentOfString("e1e1e1e1e1", "1")
         let expectedResult = "e"
         XCTAssertEqual(actualResult, expectedResult)
     }
@@ -43,7 +43,7 @@ class BeginnerLevelViewControllerTest: XCTestCase {
     func test_getFolderPath_happyPath_returnCorrectPath() {
         let url = URL(string: "user/image/hello.jpg")
         let urlArray = [url]
-        let actualResult = beginnerView.getFolderPathWithoutLastComponent(imageUrlArray: urlArray as! [URL])
+        let actualResult = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: urlArray as! [URL])
         let expectedResult = "user/image/"
         XCTAssertEqual(actualResult, expectedResult)
     }
