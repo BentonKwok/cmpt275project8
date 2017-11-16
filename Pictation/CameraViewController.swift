@@ -10,32 +10,12 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     var verbImagesUrlArray:[URL]!
     var allImagesUrlArray:[URL]!
     
-    let SUBJECT_FOLDER_NAME = "subjects"
-    let OBJECT_FOLDER_NAME = "objects"
-    let VERB_FOLDER_NAME = "verbs"
     var imagesDirectoryPath:String!
     var images:[UIImage]!
     var titles:[String]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        // Get the Document directory path
-        let documentDirectorPath:String = paths[0]
-        // Create a new path for the new images folder
-        imagesDirectoryPath = documentDirectorPath.appending("/ImagePicker")
-        var objcBool:ObjCBool = true
-        let isExist = FileManager.default.fileExists(atPath:imagesDirectoryPath, isDirectory: &objcBool)
-        // If the folder with the given path doesn't exist already, create it
-        if isExist == false{
-            do{
-                try FileManager.default.createDirectory(atPath: imagesDirectoryPath, withIntermediateDirectories: true, attributes: nil)
-                //createDirectoryAtPath(imagesDirectoryPath, withIntermediateDirectories: true, attributes: nil)
-            }catch{
-                print("Something went wrong while creating a new folder")
-            }
-        }
     }
 
     @IBOutlet weak var myImageView: UIImageView!
@@ -47,58 +27,19 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
         //get the image we took with camera
         let image = myImageView.image!
-        //get the PNG data for this image
+        //get the JPG data for this image
         let data = UIImagePNGRepresentation(image)
         //store it in the document directory
         fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
     }
+    
     @IBAction func storePictureButton(_ sender: UIButton) {
-
-        let imageData = UIImagePNGRepresentation(myImageView.image!)
-        let compressedImage=UIImage(data:imageData!)
-        UIImageWriteToSavedPhotosAlbum(compressedImage!,nil,nil,nil)
         let alert=UIAlertController(title: "saved", message: "Your image has been saved", preferredStyle:.alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
-        
-       /* let fileName = "Test"
-        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        
-        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("jpg")
-        print("FilePath: \(fileURL.path)")
-        imageData.write(to:fileURL,atomatically:true)*/
-        let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appending("lalala.png")
-        print(paths)
-        fileManager.createFile(atPath:paths,contents:imageData,attributes:nil)
-        
-        
-        
-        /*// Create path.
-        //NSSearchPathForDirectoriesInDomains(<#T##directory: FileManager.SearchPathDirectory##FileManager.SearchPathDirectory#>, <#T##domainMask: FileManager.SearchPathDomainMask##FileManager.SearchPathDomainMask#>, <#T##expandTilde: Bool##Bool#>)
-        NSSearchPathForDirectoriesInDomains(directory:DocumentDirectory, domainMask:UserDomainMask, expandTilde:YES)
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        let filePath = subjectFolderPath = getFolderPathWithoutLastComponent(imageUrlArray: subjectImagesUrlArray)
-        
-        // Save image.
-        UIImagePNGRepresentation(imageData).writeToFile(atPaht:filePath, atomically:true)
-        
-        //saveImage(imageName:"lalala.png");*/
-        
-        
-    /*   do{
-            try imageData!.write(to:completeUrl)
-               print("hahahaha");
-        }
-        catch {
-            let alert=UIAlertController(title: "saved", message: "Fail to save the image", preferredStyle:.alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alert.addAction(okAction)
-               print("houhouhou");
-            
-        }*/
-        
+
+        saveImage(imageName: "test1")
     }
     
     

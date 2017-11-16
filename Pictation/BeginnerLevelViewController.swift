@@ -36,6 +36,8 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UtilHelper.createAllDocumentDirectories()
+        
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
         
@@ -48,23 +50,46 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         allImagesUrlArray = subjectImagesUrlArray + objectImagesUrlArray
         allImagesUrlArray = allImagesUrlArray + verbImagesUrlArray
         
+        //Getting all the folder paths where the predefined images are stored
         let subjectFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: subjectImagesUrlArray)
         let objectFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: objectImagesUrlArray)
         let verbFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: verbImagesUrlArray)
         
-        //Getting all the file names of each folder and put them in String arrays [String]
-        let subjectTitles = UtilHelper.getTitleArrays(subjectFolderPath)
-        let objectTitles = UtilHelper.getTitleArrays(objectFolderPath)
-        let verbTitles = UtilHelper.getTitleArrays(verbFolderPath)
+        //Getting all the directories where the user-defined images are stored
+        let subjectFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.SUBJECT_FOLDER_NAME)
+        let objectFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.OBJECT_FOLDER_NAME)
+        let verbFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.VERB_FOLDER_NAME)
         
-        //Getting all the images of each foler and put them in UIImages arrays [UIImage]
-        let subjectImages = UtilHelper.getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
-        let objectImages = UtilHelper.getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
-        let verbImages = UtilHelper.getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
+        //Getting all the predefined images' file names of each folder and put them in String arrays [String]
+        var subjectTitles = UtilHelper.getTitleArrays(subjectFolderPath)
+        var objectTitles = UtilHelper.getTitleArrays(objectFolderPath)
+        var verbTitles = UtilHelper.getTitleArrays(verbFolderPath)
         
+        //Getting all the user-defined images' file names of each folder and put them in String arrays [String]
+        let subjectDocumentTitles = UtilHelper.getTitleArrays(subjectFolderDocumentDirectory)
+        let objectDocumentTitles = UtilHelper.getTitleArrays(objectFolderDocumentDirectory)
+        let verbDocumentTitles = UtilHelper.getTitleArrays(verbFolderDocumentDirectory)
+        
+        //Getting all the predefined images of each foler and put them in UIImages arrays [UIImage]
+        var subjectImages = UtilHelper.getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
+        var objectImages = UtilHelper.getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
+        var verbImages = UtilHelper.getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
+        
+        //Getting all the user-defined images of each foler and put them in UIImages arrays [UIImage]
+        let subjectDocumentImages = UtilHelper.getDocumentImageArrays(subjectFolderDocumentDirectory, subjectDocumentTitles)
+        let objectDocumentImages = UtilHelper.getDocumentImageArrays(objectFolderDocumentDirectory, objectDocumentTitles)
+        let verbDocumentImages = UtilHelper.getDocumentImageArrays(verbFolderDocumentDirectory, verbDocumentTitles)
+        
+        //Putting all the images titles into allTitles : [String]
+        subjectTitles = subjectTitles + subjectDocumentTitles
+        objectTitles = objectTitles + objectDocumentTitles
+        verbTitles = verbTitles + verbDocumentTitles
         allTitles = subjectTitles + objectTitles
         allTitles = allTitles + verbTitles
         
+        subjectImages = subjectImages + subjectDocumentImages
+        objectImages = objectImages + objectDocumentImages
+        verbImages = verbImages + verbDocumentImages
         allImages = subjectImages + objectImages
         allImages = allImages + verbImages
     }

@@ -89,24 +89,39 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         let objectFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: objectImagesUrlArray)
         let verbFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: verbImagesUrlArray)
         
+        //Getting all the directories where the user-defined images are stored
+        let subjectFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.SUBJECT_FOLDER_NAME)
+        let objectFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.OBJECT_FOLDER_NAME)
+        let verbFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.VERB_FOLDER_NAME)
+        
         //Getting all the file names of each folder and put them in String arrays [String]
         let subjectTitles = UtilHelper.getTitleArrays(subjectFolderPath)
         let objectTitles = UtilHelper.getTitleArrays(objectFolderPath)
         let verbTitles = UtilHelper.getTitleArrays(verbFolderPath)
+        
+        //Getting all the user-defined images' file names of each folder and put them in String arrays [String]
+        let subjectDocumentTitles = UtilHelper.getTitleArrays(subjectFolderDocumentDirectory)
+        let objectDocumentTitles = UtilHelper.getTitleArrays(objectFolderDocumentDirectory)
+        let verbDocumentTitles = UtilHelper.getTitleArrays(verbFolderDocumentDirectory)
         
         //Getting all the images of each foler and put them in UIImages arrays [UIImage]
         let subjectImages = UtilHelper.getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
         let objectImages = UtilHelper.getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
         let verbImages = UtilHelper.getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
         
-        allTitles[0] = subjectTitles
-        allTitles[1] = verbTitles
-        allTitles[2] = objectTitles
+        //Getting all the user-defined images of each foler and put them in UIImages arrays [UIImage]
+        let subjectDocumentImages = UtilHelper.getDocumentImageArrays(subjectFolderDocumentDirectory, subjectDocumentTitles)
+        let objectDocumentImages = UtilHelper.getDocumentImageArrays(objectFolderDocumentDirectory, objectDocumentTitles)
+        let verbDocumentImages = UtilHelper.getDocumentImageArrays(verbFolderDocumentDirectory, verbDocumentTitles)
+        
+        allTitles[0] = subjectTitles + subjectDocumentTitles
+        allTitles[1] = verbTitles + verbDocumentTitles
+        allTitles[2] = objectTitles + objectDocumentTitles
         //allTitles = allTitles + verbTitles
         
-        allImages[0] = subjectImages
-        allImages[1] = verbImages
-        allImages[2] = objectImages
+        allImages[0] = subjectImages + subjectDocumentImages
+        allImages[1] = verbImages + verbDocumentImages
+        allImages[2] = objectImages + objectDocumentImages
         
         currentImages = allImages[collectionViewClick]
         currentTitles = allTitles[collectionViewClick]

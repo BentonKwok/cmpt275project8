@@ -1,13 +1,4 @@
-//
-//  UtilHelper.swift
-//  Pictation
-//
-//  Created by Benton on 2017-11-14.
-//  Copyright © 2017 Benton. All rights reserved.
-//
-
 import Foundation
-
 import UIKit
 
 class UtilHelper {
@@ -51,6 +42,18 @@ class UtilHelper {
         return imageArray
     }
     
+    //Return all the images as an Array [UIImages] under folder at folderPath
+    class func getDocumentImageArrays(_ folderPath: String, _ titleArray : [String]) -> [UIImage] {
+        var imageArray = [UIImage]()
+        var imageIndex = 0
+        for _ in titleArray {
+            let image = UIImage(contentsOfFile: folderPath.appending(titleArray[imageIndex]))
+            imageArray.append(image!)
+            imageIndex = imageIndex + 1
+        }
+        return imageArray
+    }
+    
     //Return the folder path by getting the file path of first image, and then remove its last componenet to get its folder path
     //Example: Passing in User/subjects/eat.jpg will return
     //User/subjects
@@ -65,33 +68,56 @@ class UtilHelper {
         }
     }
     
+    class func getDocumentDirectory(atFolder : String) -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0].appending(atFolder)
+        return documentsDirectory
+    }
+    
     class func createSubjectsDocumentDirectory() {
         let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(Constants.SUBJECT_FOLDER_NAME)
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("/" + Constants.SUBJECT_FOLDER_NAME)
         if !fileManager.fileExists(atPath: paths){
             try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
         }else{
-            print("Already dictionary created.")
+            print("subjects directory already created.")
         }
     }
     
     class func createObjectsDocumentDirectory() {
         let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(Constants.OBJECT_FOLDER_NAME)
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("/" + Constants.OBJECT_FOLDER_NAME)
         if !fileManager.fileExists(atPath: paths){
             try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
         }else{
-            print("Already dictionary created.")
+            print("objects directory already created.")
         }
     }
     
     class func createVerbsDocumentDirectory() {
         let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(Constants.VERB_FOLDER_NAME)
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("/" + Constants.VERB_FOLDER_NAME)
         if !fileManager.fileExists(atPath: paths){
             try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
         }else{
-            print("Already dictionary created.")
+            print("verbs directory already created.")
         }
+    }
+    
+    class func createConnectivesDocumentDirectory() {
+        let fileManager = FileManager.default
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("/" + Constants.CONNECTIVES_FODLER_NAME)
+        if !fileManager.fileExists(atPath: paths){
+            try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
+        }else{
+            print("connectives directory already created.")
+        }
+    }
+
+    class func createAllDocumentDirectories() {
+        createSubjectsDocumentDirectory()
+        createObjectsDocumentDirectory()
+        createVerbsDocumentDirectory()
+        createConnectivesDocumentDirectory()
     }
 }
