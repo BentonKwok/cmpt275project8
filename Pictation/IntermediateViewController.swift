@@ -30,7 +30,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     let OBJECT_FOLDER_NAME = "objects"
     let VERB_FOLDER_NAME = "verbs"
     var collectionViewClick = 0
-    let picturePanelFontSizeBolded = 20
+    let picturePanelFontSizeBolded = 20 
     let picturePanelFontSize = 14
 
     
@@ -167,10 +167,10 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         allImages[1] = verbImages
         allImages[2] = objectImages
         
-        currentImages = allImages[collectionViewClick]
+        currentImages = allImages[collectionViewClick]  
         currentTitles = allTitles[collectionViewClick]
      
-        // setting display of PicturePanel
+        //setting display of PicturePanel
         subjectPanelState.text = SUBJECT_FOLDER_NAME
         subjectPanelState.layer.borderWidth = 2.0
         subjectPanelState.layer.cornerRadius = 8
@@ -261,8 +261,13 @@ extension IntermediateViewController : UICollectionViewDataSource {
     /// Create cell for each item
     // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.borderWidth = 3
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[collectionViewClick][indexPath.row], for: .normal)
+        cell.layer.borderWidth = 4
+        cell.layer.borderColor = UIColor.darkGray.cgColor
+        cell.layer.cornerRadius = 8
         cell.buttonHandler = { [weak self] button in
             self?.currenctSelectedWord = (self?.removeLastComponentOfString((self?.allTitles[(self?.collectionViewClick)!][indexPath.row])!, ".jpg"))!
             self?.selectedImage = self?.allImages[(self?.collectionViewClick)!][indexPath.row]

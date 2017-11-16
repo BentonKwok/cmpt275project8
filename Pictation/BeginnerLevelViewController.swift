@@ -186,6 +186,9 @@ extension BeginnerLevelViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[indexPath.row], for: .normal)
+        cell.layer.borderWidth = 4
+        cell.layer.borderColor = UIColor.darkGray.cgColor
+        cell.layer.cornerRadius = 8
         cell.buttonHandler = { [weak self] button in
             self?.currenctSelectedWord = (self?.removeLastComponentOfString((self?.allTitles[indexPath.row])!, ".jpg"))!
             self?.selectedImage.image = self?.allImages[indexPath.row]
