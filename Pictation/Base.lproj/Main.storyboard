@@ -109,7 +109,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S3U-ym-ifh">
-                                <rect key="frame" x="30" y="91" width="101" height="89"/>
+                                <rect key="frame" x="30" y="135" width="101" height="89"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="89" id="O3b-NN-qOx"/>
                                 </constraints>
@@ -122,14 +122,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W52-gk-50V">
-                                <rect key="frame" x="705" y="200" width="37" height="30"/>
+                                <rect key="frame" x="705" y="244" width="37" height="30"/>
                                 <state key="normal" title="Make"/>
                                 <connections>
                                     <action selector="makeButtonHandler:" destination="k9T-gN-1uI" eventType="touchUpInside" id="L3K-3q-1ls"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GH1-R8-VeX">
-                                <rect key="frame" x="295" y="32" width="179" height="30"/>
+                                <rect key="frame" x="295" y="76" width="179" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -431,11 +431,12 @@
                         <outlet property="sentenceImages" destination="FmA-4c-trw" id="99U-FL-jZz"/>
                         <outlet property="subjectPanelState" destination="4Fk-Ca-HzI" id="MWi-U6-XGC"/>
                         <outlet property="verbPanelState" destination="qz2-pM-nSw" id="Bpe-tf-foU"/>
+                        <segue destination="b3d-vN-0LF" kind="show" identifier="settingsFromIntermediate" id="Keq-Pd-tLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59z-0j-we9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1830.46875" y="496.28906249999994"/>
+            <point key="canvasLocation" x="1105" y="1131"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="oEz-dm-PT1">
@@ -698,5 +699,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="M89-ub-1cL"/>
         <segue reference="HXf-Au-mBU"/>
+        <segue reference="Keq-Pd-tLt"/>
+        <segue reference="2U3-2p-Ijy"/>
+        <segue reference="MpU-hq-Oov"/>
     </inferredMetricsTieBreakers>
 </document>
