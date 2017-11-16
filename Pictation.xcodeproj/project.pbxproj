@@ -17,8 +17,9 @@
 		C61B33841FA1161B006CAC0D /* PictationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B33831FA1161B006CAC0D /* PictationTests.swift */; };
 		C61B338F1FA1161B006CAC0D /* PictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B338E1FA1161B006CAC0D /* PictationUITests.swift */; };
 		C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */; };
-		C6A0DBC81FA70EB600E15AD1 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBC71FA70EB600E15AD1 /* Images.swift */; };
 		C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBCB1FA721E200E15AD1 /* myCell.swift */; };
+		C6A9C0101FBD10130041DBCE /* UtilHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C00F1FBD10130041DBCE /* UtilHelper.swift */; };
+		C6A9C0121FBD132E0041DBCE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C0111FBD132E0041DBCE /* Constants.swift */; };
 		C6D58C171FAE9484005C9CF3 /* objects in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C151FAE9484005C9CF3 /* objects */; };
 		C6D58C181FAE9484005C9CF3 /* verbs in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C161FAE9484005C9CF3 /* verbs */; };
 		C6D58C1A1FAE948C005C9CF3 /* subjects in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C191FAE948B005C9CF3 /* subjects */; };
@@ -61,8 +62,9 @@
 		C61B338E1FA1161B006CAC0D /* PictationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictationUITests.swift; sourceTree = "<group>"; };
 		C61B33901FA1161B006CAC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginnerLevelViewController.swift; sourceTree = "<group>"; };
-		C6A0DBC71FA70EB600E15AD1 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		C6A0DBCB1FA721E200E15AD1 /* myCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = myCell.swift; path = ../myCell.swift; sourceTree = "<group>"; };
+		C6A9C00F1FBD10130041DBCE /* UtilHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilHelper.swift; sourceTree = "<group>"; };
+		C6A9C0111FBD132E0041DBCE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C6D58C151FAE9484005C9CF3 /* objects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = objects; sourceTree = "<group>"; };
 		C6D58C161FAE9484005C9CF3 /* verbs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = verbs; sourceTree = "<group>"; };
 		C6D58C191FAE948B005C9CF3 /* subjects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = subjects; sourceTree = "<group>"; };
@@ -123,12 +125,12 @@
 				45672A801FA8F15200BCC811 /* ImageDisplay.swift */,
 				C6A0DBCB1FA721E200E15AD1 /* myCell.swift */,
 				C61B336E1FA1161B006CAC0D /* AppDelegate.swift */,
-				C6A0DBC71FA70EB600E15AD1 /* Images.swift */,
 				C61B33721FA1161B006CAC0D /* Main.storyboard */,
 				5A1478801FB059F000A617DB /* CameraViewController.swift */,
-				C666C3A51FA1E0C200C6E562 /* LevelViewController.swift */,
 				C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */,
 				CD5593F41FBA22BB008C5301 /* SettingsViewController.swift */,
+				C6A9C00F1FBD10130041DBCE /* UtilHelper.swift */,
+				C6A9C0111FBD132E0041DBCE /* Constants.swift */,
 				C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */,
 				C61B33751FA1161B006CAC0D /* Assets.xcassets */,
 				C61B337A1FA1161B006CAC0D /* Info.plist */,
@@ -174,7 +176,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C61B33931FA1161B006CAC0D /* Build configuration list for PBXNativeTarget "Pictation" */;
 			buildPhases = (
-				C6A0DBC61FA70D0900E15AD1 /* Swiftgen */,
 				C61B33671FA1161B006CAC0D /* Sources */,
 				C61B33681FA1161B006CAC0D /* Frameworks */,
 				C61B33691FA1161B006CAC0D /* Resources */,
@@ -300,23 +301,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		C6A0DBC61FA70D0900E15AD1 /* Swiftgen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftgen;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if hash swiftgen; then\nswiftgen xcassets -p xcassets_swift4.stencil Pictation/Assets.xcassets/ -o Pictation/Images.swift\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		C61B33671FA1161B006CAC0D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -324,13 +308,14 @@
 			files = (
 				45672A811FA8F15300BCC811 /* ImageDisplay.swift in Sources */,
 				452D39641FAA2A1C00C4850E /* IntermediateViewController.swift in Sources */,
-				C6A0DBC81FA70EB600E15AD1 /* Images.swift in Sources */,
 				C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */,
 				C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */,
 				CD4C4FF51FBA430200F271ED /* UsersViewController.swift in Sources */,
+				C6A9C0121FBD132E0041DBCE /* Constants.swift in Sources */,
 				C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */,
 				5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */,
 				CD5593F51FBA22BB008C5301 /* SettingsViewController.swift in Sources */,
+				C6A9C0101FBD10130041DBCE /* UtilHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

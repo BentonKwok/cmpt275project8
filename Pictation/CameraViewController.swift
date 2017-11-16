@@ -1,13 +1,4 @@
-//
-//  CameraViewController.swift
-//  Pictation
-//
-//  Created by Zoe Yan on 2017-11-06.
-//  Copyright © 2017 Benton. All rights reserved.
-//
-
 import UIKit
-
 
 class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
@@ -22,71 +13,13 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     let SUBJECT_FOLDER_NAME = "subjects"
     let OBJECT_FOLDER_NAME = "objects"
     let VERB_FOLDER_NAME = "verbs"
-    fileprivate func saveImageToFoler()
-    {
-        
-    }
-    func removeLastComponentOfString(_ originalString: String, _ stringToBeRemoved: String) -> String {
-        if (stringToBeRemoved != "") {
-            var trimmedString = ""
-            if let index = originalString.range(of: stringToBeRemoved)?.lowerBound {
-                let substring = originalString[..<(index)]
-                trimmedString = String(substring)
-            }
-            return trimmedString
-        } else {
-            return originalString
-        }
-    }
-    
-    //Return all the file names as an Arary [String] under folder at folderPath
-    fileprivate func getTitleArrays(_ folderPath: String) -> [String] {
-        var titleArray = [String]()
-        do {
-            titleArray = try FileManager.default.contentsOfDirectory(atPath: folderPath)
-        } catch {
-            print("Error at getting contents of directory = \(folderPath)")
-        }
-        return titleArray
-    }
-    
-    //Return all the images as an Array [UIImages] under folder at folderPath
-    fileprivate func getImageArrays(_ folderPath: String, _ titleArray : [String], _ imageUrlArray : [URL]) -> [UIImage] {
-        var imageArray = [UIImage]()
-        var imageIndex = 0
-        for _ in titleArray {
-            let data = NSData(contentsOf: imageUrlArray[imageIndex])
-            let image = UIImage(data: data! as Data)
-            imageArray.append(image!)
-            imageIndex = imageIndex + 1
-        }
-        return imageArray
-    }
-    
-    //Return the folder path by getting the file path of first image, and then remove its last componenet to get its folder path
-    //Example: Passing in User/subjects/eat.jpg will return
-    //User/subjects
-    func getFolderPathWithoutLastComponent(imageUrlArray : [URL]) -> String {
-        if (imageUrlArray[0].absoluteString != "" ) {
-            let firstImagePath = imageUrlArray[0].path
-            let firstImageNSPath = firstImagePath as NSString
-            let stringToBeRemoved = firstImageNSPath.lastPathComponent as String
-            return removeLastComponentOfString(firstImagePath, stringToBeRemoved)
-        } else {
-            return ""
-        }
-    }
-    //************************************************************************
-    
-
     var imagesDirectoryPath:String!
     var images:[UIImage]!
     var titles:[String]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        ////////////////////////////////////////////////////////
        
-        images=[]
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         // Get the Document directory path
         let documentDirectorPath:String = paths[0]
@@ -103,36 +36,6 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                 print("Something went wrong while creating a new folder")
             }
         }
-        //////////////////////////////////////////////////////////////////////////////
-        
-        //Getting all the image folder paths as URL arrays [URL]
-        //There are THREE folders, subjects, objects, verbs
-        subjectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: SUBJECT_FOLDER_NAME)!
-        objectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: OBJECT_FOLDER_NAME)!
-        verbImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: VERB_FOLDER_NAME)!
-        
-        allImagesUrlArray = subjectImagesUrlArray + objectImagesUrlArray
-        allImagesUrlArray = allImagesUrlArray + verbImagesUrlArray
-        
-        let subjectFolderPath = getFolderPathWithoutLastComponent(imageUrlArray: subjectImagesUrlArray)
-        let objectFolderPath = getFolderPathWithoutLastComponent(imageUrlArray: objectImagesUrlArray)
-        let verbFolderPath = getFolderPathWithoutLastComponent(imageUrlArray: verbImagesUrlArray)
-        
-        //Getting all the file names of each folder and put them in String arrays [String]
-        let subjectTitles = getTitleArrays(subjectFolderPath)
-        let objectTitles = getTitleArrays(objectFolderPath)
-        let verbTitles = getTitleArrays(verbFolderPath)
-        
-        //Getting all the images of each foler and put them in UIImages arrays [UIImage]
-        let subjectImages = getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
-        let objectImages = getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
-        let verbImages = getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
-        
-        allTitles = subjectTitles + objectTitles
-        allTitles = allTitles + verbTitles
-        
-        allImages = subjectImages + objectImages
-        allImages = allImages + verbImages
     }
 
     @IBOutlet weak var myImageView: UIImageView!
@@ -260,51 +163,4 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
             animated: true,
             completion: nil)
     }
-
-    /*private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        myImageView.image = image
-        dismiss(animated:true, completion: nil)
-        
-        // Save image to Document directory
-        var imagePath = NSDate().description
-        imagePath = imagePath.replacingOccurrences(of: " ", with: "")
-        imagePath = imagesDirectoryPath.appending("/\(imagePath).png")
-        let data = UIImagePNGRepresentation(image)
-        let success = FileManager.default.createFile(atPath: imagePath, contents: data, attributes: nil)
-        dismiss(animated:true) { () -> Void in
-            self.refreshTable()
-        }
-    }
-    func refreshTable(){
-        do{
-            images.removeAll()
-            titles = try FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath)
-            for image in titles{
-                let data = FileManager.default.contents(atPath:imagesDirectoryPath.appending("/\(image)"))
-                let image = UIImage(data: data!)
-                images.append(image!)
-            }
-            self.tableView.reloadData()
-        }catch{
-            print("Error")
-        }
-    }
-   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "CellID")
-        cell?.imageView?.image = images[indexPath.row]
-        cell.textLabel?.text = titles[indexPath.row]
-        return cell
-    }*/
- 
-    /*
-    // MARK: - Navigation
- 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
