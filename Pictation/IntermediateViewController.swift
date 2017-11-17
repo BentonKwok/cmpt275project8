@@ -38,6 +38,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
             for i in 0...(self.sentenceImages.selectedText.count-1){
                 if i >= 1
                 {
+                    // Grammer correction for the sentence combinations be are able to currently able to offer
                     if (sentenceImages.selectedText[i-1] == "I" ||  sentenceImages.selectedText[i-1] == "me" || sentenceImages.selectedText[i-1] == "we" ||  sentenceImages.selectedText[i-1] == "they")
                     {
                         sentence += addWantTo
@@ -64,6 +65,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
                     sentence += " "
                 }
             }
+            outputSentenceText.font = UIFont.systemFont(ofSize: CGFloat(30), weight: .bold)
             outputSentenceText.text = sentence
         }
     }
@@ -76,7 +78,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         outputSentenceText.text = currenctSelectedWord
         self.sentenceImages.reset()
         self.collectionViewClick = 0
-        
+    
         currentTitles = allTitles[collectionViewClick]
         currentImages = allImages[collectionViewClick]
         collectionView.reloadData()
@@ -100,6 +102,9 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Sets background color of Picture Panel ViewController
+        self.view.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
         
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
@@ -189,6 +194,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         voiceRate = Double(sender.value / 100.0)
     }
     @IBAction func stopAudioButton(_ sender: UIButton) {
+
         self.mySynthesizer.stopSpeaking(at: .immediate)
     }
     
@@ -227,6 +233,19 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     
     
 }
+
+// HEX Value to UIColor conversion
+extension UIColor{
+    convenience init(colorWithHexValue value: Int, alpha:CGFloat = 1.0){
+        self.init(
+            red: CGFloat((value & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((value & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(value & 0x0000FF) / 255.0,
+            alpha: alpha
+        )
+    }
+}
+
 /// Collection View data
 extension IntermediateViewController : UICollectionViewDataSource {
     /// Number of section and items in each section
@@ -238,8 +257,12 @@ extension IntermediateViewController : UICollectionViewDataSource {
     /// Create cell for each item
     // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // Sets color and borders of Collection View
+        collectionView.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
         collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.borderWidth = 3
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[collectionViewClick][indexPath.row], for: .normal)
         cell.layer.borderWidth = 4

@@ -5,6 +5,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var selectedImage: UIImageView!
+    @IBOutlet weak var picturePanelState: UILabel!
     
     var allImages:[UIImage]!
     var allTitles:[String]!
@@ -16,8 +17,11 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     
     var currenctSelectedWord = ""
     
+    let picturePanelFontSizeBolded = 20
+    
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         if (currenctSelectedWord != "") {
+            outputSentenceText.font = UIFont.systemFont(ofSize: CGFloat(30), weight: .bold)
             outputSentenceText.text = currenctSelectedWord
         }
     }
@@ -37,6 +41,9 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         super.viewDidLoad()
         
         UtilHelper.createAllDocumentDirectories()
+        
+        //Sets background color of ViewController
+        self.view.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
         
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
@@ -147,6 +154,12 @@ extension BeginnerLevelViewController : UICollectionViewDataSource {
     /// Create cell for each item
     // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // Sets color and borders of Collection View
+        collectionView.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.borderWidth = 3
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[indexPath.row], for: .normal)
         cell.layer.borderWidth = 4
