@@ -30,16 +30,44 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     
    // @IBAction func makeButtonHandler(_ sender: UIButton) {
     @IBAction func makeButtonHandler(_ sender: UIButton) {
+        var verbWithS = ""
+        let addWantTo = "want to"
         //A check to make sure selectedText is not accessed when it doesn't have elements yet
         if (currenctSelectedWord != "") {
             var sentence : String = ""
-            for i in 0...(self.sentenceImages.selectedText.count-1){    
-                sentence += self.sentenceImages.selectedText[i]
-                sentence += " "
+            for i in 0...(self.sentenceImages.selectedText.count-1){
+                if i >= 1
+                {
+                    if (sentenceImages.selectedText[i-1] == "I" ||  sentenceImages.selectedText[i-1] == "me" || sentenceImages.selectedText[i-1] == "we" ||  sentenceImages.selectedText[i-1] == "they")
+                    {
+                        sentence += addWantTo
+                        sentence += " "
+                        sentence += self.sentenceImages.selectedText[i]
+                        sentence += " "
+                    }
+                    else if sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she"
+                    {
+                        verbWithS = sentenceImages.selectedText[i]
+                        verbWithS += "s"
+                        sentence += verbWithS
+                        sentence += " "
+                    }
+                    else
+                    {
+                        sentence += self.sentenceImages.selectedText[i]
+                        sentence += " "
+                    }
+                    
+                }
+                else{
+                    sentence += self.sentenceImages.selectedText[i]
+                    sentence += " "
+                }
             }
-                outputSentenceText.text = sentence
+            outputSentenceText.text = sentence
         }
     }
+
 
     @IBAction func restartButtonHandler(_ sender: UIButton
         ) {
