@@ -99,6 +99,12 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         verbImages = verbImages + verbDocumentImages
         allImages = subjectImages + objectImages
         allImages = allImages + verbImages
+        
+        picturePanelState.text = Constants.ALL_PICTURES_NAME
+        picturePanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSizeBolded), weight: .bold)
+        picturePanelState.textColor = UIColor.black
+        picturePanelState.layer.borderWidth = 2.0
+        picturePanelState.layer.cornerRadius = 8
     }
     
     override func didReceiveMemoryWarning() {

@@ -106,7 +106,7 @@ class UtilHelper {
     
     class func createConnectivesDocumentDirectory() {
         let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("/" + Constants.CONNECTIVES_FODLER_NAME)
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("/" + Constants.CONNECTIVES_FOLDER_NAME)
         if !fileManager.fileExists(atPath: paths){
             try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
         }else{
