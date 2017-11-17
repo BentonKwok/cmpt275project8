@@ -200,6 +200,27 @@
                                     <constraint firstAttribute="height" constant="96" id="O3b-NN-qOx"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGO-Z9-8ba">
+                                <rect key="frame" x="528" y="207" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="qpX-6K-sAW">
+                                <rect key="frame" x="576" y="207" width="118" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="adjustSpeakRateButton:" destination="k9T-gN-1uI" eventType="valueChanged" id="EfO-Nt-fmU"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFT-dD-cqn">
+                                <rect key="frame" x="700" y="207" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -234,6 +255,7 @@
                     <connections>
                         <outlet property="collectionView" destination="gq6-M0-8ca" id="WeF-Nf-ASe"/>
                         <outlet property="outputSentenceText" destination="GH1-R8-VeX" id="yYy-HA-L77"/>
+                        <outlet property="rateLabel" destination="oFT-dD-cqn" id="qdS-Uf-VeX"/>
                         <outlet property="selectedImage" destination="S3U-ym-ifh" id="1tf-aD-pIt"/>
                         <segue destination="b3d-vN-0LF" kind="show" identifier="settingsFromBeginner" id="LBc-jJ-fQO"/>
                     </connections>
@@ -416,6 +438,27 @@
                                     <outlet property="delegate" destination="ZfP-XQ-GJu" id="0BZ-Tz-T2y"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjl-E2-wQJ">
+                                <rect key="frame" x="529" y="200" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="eIm-xf-mld">
+                                <rect key="frame" x="577" y="200" width="118" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="adjustSpeakRateButton:" destination="ZfP-XQ-GJu" eventType="valueChanged" id="Uyf-5P-jcw"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as5-bg-vyV">
+                                <rect key="frame" x="701" y="200" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -452,6 +495,7 @@
                         <outlet property="collectionView" destination="WIl-B9-Gwj" id="u6A-k9-qEx"/>
                         <outlet property="objectPanelState" destination="eWG-5p-VGh" id="4HS-ua-HVi"/>
                         <outlet property="outputSentenceText" destination="XAh-eu-VYf" id="t2b-ve-3cB"/>
+                        <outlet property="rateLabel" destination="as5-bg-vyV" id="FJV-R1-m92"/>
                         <outlet property="sentenceImages" destination="FmA-4c-trw" id="99U-FL-jZz"/>
                         <outlet property="subjectPanelState" destination="4Fk-Ca-HzI" id="MWi-U6-XGC"/>
                         <outlet property="verbPanelState" destination="qz2-pM-nSw" id="Bpe-tf-foU"/>

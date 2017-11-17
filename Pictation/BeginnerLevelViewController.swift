@@ -103,6 +103,12 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     let mySynthesizer = AVSpeechSynthesizer()
     var myUtterence = AVSpeechUtterance(string: "This assignment is so much fun and I really enjoy doing it!")
     var wasPaused = false;
+    var voiceRate = 0.0
+    @IBOutlet weak var rateLabel: UILabel!
+    @IBAction func adjustSpeakRateButton(_ sender: UISlider) {
+        rateLabel.text = String(Int(sender.value))
+        voiceRate = Double(sender.value / 100.0)
+    }
     @IBAction func stopAudioButton(_ sender: UIButton) {
         self.mySynthesizer.stopSpeaking(at: .immediate)
         
@@ -117,7 +123,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         {
             myUtterence = AVSpeechUtterance(string: outputSentenceText.text!);
             // myUtterence.rate = AVSpeechUtteranceMinimumSpeechRate
-            myUtterence.rate = 0.52
+            myUtterence.rate = Float(voiceRate)
             myUtterence.voice = AVSpeechSynthesisVoice(language: "en-us")
             myUtterence.pitchMultiplier = 1.5 //between 0.5 and 2.0. Default is 1.0.
             mySynthesizer.speak(myUtterence)
