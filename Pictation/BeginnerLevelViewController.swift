@@ -5,6 +5,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
     @IBOutlet weak var selectedImage: UIImageView!
+    @IBOutlet weak var picturePanelState: UILabel!
     
     var allImages:[UIImage]!
     var allTitles:[String]!
@@ -16,8 +17,11 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     
     var currenctSelectedWord = ""
     
+    let picturePanelFontSizeBolded = 20
+    
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         if (currenctSelectedWord != "") {
+            outputSentenceText.font = UIFont.systemFont(ofSize: CGFloat(30), weight: .bold)
             outputSentenceText.text = currenctSelectedWord
         }
     }
@@ -37,6 +41,9 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         super.viewDidLoad()
         
         UtilHelper.createAllDocumentDirectories()
+        
+        //Sets background color of ViewController
+        self.view.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
         
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
@@ -92,6 +99,12 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         verbImages = verbImages + verbDocumentImages
         allImages = subjectImages + objectImages
         allImages = allImages + verbImages
+        
+        picturePanelState.text = Constants.ALL_PICTURES_NAME
+        picturePanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSizeBolded), weight: .bold)
+        picturePanelState.textColor = UIColor.black
+        picturePanelState.layer.borderWidth = 2.0
+        picturePanelState.layer.cornerRadius = 8
     }
     
     override func didReceiveMemoryWarning() {
@@ -103,6 +116,12 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     let mySynthesizer = AVSpeechSynthesizer()
     var myUtterence = AVSpeechUtterance(string: "This assignment is so much fun and I really enjoy doing it!")
     var wasPaused = false;
+    var voiceRate = 0.0
+    @IBOutlet weak var rateLabel: UILabel!
+    @IBAction func adjustSpeakRateButton(_ sender: UISlider) {
+        rateLabel.text = String(Int(sender.value))
+        voiceRate = Double(sender.value / 100.0)
+    }
     @IBAction func stopAudioButton(_ sender: UIButton) {
         self.mySynthesizer.stopSpeaking(at: .immediate)
         
@@ -117,7 +136,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         {
             myUtterence = AVSpeechUtterance(string: outputSentenceText.text!);
             // myUtterence.rate = AVSpeechUtteranceMinimumSpeechRate
-            myUtterence.rate = 0.52
+            myUtterence.rate = Float(voiceRate)
             myUtterence.voice = AVSpeechSynthesisVoice(language: "en-us")
             myUtterence.pitchMultiplier = 1.5 //between 0.5 and 2.0. Default is 1.0.
             mySynthesizer.speak(myUtterence)
@@ -141,6 +160,12 @@ extension BeginnerLevelViewController : UICollectionViewDataSource {
     /// Create cell for each item
     // In buttonHandler, update currentSelectedWord and the selectedImage when "Make" button is clicked
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // Sets color and borders of Collection View
+        collectionView.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.borderWidth = 3
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[indexPath.row], for: .normal)
         cell.layer.borderWidth = 4

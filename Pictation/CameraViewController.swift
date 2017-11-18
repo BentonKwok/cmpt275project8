@@ -16,6 +16,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
     }
 
     @IBOutlet weak var myImageView: UIImageView!
