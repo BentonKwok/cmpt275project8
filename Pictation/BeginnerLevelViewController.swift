@@ -10,10 +10,10 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     var allImages:[UIImage]!
     var allTitles:[String]!
     
-    var subjectImagesUrlArray:[URL]!
-    var objectImagesUrlArray:[URL]!
-    var verbImagesUrlArray:[URL]!
-    var allImagesUrlArray:[URL]!
+//    var subjectImagesUrlArray:[URL]!
+//    var objectImagesUrlArray:[URL]!
+//    var verbImagesUrlArray:[URL]!
+//    var allImagesUrlArray:[URL]!
     
     var currenctSelectedWord = ""
     
@@ -50,11 +50,11 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         
         //Getting all the image folder paths as URL arrays [URL]
         //There are THREE folders, subjects, objects, verbs
-        subjectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.SUBJECT_FOLDER_NAME)!
-        objectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.OBJECT_FOLDER_NAME)!
-        verbImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.VERB_FOLDER_NAME)!
+        let subjectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.SUBJECT_FOLDER_NAME)!
+        let objectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.OBJECT_FOLDER_NAME)!
+        let verbImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.VERB_FOLDER_NAME)!
         
-        allImagesUrlArray = subjectImagesUrlArray + objectImagesUrlArray
+        var allImagesUrlArray = subjectImagesUrlArray + objectImagesUrlArray
         allImagesUrlArray = allImagesUrlArray + verbImagesUrlArray
         
         //Getting all the folder paths where the predefined images are stored

@@ -22,6 +22,7 @@
 		C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0DBCB1FA721E200E15AD1 /* myCell.swift */; };
 		C6A9C0101FBD10130041DBCE /* UtilHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C00F1FBD10130041DBCE /* UtilHelper.swift */; };
 		C6A9C0121FBD132E0041DBCE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C0111FBD132E0041DBCE /* Constants.swift */; };
+		C6A9C0161FC0EE670041DBCE /* connectives in Resources */ = {isa = PBXBuildFile; fileRef = C6A9C0151FC0EE670041DBCE /* connectives */; };
 		C6D58C171FAE9484005C9CF3 /* objects in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C151FAE9484005C9CF3 /* objects */; };
 		C6D58C181FAE9484005C9CF3 /* verbs in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C161FAE9484005C9CF3 /* verbs */; };
 		C6D58C1A1FAE948C005C9CF3 /* subjects in Resources */ = {isa = PBXBuildFile; fileRef = C6D58C191FAE948B005C9CF3 /* subjects */; };
@@ -69,6 +70,7 @@
 		C6A0DBCB1FA721E200E15AD1 /* myCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = myCell.swift; path = ../myCell.swift; sourceTree = "<group>"; };
 		C6A9C00F1FBD10130041DBCE /* UtilHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilHelper.swift; sourceTree = "<group>"; };
 		C6A9C0111FBD132E0041DBCE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C6A9C0151FC0EE670041DBCE /* connectives */ = {isa = PBXFileReference; lastKnownFileType = folder; path = connectives; sourceTree = "<group>"; };
 		C6D58C151FAE9484005C9CF3 /* objects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = objects; sourceTree = "<group>"; };
 		C6D58C161FAE9484005C9CF3 /* verbs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = verbs; sourceTree = "<group>"; };
 		C6D58C191FAE948B005C9CF3 /* subjects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = subjects; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		C6D58C1B1FAE9516005C9CF3 /* AllImages */ = {
 			isa = PBXGroup;
 			children = (
+				C6A9C0151FC0EE670041DBCE /* connectives */,
 				C6D58C191FAE948B005C9CF3 /* subjects */,
 				C6D58C151FAE9484005C9CF3 /* objects */,
 				C6D58C161FAE9484005C9CF3 /* verbs */,
@@ -288,6 +291,7 @@
 				C61B33741FA1161B006CAC0D /* Main.storyboard in Resources */,
 				90C4FF541FBECF3500AB802D /* Assets.xcassets in Resources */,
 				C6D58C181FAE9484005C9CF3 /* verbs in Resources */,
+				C6A9C0161FC0EE670041DBCE /* connectives in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

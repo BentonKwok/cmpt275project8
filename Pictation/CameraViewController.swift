@@ -1,57 +1,65 @@
 import UIKit
 
 class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-
-    var allImages:[UIImage]!
-    var allTitles:[String]!
-    
-    var subjectImagesUrlArray:[URL]!
-    var objectImagesUrlArray:[URL]!
-    var verbImagesUrlArray:[URL]!
-    var allImagesUrlArray:[URL]!
-    
-    var imagesDirectoryPath:String!
-    var images:[UIImage]!
-    var titles:[String]!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
+        self.view.backgroundColor = UIColor(colorWithHexValue : 0xD6EAF8)
     }
-
+    
     @IBOutlet weak var myImageView: UIImageView!
-
-    func saveImage(imageName: String){
+    
+    func saveImage(imageName: String) {
         //create an instance of the FileManager
         let fileManager = FileManager.default
         //get the image path
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+        //print(imagePath)
         //get the image we took with camera
         let image = myImageView.image!
         //get the JPG data for this image
-        let data = UIImagePNGRepresentation(image)
+        let data = UIImageJPEGRepresentation(image, 1.0)
         //store it in the document directory
         fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
     }
     
     @IBAction func storePictureButton(_ sender: UIButton) {
+        chooseDirectory()
         let alert=UIAlertController(title: "saved", message: "Your image has been saved", preferredStyle:.alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
-
-        saveImage(imageName: "test1")
     }
     
-    
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
+    func chooseDirectory() {
+        let alertController = UIAlertController(title: "Name", message: "Please type a name for your Image", preferredStyle: .alert)
+        let titleAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+            if let field = alertController.textFields?[0] {
+                // store your data
+                UserDefaults.standard.set(field.text, forKey: "userTitle")    // We can use this forKey to store the name of the picture
+                UserDefaults.standard.synchronize()
+                self.saveImage(imageName: "objects/" + field.text! + ".jpg")
+                
+                
+            } else {
+                // user did not fill field
+                //let alertController = UIAlertController(title: "Error", message: "field cannot be left empty", preferredStyle: .alert)
+                
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Enter name"
+        }
+        
+        
+        alertController.addAction(titleAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        //saveImage(imageName : "title/userTitle")
     }
-  
     
-   
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image=info[UIImagePickerControllerOriginalImage] as? UIImage{
             myImageView.image=image
@@ -63,10 +71,8 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         self.dismiss(animated:true,completion:nil)
     }
     
-    
-    
     @IBAction func photoDirectoryButton(_ sender: UIButton) {
-
+        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
@@ -75,7 +81,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         
     }
     @IBAction func cameraButton(_ sender: UIButton) {
- 
+        
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         {
             let imagePicker = UIImagePickerController()
@@ -89,7 +95,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
+    
     func noCamera(){
         let alertVC = UIAlertController(
             title: "No Camera",
