@@ -1,9 +1,10 @@
-import UIKit
+  import UIKit
 import CoreData
 
 /*** Much of the code for the core data model here has been coppied from: https://github.com/Shashikant86/CoreDataDemo
  and their tutorial located at: https://medium.com/xcblog/core-data-with-swift-4-for-beginners-1fc067cca707 ***/
- 
+var CURRENT_USER : String = "none"
+
 @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
