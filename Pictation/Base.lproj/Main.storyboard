@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -465,6 +466,30 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gd0-u0-sYW" id="ZEW-z9-1ts">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JC3-kv-CiV">
+                                                    <rect key="frame" x="40" y="11" width="108" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Name" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Yi-Oj-Sg0">
+                                                    <rect key="frame" x="382" y="0.0" width="366" height="43.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="4Yi-Oj-Sg0" secondAttribute="trailing" constant="20" id="8YW-Sq-B0r"/>
+                                                <constraint firstItem="JC3-kv-CiV" firstAttribute="leading" secondItem="ZEW-z9-1ts" secondAttribute="leadingMargin" constant="20" id="BvS-nH-cm7"/>
+                                                <constraint firstItem="JC3-kv-CiV" firstAttribute="top" secondItem="ZEW-z9-1ts" secondAttribute="topMargin" id="TQb-5O-ObY"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JC3-kv-CiV" secondAttribute="trailing" constant="600" id="UvT-Xd-hng"/>
+                                                <constraint firstItem="4Yi-Oj-Sg0" firstAttribute="top" secondItem="ZEW-z9-1ts" secondAttribute="top" id="hlq-QW-P8S"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="JC3-kv-CiV" secondAttribute="bottom" id="j3v-bh-GDM"/>
+                                                <constraint firstAttribute="bottom" secondItem="4Yi-Oj-Sg0" secondAttribute="bottom" id="rbc-iQ-GkG"/>
+                                                <constraint firstItem="4Yi-Oj-Sg0" firstAttribute="leading" secondItem="JC3-kv-CiV" secondAttribute="trailing" constant="234" id="s0c-8N-FG4"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="msg-5q-Vlk">
@@ -593,6 +618,7 @@
                     <connections>
                         <outlet property="levelSelect" destination="nAM-rQ-CkH" id="Gml-vu-44n"/>
                         <outlet property="logoutButton" destination="pdr-xx-sAw" id="2ug-bi-RHC"/>
+                        <outlet property="nameTextField" destination="4Yi-Oj-Sg0" id="19R-AP-XVS"/>
                         <segue destination="k9T-gN-1uI" kind="show" identifier="beginnerFromSettings" id="rv6-lD-qnG"/>
                         <segue destination="ZfP-XQ-GJu" kind="show" identifier="intermediateFromSettings" id="2U3-2p-Ijy"/>
                         <segue destination="O6S-79-Fh2" kind="show" identifier="toUserFromSettings" id="xxE-eh-9xa"/>
@@ -600,7 +626,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74e-g6-IoK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2429" y="-641"/>
+            <point key="canvasLocation" x="2428.90625" y="-641.015625"/>
         </scene>
         <!--Users View Controller-->
         <scene sceneID="7rW-I5-Eus">
@@ -610,12 +636,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jei-LM-tpz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jei-LM-tpz">
                                 <rect key="frame" x="20" y="40" width="728" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="9CJ-pk-IlJ"/>
                                 </constraints>
-                                <state key="normal" title="Guest"/>
+                                <state key="normal" title="Guest">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="guestButtonPress:" destination="O6S-79-Fh2" eventType="touchUpInside" id="PGb-b8-cxD"/>
                                 </connections>
@@ -671,9 +699,9 @@
                     <connections>
                         <outlet property="guestButton" destination="Jei-LM-tpz" id="bYX-d3-fJV"/>
                         <outlet property="tableView" destination="Qbn-jf-Qlk" id="HAK-n5-ERC"/>
-                        <segue destination="b3d-vN-0LF" kind="show" identifier="toSettingsFromUser" id="yu3-yS-ZOa"/>
                         <segue destination="k9T-gN-1uI" kind="show" identifier="usersToBeginner" id="uai-St-tLF"/>
                         <segue destination="ZfP-XQ-GJu" kind="show" identifier="userToIntermediate" id="qUM-3B-JQM"/>
+                        <segue destination="b3d-vN-0LF" kind="show" identifier="toSettingsFromUsers" id="aVe-0C-psZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQo-Yn-Gsu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -754,7 +782,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="xxE-eh-9xa"/>
-        <segue reference="yu3-yS-ZOa"/>
+        <segue reference="aVe-0C-psZ"/>
         <segue reference="qUM-3B-JQM"/>
         <segue reference="uai-St-tLF"/>
     </inferredMetricsTieBreakers>
