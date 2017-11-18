@@ -12,7 +12,6 @@ import CoreData
 private let reuseIdentifier = "UserCell"
 
 class UserTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var buttonCell: UIButton!
     
 }

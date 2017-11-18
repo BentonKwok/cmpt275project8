@@ -60,7 +60,7 @@ class UsersViewController: UIViewController {
     }
 
     //Handles the pressing of the guest button
-    @IBAction func buttonPressed(_ sender: UIButton) {
+    @IBAction func guestButtonPress(_ sender: UIButton) {
         CURRENT_USER = guestButton.titleLabel!.text!
         
         if((GuestInfo.value(forKey: "commlevel") as! Int) == BEGINNER_LEVEL){
