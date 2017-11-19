@@ -78,6 +78,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
                 UserInfo = NSManagedObject(entity: entity!, insertInto: context)
                 UserInfo?.setValue(CURRENT_USER, forKey: "name")
                 UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
+                UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
             }
             
         } catch {
@@ -85,6 +86,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             UserInfo = NSManagedObject(entity: entity!, insertInto: context)
             UserInfo?.setValue(CURRENT_USER, forKey: "name")
             UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
+            UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         }
         
         //set up the containers in the table
@@ -142,14 +144,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
                 break
             }
         }*/
-        
-        Settings.sharedValues.viewBackgroundColor = color[colorClick]
         colorClick += 1
         if (colorClick >= 4){
             return colorClick = 0
         }
+        Settings.sharedValues.viewBackgroundColor = color[colorClick]
+
         //Settings.sharedValues.viewBackgroundColor = color[colorClick]
-        UserInfo?.setValue(color[colorClick].toHexString(), forKey: "bg_colour")
+        UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         // Setting all background color values to the new viewBackgroundColor value
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
