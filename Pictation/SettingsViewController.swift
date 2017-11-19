@@ -22,6 +22,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var levelSelect: UISegmentedControl!
     @IBOutlet weak var BGColourButton: UIButton!
+    @IBOutlet weak var fontSizeSelect: UISegmentedControl!
     //    @IBOutlet weak var fontStyle: UIButton!
     
     //MARK: User Settings Properties
@@ -33,12 +34,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     
     // color counter
     var colorClick = 0
+    //All background coulour options are stored
     let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Sets background color of SettingsViewController
+        //Sets up background colour and BGColourButton
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
         for i in 0...color.endIndex{
@@ -47,7 +49,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
                 break
             }
         }
-        //**Add button borders here
+        BGColourButton.layer.cornerRadius = 5
+        BGColourButton.layer.borderWidth = 1
+        BGColourButton.layer.borderColor = UIColor.black.cgColor
         
         self.nameTextField.delegate = self
         logoutButton.backgroundColor = UIColor.red
@@ -79,6 +83,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
                 UserInfo?.setValue(CURRENT_USER, forKey: "name")
                 UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
                 UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
+                UserInfo?.setValue(1, forKey: "fontsize")
             }
             
         } catch {
@@ -87,9 +92,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             UserInfo?.setValue(CURRENT_USER, forKey: "name")
             UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
             UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
+            UserInfo?.setValue(1, forKey: "fontsize")
         }
         
-        //set up the containers in the table
+        //set up the containers in the table to match stored user settings
+        fontSizeSelect.selectedSegmentIndex = UserInfo?.value(forKey: "fontsize") as! Int
         nameTextField.text = (UserInfo?.value(forKey: "name") as! String)
         levelSelect.selectedSegmentIndex = UserInfo?.value(forKey: "commlevel") as! Int
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UserInfo?.value(forKey: "bg_colour") as! String)
@@ -128,6 +135,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         CURRENT_USER = nameTextField.text!
         UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserInfo?.setValue(nameTextField.text, forKey: "name")
+        UserInfo?.setValue(fontSizeSelect.selectedSegmentIndex, forKey: "fontsize")
+        Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: (CGFloat((10*fontSizeSelect.selectedSegmentIndex)+20)))
         do {
             let context = appDelegate.persistentContainer.viewContext
             try context.save()
@@ -136,21 +145,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         }
     }
     
+    ///Changes the baclground colour when the background colour button is pressed
     @IBAction func backgroundColorChange(_ sender: UIButton) {
-       /* let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
-        for i in 0...color.endIndex-1{
-            colorClick = i
-            if(color[i].toHexString() == Settings.sharedValues.viewBackgroundColor.toHexString()){
-                break
-            }
-        }*/
         colorClick += 1
         if (colorClick >= 4){
-            return colorClick = 0
+            colorClick = 0
         }
         Settings.sharedValues.viewBackgroundColor = color[colorClick]
-
-        //Settings.sharedValues.viewBackgroundColor = color[colorClick]
         UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         // Setting all background color values to the new viewBackgroundColor value
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor

@@ -3,9 +3,10 @@
     <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
         <attribute name="bg_colour" optional="YES" attributeType="String" defaultValueString="0xD6EAF8" syncable="YES"/>
         <attribute name="commlevel" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="fontsize" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Users" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Users" positionX="-54" positionY="-9" width="128" height="105"/>
     </elements>
 </model>

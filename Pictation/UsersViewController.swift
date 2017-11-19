@@ -56,6 +56,7 @@ class UsersViewController: UIViewController {
                 GuestInfo.setValue("Guest", forKey: "name")
                 GuestInfo.setValue(BEGINNER_LEVEL, forKey: "commlevel")
                 GuestInfo.setValue("0xD6EAF8", forKey: "bg_colour")
+                GuestInfo.setValue(1, forKey: "fontsize")
                 do {
                     let context = appDelegate.persistentContainer.viewContext
                     try context.save()
@@ -88,7 +89,7 @@ class UsersViewController: UIViewController {
             performSegue(withIdentifier: "userToIntermediate", sender: self)
         }
         else{
-            performSegue(withIdentifier: "usersToBeginner", sender: self)
+            performSegue(withIdentifier: "userToIntermediate", sender: self)
         }
     }
   
@@ -109,6 +110,7 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         CURRENT_USER = (UsersInfo[indexPath.row].value(forKey: "name") as! String)
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UsersInfo[indexPath.row].value(forKey: "bg_colour") as! String)
+        Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: ((CGFloat(10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int)+20))))
         
         if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.BEGINNER_LEVEL){
             performSegue(withIdentifier: "usersToBeginner", sender: self)
@@ -117,7 +119,7 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
             performSegue(withIdentifier: "userToIntermediate", sender: self)
         }
         else{
-            performSegue(withIdentifier: "usersToBeginner", sender: self)
+            performSegue(withIdentifier: "userToIntermediate", sender: self)
         }
     }
     
