@@ -198,7 +198,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSN-Rl-W11" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2013" y="312"/>
+            <point key="canvasLocation" x="2012.5" y="311.71875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yz6-Xg-6dH">
@@ -466,6 +466,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TTA-b9-gMB">
+                            <rect key="frame" x="0.0" y="506.5" width="768" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Camera"/>
+                            <connections>
+                                <segue destination="yPQ-Xq-dO4" kind="show" id="RxG-O6-ICN"/>
+                            </connections>
+                        </button>
                         <sections>
                             <tableViewSection headerTitle="User Settings" id="Evd-Dl-aD0">
                                 <cells>

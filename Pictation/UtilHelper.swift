@@ -47,7 +47,8 @@ class UtilHelper {
         var imageArray = [UIImage]()
         var imageIndex = 0
         for _ in titleArray {
-            let image = UIImage(contentsOfFile: folderPath.appending(titleArray[imageIndex]))
+            let folderPath = folderPath.appending("/" + titleArray[imageIndex])
+            let image = UIImage(contentsOfFile: folderPath)
             imageArray.append(image!)
             imageIndex = imageIndex + 1
         }
@@ -70,7 +71,7 @@ class UtilHelper {
     
     class func getDocumentDirectory(atFolder : String) -> String {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0].appending(atFolder)
+        let documentsDirectory = paths[0].appending("/"+atFolder)
         return documentsDirectory
     }
     
@@ -113,7 +114,7 @@ class UtilHelper {
             print("connectives directory already created.")
         }
     }
-
+    
     class func createAllDocumentDirectories() {
         createSubjectsDocumentDirectory()
         createObjectsDocumentDirectory()

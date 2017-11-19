@@ -164,7 +164,6 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         allTitles[0] = subjectTitles + subjectDocumentTitles
         allTitles[1] = verbTitles + verbDocumentTitles
         allTitles[2] = objectTitles + objectDocumentTitles
-        //allTitles = allTitles + verbTitles
         
         allImages[0] = subjectImages + subjectDocumentImages
         allImages[1] = verbImages + verbDocumentImages
