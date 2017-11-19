@@ -39,7 +39,16 @@ class UsersViewController: UIViewController {
         //Puts the core data for guest into guest info and everything else into UserInfo array
         do {
             let result = try context.fetch(request)
-            if(result.count == 0){
+            for data in result as! [NSManagedObject] {
+                if((data.value(forKey: "name") as! String) == "Guest"){
+                    GuestInfo = data
+                }
+                else{
+                    UsersInfo.append(data)
+                }
+            }
+            //Creates a Guest Account if none exists
+            if(GuestInfo == nil){
                 let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
                 GuestInfo = NSManagedObject(entity: entity!, insertInto: context)
                 GuestInfo.setValue("Guest", forKey: "name")
@@ -50,14 +59,6 @@ class UsersViewController: UIViewController {
                     try context.save()
                 } catch {
                     print("Failed saving")
-                }
-            }
-            for data in result as! [NSManagedObject] {
-                if((data.value(forKey: "name") as! String) == "Guest"){
-                    GuestInfo = data
-                }
-                else{
-                    UsersInfo.append(data)
                 }
             }
            // context.delete(GuestInfo)
