@@ -39,12 +39,14 @@ class UsersViewController: UIViewController {
         //Puts the core data for guest into guest info and everything else into UserInfo array
         do {
             let result = try context.fetch(request)
-            for data in result as! [NSManagedObject] {
-                if((data.value(forKey: "name") as! String) == "Guest"){
-                    GuestInfo = data
-                }
-                else{
-                    UsersInfo.append(data)
+            if(result.count != 0){
+                for data in result as! [NSManagedObject] {
+                    if((data.value(forKey: "name") as! String) == "Guest"){
+                        GuestInfo = data
+                    }
+                    else{
+                        UsersInfo.append(data)
+                    }
                 }
             }
             //Creates a Guest Account if none exists
