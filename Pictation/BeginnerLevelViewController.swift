@@ -43,7 +43,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         UtilHelper.createAllDocumentDirectories()
         
         //Sets background color of ViewController
-        self.view.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
+        self.view.backgroundColor = Settings.sharedValues.BGColor // hex number color #D6EAF8
         
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
@@ -162,7 +162,7 @@ extension BeginnerLevelViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Sets color and borders of Collection View
-        collectionView.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
+        collectionView.backgroundColor = Settings.sharedValues.BGColor// hex number color #D6EAF8
         collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.borderWidth = 3
         

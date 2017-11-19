@@ -27,6 +27,20 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     var collectionViewClick = 0
     let picturePanelFontSizeBolded = 20 
     let picturePanelFontSize = 14
+    var colorClick = 0
+    
+    @IBAction func backgroundColor(_ sender: Any) {
+        let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
+        Settings.sharedValues.BGColor = color[colorClick]
+        colorClick += 1
+        if (colorClick == 4){
+            return colorClick = 0
+        }
+        self.collectionView.reloadData()
+        self.view.backgroundColor = Settings.sharedValues.BGColor
+    }
+    
+    
     
    // @IBAction func makeButtonHandler(_ sender: UIButton) {
     @IBAction func makeButtonHandler(_ sender: UIButton) {
@@ -104,7 +118,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         super.viewDidLoad()
         
         //Sets background color of Picture Panel ViewController
-        self.view.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
+        self.view.backgroundColor = Settings.sharedValues.BGColor
         
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
@@ -259,7 +273,7 @@ extension IntermediateViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Sets color and borders of Collection View
-        collectionView.backgroundColor = UIColor(colorWithHexValue: 0xD6EAF8) // hex number color #D6EAF8
+        collectionView.backgroundColor = Settings.sharedValues.BGColor
         collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.borderWidth = 3
         

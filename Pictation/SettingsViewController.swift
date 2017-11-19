@@ -9,6 +9,12 @@
 import UIKit
 import CoreData
 
+// Allows for backgroundColor to be a global variable
+class Settings {
+    static let sharedValues = Settings()
+    var BGColor = UIColor(colorWithHexValue: 0xD6EAF8)
+}
+
 class SettingsViewController: UITableViewController, UITextFieldDelegate  {
     //MARK: Properties
     @IBOutlet weak var logoutButton: UIButton!
