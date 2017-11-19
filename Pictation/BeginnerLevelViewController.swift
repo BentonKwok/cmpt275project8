@@ -21,7 +21,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
     
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         if (currenctSelectedWord != "") {
-            outputSentenceText.font = UIFont.systemFont(ofSize: CGFloat(30), weight: .bold)
+            outputSentenceText.font = Settings.sharedValues.sentencePanelFont
             outputSentenceText.text = currenctSelectedWord
         }
     }
@@ -43,7 +43,7 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         UtilHelper.createAllDocumentDirectories()
         
         //Sets background color of ViewController
-        self.view.backgroundColor = Settings.sharedValues.BGColor // hex number color #D6EAF8
+        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
@@ -162,7 +162,7 @@ extension BeginnerLevelViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Sets color and borders of Collection View
-        collectionView.backgroundColor = Settings.sharedValues.BGColor// hex number color #D6EAF8
+        collectionView.backgroundColor = Settings.sharedValues.viewBackgroundColor// hex number color #D6EAF8
         collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.borderWidth = 3
         

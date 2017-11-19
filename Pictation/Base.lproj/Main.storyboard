@@ -392,13 +392,6 @@
                                     <outlet property="delegate" destination="ZfP-XQ-GJu" id="0BZ-Tz-T2y"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYB-Yg-bQI">
-                                <rect key="frame" x="605" y="242" width="123" height="30"/>
-                                <state key="normal" title="Background Color"/>
-                                <connections>
-                                    <action selector="backgroundColor:" destination="ZfP-XQ-GJu" eventType="touchUpInside" id="azK-pO-zDI"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -422,9 +415,7 @@
                             <constraint firstItem="qae-EF-RuH" firstAttribute="trailing" secondItem="7dC-py-Eu8" secondAttribute="trailing" constant="233" id="Q6q-cu-Mty"/>
                             <constraint firstItem="as5-bg-vyV" firstAttribute="top" secondItem="XAh-eu-VYf" secondAttribute="bottom" constant="59" id="SRS-zY-txo"/>
                             <constraint firstItem="XAh-eu-VYf" firstAttribute="top" secondItem="qae-EF-RuH" secondAttribute="top" constant="122" id="ScR-O5-ymK"/>
-                            <constraint firstItem="qae-EF-RuH" firstAttribute="trailing" secondItem="vYB-Yg-bQI" secondAttribute="trailing" constant="40" id="T8L-Lw-uIj"/>
                             <constraint firstItem="eIm-xf-mld" firstAttribute="top" secondItem="qae-EF-RuH" secondAttribute="top" constant="222" id="Vf2-7f-u8F"/>
-                            <constraint firstItem="vYB-Yg-bQI" firstAttribute="top" secondItem="qae-EF-RuH" secondAttribute="top" constant="222" id="YHI-vu-1dn"/>
                             <constraint firstItem="7dC-py-Eu8" firstAttribute="leading" secondItem="qae-EF-RuH" secondAttribute="leading" constant="395" id="drz-zT-f5x"/>
                             <constraint firstItem="FmA-4c-trw" firstAttribute="top" secondItem="qae-EF-RuH" secondAttribute="top" constant="12" id="e7n-9V-C00"/>
                             <constraint firstItem="XAh-eu-VYf" firstAttribute="leading" secondItem="qae-EF-RuH" secondAttribute="leading" constant="190" id="fqs-Bi-RWO"/>
@@ -467,7 +458,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TTA-b9-gMB">
-                            <rect key="frame" x="0.0" y="506.5" width="768" height="44"/>
+                            <rect key="frame" x="0.0" y="462.5" width="768" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Camera"/>
                             <connections>
@@ -515,6 +506,22 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LRO-cr-BP6" id="XiP-sZ-3r9">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZyC-1e-Xcc">
+                                                    <rect key="frame" x="20" y="7" width="136" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="136" id="w0w-k1-3cQ"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Background Color"/>
+                                                    <connections>
+                                                        <action selector="backgroundColorChange:" destination="b3d-vN-0LF" eventType="touchUpInside" id="w3p-rz-rPj"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZyC-1e-Xcc" firstAttribute="centerY" secondItem="XiP-sZ-3r9" secondAttribute="centerY" id="Q84-FA-UrT"/>
+                                                <constraint firstItem="ZyC-1e-Xcc" firstAttribute="leading" secondItem="XiP-sZ-3r9" secondAttribute="leading" constant="20" id="hI2-kv-BF7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

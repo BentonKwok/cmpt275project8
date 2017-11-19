@@ -9,17 +9,19 @@
 import UIKit
 import CoreData
 
-// Allows for backgroundColor to be a global variable
+// Setting global variables for Custom User values
 class Settings {
     static let sharedValues = Settings()
-    var BGColor = UIColor(colorWithHexValue: 0xD6EAF8)
+    var viewBackgroundColor = UIColor(colorWithHexValue: 0xD6EAF8)
+    var sentencePanelFont = UIFont(name: "Helvetica-Bold", size: 30)
 }
 
-class SettingsViewController: UITableViewController, UITextFieldDelegate  {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate  {
     //MARK: Properties
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var levelSelect: UISegmentedControl!
+    @IBOutlet weak var fontStyle: UIButton!
     
     //MARK: User Settings Properties
     let BEGINNER_LEVEL: Int = 0
@@ -28,11 +30,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate  {
     var UserInfo : NSManagedObject?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    // color counter
+    var colorClick = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.nameTextField.delegate = self
         logoutButton.backgroundColor = UIColor.red
-        
         if(CURRENT_USER != "none"){
             nameTextField.text = CURRENT_USER
             if(CURRENT_USER == "Guest"){
@@ -113,6 +117,28 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate  {
             print("Failed saving")
         }
     }
+    
+    @IBAction func backgroundColorChange(_ sender: UIButton) {
+        let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
+        Settings.sharedValues.viewBackgroundColor = color[colorClick]
+        colorClick += 1
+        if (colorClick == 4){
+            return colorClick = 0
+        }
+        // Setting all background color values to the new viewBackgroundColor value
+        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
+    }
+    // Trying to make the font style show up as a popover. No success
+//    @IBAction func FontStyleButton(_ sender: UIButton) {
+//        let tableViewController = UITableViewController()
+//        tableViewController.modalPresentationStyle = UIModalTransitionStyle.popover
+//        tableViewController.preferredContentSize = CGSize(width: 400, height: 400)
+//
+//        present(tableViewController, animated: true, completion: nil)
+//
+//        let popoverPresentationController =
+//    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

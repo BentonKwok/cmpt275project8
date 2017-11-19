@@ -29,19 +29,6 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     let picturePanelFontSize = 14
     var colorClick = 0
     
-    @IBAction func backgroundColor(_ sender: Any) {
-        let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
-        Settings.sharedValues.BGColor = color[colorClick]
-        colorClick += 1
-        if (colorClick == 4){
-            return colorClick = 0
-        }
-        self.collectionView.reloadData()
-        self.view.backgroundColor = Settings.sharedValues.BGColor
-    }
-    
-    
-    
    // @IBAction func makeButtonHandler(_ sender: UIButton) {
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         var verbWithS = ""
@@ -79,7 +66,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
                     sentence += " "
                 }
             }
-            outputSentenceText.font = UIFont.systemFont(ofSize: CGFloat(30), weight: .bold)
+            outputSentenceText.font = Settings.sharedValues.sentencePanelFont
             outputSentenceText.text = sentence
         }
     }
@@ -118,7 +105,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         super.viewDidLoad()
         
         //Sets background color of Picture Panel ViewController
-        self.view.backgroundColor = Settings.sharedValues.BGColor
+        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
@@ -272,7 +259,7 @@ extension IntermediateViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Sets color and borders of Collection View
-        collectionView.backgroundColor = Settings.sharedValues.BGColor
+        collectionView.backgroundColor = Settings.sharedValues.viewBackgroundColor
         collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.borderWidth = 3
         
