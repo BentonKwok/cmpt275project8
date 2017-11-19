@@ -39,6 +39,19 @@ class UsersViewController: UIViewController {
         //Puts the core data for guest into guest info and everything else into UserInfo array
         do {
             let result = try context.fetch(request)
+            if(result.count == 0){
+                let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
+                GuestInfo = NSManagedObject(entity: entity!, insertInto: context)
+                GuestInfo.setValue("Guest", forKey: "name")
+                GuestInfo.setValue(BEGINNER_LEVEL, forKey: "commlevel")
+                GuestInfo.setValue("0xD6EAF8", forKey: "bg_colour")
+                do {
+                    let context = appDelegate.persistentContainer.viewContext
+                    try context.save()
+                } catch {
+                    print("Failed saving")
+                }
+            }
             for data in result as! [NSManagedObject] {
                 if((data.value(forKey: "name") as! String) == "Guest"){
                     GuestInfo = data
@@ -47,6 +60,7 @@ class UsersViewController: UIViewController {
                     UsersInfo.append(data)
                 }
             }
+           // context.delete(GuestInfo)
         } catch {
             print("Error Loading User Data")
         }
@@ -62,6 +76,7 @@ class UsersViewController: UIViewController {
     //Handles the pressing of the guest button
     @IBAction func guestButtonPress(_ sender: UIButton) {
         CURRENT_USER = guestButton.titleLabel!.text!
+        Settings.sharedValues.viewBackgroundColor = UIColor(hexString : GuestInfo.value(forKey: "bg_colour") as! String)
         
         if((GuestInfo.value(forKey: "commlevel") as! Int) == BEGINNER_LEVEL){
             performSegue(withIdentifier: "usersToBeginner", sender: self)
@@ -90,6 +105,7 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
     //handles what happens when an account name is pressed
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         CURRENT_USER = (UsersInfo[indexPath.row].value(forKey: "name") as! String)
+        Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UsersInfo[indexPath.row].value(forKey: "bg_colour") as! String)
         
         if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.BEGINNER_LEVEL){
             performSegue(withIdentifier: "usersToBeginner", sender: self)

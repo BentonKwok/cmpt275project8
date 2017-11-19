@@ -35,6 +35,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Sets background color of SettingsViewController
+        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
+        
         self.nameTextField.delegate = self
         logoutButton.backgroundColor = UIColor.red
         if(CURRENT_USER != "none"){
@@ -76,6 +80,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         //set up the containers in the table
         nameTextField.text = (UserInfo?.value(forKey: "name") as! String)
         levelSelect.selectedSegmentIndex = UserInfo?.value(forKey: "commlevel") as! Int
+        Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UserInfo?.value(forKey: "bg_colour") as! String)
     }
 
     //dismiss keyboard when enter is pressed
@@ -109,6 +114,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         //save changed settings
         UserInfo?.setValue(levelSelect.selectedSegmentIndex, forKey: "commlevel")
         CURRENT_USER = nameTextField.text!
+        UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserInfo?.setValue(nameTextField.text, forKey: "name")
         do {
             let context = appDelegate.persistentContainer.viewContext
@@ -125,6 +131,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         if (colorClick == 4){
             return colorClick = 0
         }
+        UserInfo?.setValue(color[colorClick].toHexString(), forKey: "bg_colour")
         // Setting all background color values to the new viewBackgroundColor value
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
     }
