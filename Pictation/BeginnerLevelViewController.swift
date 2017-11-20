@@ -53,52 +53,60 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         let subjectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.SUBJECT_FOLDER_NAME)!
         let objectImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.OBJECT_FOLDER_NAME)!
         let verbImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.VERB_FOLDER_NAME)!
-        
-        var allImagesUrlArray = subjectImagesUrlArray + objectImagesUrlArray
-        allImagesUrlArray = allImagesUrlArray + verbImagesUrlArray
+        let connectiveImagesUrlArray = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: Constants.CONNECTIVES_FOLDER_NAME)!
         
         //Getting all the folder paths where the predefined images are stored
         let subjectFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: subjectImagesUrlArray)
         let objectFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: objectImagesUrlArray)
         let verbFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: verbImagesUrlArray)
-        
+        let connectiveFolderPath = UtilHelper.getFolderPathWithoutLastComponent(imageUrlArray: connectiveImagesUrlArray)
+
         //Getting all the directories where the user-defined images are stored
         let subjectFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.SUBJECT_FOLDER_NAME)
         let objectFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.OBJECT_FOLDER_NAME)
         let verbFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.VERB_FOLDER_NAME)
-        
+        let connectiveFolderDocumentDirectory = UtilHelper.getDocumentDirectory(atFolder: Constants.CONNECTIVES_FOLDER_NAME)
+
         //Getting all the predefined images' file names of each folder and put them in String arrays [String]
         var subjectTitles = UtilHelper.getTitleArrays(subjectFolderPath)
         var objectTitles = UtilHelper.getTitleArrays(objectFolderPath)
         var verbTitles = UtilHelper.getTitleArrays(verbFolderPath)
-        
+        var connectiveTitles = UtilHelper.getTitleArrays(connectiveFolderPath)
+
         //Getting all the user-defined images' file names of each folder and put them in String arrays [String]
         let subjectDocumentTitles = UtilHelper.getTitleArrays(subjectFolderDocumentDirectory)
         let objectDocumentTitles = UtilHelper.getTitleArrays(objectFolderDocumentDirectory)
         let verbDocumentTitles = UtilHelper.getTitleArrays(verbFolderDocumentDirectory)
+        let connectivesDocumentTitles = UtilHelper.getTitleArrays(connectiveFolderDocumentDirectory)
         
         //Getting all the predefined images of each foler and put them in UIImages arrays [UIImage]
-        var subjectImages = UtilHelper.getImageArrays(subjectFolderPath, subjectTitles, subjectImagesUrlArray)
-        var objectImages = UtilHelper.getImageArrays(objectFolderPath, objectTitles, objectImagesUrlArray)
-        var verbImages = UtilHelper.getImageArrays(verbFolderPath, verbTitles, verbImagesUrlArray)
+        var subjectImages = UtilHelper.getDocumentImageArrays(subjectFolderPath, subjectTitles)
+        var objectImages = UtilHelper.getDocumentImageArrays(objectFolderPath, objectTitles)
+        var verbImages = UtilHelper.getDocumentImageArrays(verbFolderPath, verbTitles)
+        var connectivesImages = UtilHelper.getDocumentImageArrays(connectiveFolderPath, connectiveTitles)
         
         //Getting all the user-defined images of each foler and put them in UIImages arrays [UIImage]
         let subjectDocumentImages = UtilHelper.getDocumentImageArrays(subjectFolderDocumentDirectory, subjectDocumentTitles)
         let objectDocumentImages = UtilHelper.getDocumentImageArrays(objectFolderDocumentDirectory, objectDocumentTitles)
         let verbDocumentImages = UtilHelper.getDocumentImageArrays(verbFolderDocumentDirectory, verbDocumentTitles)
+        let connectivesDocumentImages = UtilHelper.getDocumentImageArrays(connectiveFolderDocumentDirectory, connectivesDocumentTitles)
         
         //Putting all the images titles into allTitles : [String]
         subjectTitles = subjectTitles + subjectDocumentTitles
         objectTitles = objectTitles + objectDocumentTitles
         verbTitles = verbTitles + verbDocumentTitles
+        connectiveTitles = connectiveTitles + connectivesDocumentTitles
         allTitles = subjectTitles + objectTitles
         allTitles = allTitles + verbTitles
+        allTitles = allTitles + connectiveTitles
         
         subjectImages = subjectImages + subjectDocumentImages
         objectImages = objectImages + objectDocumentImages
         verbImages = verbImages + verbDocumentImages
+        connectivesImages = connectivesImages + connectivesDocumentImages
         allImages = subjectImages + objectImages
         allImages = allImages + verbImages
+        allImages = allImages + connectivesImages
         
         picturePanelState.text = Constants.ALL_PICTURES_NAME
         picturePanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSizeBolded), weight: .bold)

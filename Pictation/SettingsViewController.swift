@@ -120,7 +120,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             performSegue(withIdentifier: "intermediateFromSettings", sender: self)
         }
         else{
-            performSegue(withIdentifier: "intermediateFromSettings", sender: self)
+            performSegue(withIdentifier: "advancedFromSettings", sender: self)
         }
     }
     

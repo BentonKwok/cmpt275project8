@@ -96,7 +96,7 @@ class UsersViewController: UIViewController {
             performSegue(withIdentifier: "userToIntermediate", sender: self)
         }
         else{
-            performSegue(withIdentifier: "userToIntermediate", sender: self)
+            performSegue(withIdentifier: "userToAdvanced", sender: self)
         }
     }
   
@@ -126,7 +126,7 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
             performSegue(withIdentifier: "userToIntermediate", sender: self)
         }
         else{
-            performSegue(withIdentifier: "userToIntermediate", sender: self)
+            performSegue(withIdentifier: "userToAdvanced", sender: self)
         }
     }
     

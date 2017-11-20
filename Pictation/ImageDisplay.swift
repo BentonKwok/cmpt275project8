@@ -9,7 +9,7 @@ import UIKit
     //MARK: Properties
     private var selectedImages = [UIImageView]()
     private var numSubViews = 0
-    @IBInspectable var imageSize: CGSize = CGSize(width: 60.0, height: 60.0)
+    @IBInspectable var imageSize: CGSize = CGSize(width: 1000.0, height: 1000.0)
     var selectedText = [String]()
     
     
@@ -35,9 +35,13 @@ import UIKit
             }
             newImageView.image = newImage!
             //a bunch of properites to make sure the image views resize correctly
-            newImageView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleBottomMargin.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue) | UInt8(UIViewAutoresizing.flexibleRightMargin.rawValue) | UInt8(UIViewAutoresizing.flexibleLeftMargin.rawValue) | UInt8(UIViewAutoresizing.flexibleTopMargin.rawValue) | UInt8(UIViewAutoresizing.flexibleWidth.rawValue)))
-            newImageView.contentMode = UIViewContentMode.scaleAspectFit
-            newImageView.translatesAutoresizingMaskIntoConstraints = false
+            newImageView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleBottomMargin.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue) |
+                UInt8(UIViewAutoresizing.flexibleRightMargin.rawValue) |
+                UInt8(UIViewAutoresizing.flexibleLeftMargin.rawValue) |
+                UInt8(UIViewAutoresizing.flexibleTopMargin.rawValue) |
+                UInt8(UIViewAutoresizing.flexibleWidth.rawValue)))
+            newImageView.contentMode = UIViewContentMode.scaleAspectFill
+            newImageView.translatesAutoresizingMaskIntoConstraints = true
             newImageView.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
             newImageView.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
           
@@ -50,15 +54,27 @@ import UIKit
         }
     }
     
+    func removeLastImage() {
+        if (numSubViews != 0) {
+            selectedText.remove(at: selectedText.endIndex - 1)
+            selectedImages[selectedImages.endIndex - 1].removeFromSuperview()
+            selectedImages.remove(at: selectedImages.endIndex - 1)
+            numSubViews = numSubViews - 1
+        }
+    }
+    
+    func getSize() -> Int{
+        return numSubViews
+    }
+    
     //resets the ImageDisplayObject
-    func reset( ){
+    func reset( ) {
         if(numSubViews > 0){
             selectedText.removeAll()
             //remove pictures from the stack
-            for view in selectedImages{
+            for view in selectedImages {
                 view.removeFromSuperview()
             }
-            
             selectedImages.removeAll()
             numSubViews = 0
         }
