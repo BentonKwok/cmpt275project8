@@ -31,7 +31,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     }
     
     func chooseDirectory() {
-        let alertController = UIAlertController(title: "Directory and Name", message: "Please type a directory and name for the Image : subjects, verbs or objects", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Directory and Name", message: "Please type a directory and name for the Image : subjects, verbs or objects followed by /'name of image'", preferredStyle: .alert)
         let titleAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
             if let field = alertController.textFields?[0] {
                 // store your data
