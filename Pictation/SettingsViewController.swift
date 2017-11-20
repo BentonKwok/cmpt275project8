@@ -62,7 +62,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             }
         }
         //Add Done button to navigation bar
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(doneTapped))
         
         //Retrieve the user settings
         let context = appDelegate.persistentContainer.viewContext

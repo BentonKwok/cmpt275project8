@@ -109,6 +109,7 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath as IndexPath) as! UserTableViewCell
         cell.buttonCell.setTitle((UsersInfo[indexPath.row].value(forKey: "name") as! String), for: .normal)
+        cell.buttonCell.contentHorizontalAlignment = .center
         
         return cell
     }
