@@ -11,6 +11,8 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var objectPanelState: UILabel!
     @IBOutlet weak var connectivesPanelState: UILabel!
     
+    let MAX_NUMBER_OF_CLICKS_ALLOWED = 6
+    
     var allImages:[[UIImage]]! = [[UIImage](), [UIImage](), [UIImage](), [UIImage]()]
     var allTitles:[[String]]! = [[String](), [String](), [String](), [String]()]
     
@@ -21,43 +23,56 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
     var currenctSelectedWord = ""
     
     var collectionViewClick = 0
+    var collectionViewOutOfBoundClicked = false
     let picturePanelFontSizeBolded = 20
     let picturePanelFontSize = 14
     var colorClick = 0
     
-    // @IBAction func makeButtonHandler(_ sender: UIButton) {
+    @IBAction func undoButtonHandler(_ sender: UIButton) {
+        if (collectionViewClick != 0 && sentenceImages.getSize() != 0) {
+            if (!collectionViewOutOfBoundClicked) {
+            sentenceImages.removeLastImage()
+            collectionViewClick -= 1
+            currentTitles = allTitles[collectionViewClick % 4]
+            currentImages = allImages[collectionViewClick % 4]
+            collectionView.reloadData()
+            self.setSelectedStateStyle(viewClicked: (self.collectionViewClick) % 4)
+            }
+            //if Maximum number of pictures reached
+            else {
+                sentenceImages.removeLastImage()
+                collectionViewOutOfBoundClicked = false
+            }
+        }
+    }
+    
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         var verbWithS = ""
         let addWantTo = "want to"
         //A check to make sure selectedText is not accessed when it doesn't have elements yet
-        if (currenctSelectedWord != "") {
+        if (currenctSelectedWord != "" && sentenceImages.getSize() != 0) {
             var sentence : String = ""
-            for i in 0...(self.sentenceImages.selectedText.count-1){
-                if i >= 1
-                {
+            for i in 0...(self.sentenceImages.selectedText.count-1) {
+                if i >= 1 {
                     // Grammer correction for the sentence combinations be are able to currently able to offer
-                    if (sentenceImages.selectedText[i-1] == "I" ||  sentenceImages.selectedText[i-1] == "me" || sentenceImages.selectedText[i-1] == "we" ||  sentenceImages.selectedText[i-1] == "they")
-                    {
+                    if (sentenceImages.selectedText[i-1] == "I" ||  sentenceImages.selectedText[i-1] == "me" || sentenceImages.selectedText[i-1] == "we" ||  sentenceImages.selectedText[i-1] == "they") {
                         sentence += addWantTo
                         sentence += " "
                         sentence += self.sentenceImages.selectedText[i]
                         sentence += " "
                     }
-                    else if sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she"
-                    {
+                    else if (sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she") {
                         verbWithS = sentenceImages.selectedText[i]
                         verbWithS += "s"
                         sentence += verbWithS
                         sentence += " "
                     }
-                    else
-                    {
+                    else {
                         sentence += self.sentenceImages.selectedText[i]
                         sentence += " "
                     }
-                    
                 }
-                else{
+                else {
                     sentence += self.sentenceImages.selectedText[i]
                     sentence += " "
                 }
@@ -67,8 +82,7 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    @IBAction func restartButtonHandler(_ sender: UIButton
-        ) {
+    @IBAction func restartButtonHandler(_ sender: UIButton) {
         currenctSelectedWord = ""
         selectedImage = nil
         outputSentenceText.text = currenctSelectedWord
@@ -95,7 +109,7 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     //Settings button handler
-    @objc func settingsTapped(){
+    @objc func settingsTapped() {
         performSegue(withIdentifier: "settingsFromAdvanced", sender: self)
     }
     
@@ -184,7 +198,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
         connectivesPanelState.layer.cornerRadius = 8
         connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
         connectivesPanelState.textColor = UIColor.lightGray
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -283,80 +296,84 @@ extension AdvancedViewController : UICollectionViewDataSource {
             
             //adds images and text to subview at the top
             self?.sentenceImages.addImage(newImage: (self?.selectedImage), newText : (self?.currenctSelectedWord), maxSubViews: 7)
-            if((self?.collectionViewClick)! < 6){
+            if((self?.collectionViewClick)! < (self?.MAX_NUMBER_OF_CLICKS_ALLOWED)!) {
                 self?.collectionViewClick = ((self?.collectionViewClick)! + 1)
+            } else {
+                //check if max number of images reached
+                self?.collectionViewOutOfBoundClicked = true
             }
             
             self?.currentTitles = self?.allTitles[((self?.collectionViewClick)! % 4)]
             self?.currentImages = self?.allImages[((self?.collectionViewClick)! % 4)]
             collectionView.reloadData()
-            
-            switch ((self?.collectionViewClick)! % 4){
-            case 0: //subject
-                //bolding words to emphasize selection
-                self?.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSizeBolded)!), weight:.bold)
-                self?.subjectPanelState.textColor = UIColor.black
-                
-                //changing font and colour to give it the faded look
-                self?.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.verbPanelState.textColor = UIColor.lightGray
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.objectPanelState.textColor = UIColor.lightGray
-                self?.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.subjectPanelState.textColor = UIColor.lightGray
-            case 1: //verb
-                //bolding words to emphasize selection
-                self?.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSizeBolded)!), weight:.bold)
-                self?.verbPanelState.textColor = UIColor.black
-                
-                //changing font and colour to give it the faded look
-                self?.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.subjectPanelState.textColor = UIColor.lightGray
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.objectPanelState.textColor = UIColor.lightGray
-                self?.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.connectivesPanelState.textColor = UIColor.lightGray
-            case 2://object
-                //bolding words to emphasize selection
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSizeBolded)!), weight:.bold)
-                self?.objectPanelState.textColor = UIColor.black
-                
-                // changing font and colour to give it the faded look
-                self?.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.subjectPanelState.textColor = UIColor.lightGray
-                self?.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.verbPanelState.textColor = UIColor.lightGray
-                self?.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.connectivesPanelState.textColor = UIColor.lightGray
-
-            case 3:
-                //bolding words to emphasize selection
-                self?.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSizeBolded)!), weight:.bold)
-                self?.connectivesPanelState.textColor = UIColor.black
-                
-                // changing font and colour to give it the faded look
-                self?.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.subjectPanelState.textColor = UIColor.lightGray
-                self?.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.verbPanelState.textColor = UIColor.lightGray
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.objectPanelState.textColor = UIColor.lightGray
-            default:
-                //default will have a faded look
-                self?.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.subjectPanelState.textColor = UIColor.lightGray
-                self?.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.verbPanelState.textColor = UIColor.lightGray
-                self?.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.objectPanelState.textColor = UIColor.lightGray
-                self?.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self?.picturePanelFontSize)!), weight:.thin)
-                self?.connectivesPanelState.textColor = UIColor.lightGray
+            self?.setSelectedStateStyle(viewClicked: (self?.collectionViewClick)! % 4)
             }
-            //print("bentonk: buttonHandler on item: \(indexPath.item) selected")
-        }
-        //cell.buttonCell.setAttributedTitle(NSAttributedString.init(string: "test"), for: .normal)
         
         return cell
+    }
+    
+    func setSelectedStateStyle(viewClicked: Int) {
+        switch ((self.collectionViewClick) % 4){
+        case 0: //subject
+            //bolding words to emphasize selection
+            self.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSizeBolded)), weight:.bold)
+            self.subjectPanelState.textColor = UIColor.black
+            
+            //changing font and colour to give it the faded look
+            self.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.verbPanelState.textColor = UIColor.lightGray
+            self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.objectPanelState.textColor = UIColor.lightGray
+            self.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.connectivesPanelState.textColor = UIColor.lightGray
+        case 1: //verb
+            //bolding words to emphasize selection
+            self.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSizeBolded)), weight:.bold)
+            self.verbPanelState.textColor = UIColor.black
+            
+            //changing font and colour to give it the faded look
+            self.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.subjectPanelState.textColor = UIColor.lightGray
+            self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.objectPanelState.textColor = UIColor.lightGray
+            self.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.connectivesPanelState.textColor = UIColor.lightGray
+        case 2://object
+            //bolding words to emphasize selection
+            self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSizeBolded)), weight:.bold)
+            self.objectPanelState.textColor = UIColor.black
+            
+            // changing font and colour to give it the faded look
+            self.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.subjectPanelState.textColor = UIColor.lightGray
+            self.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.verbPanelState.textColor = UIColor.lightGray
+            self.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.connectivesPanelState.textColor = UIColor.lightGray
+            
+        case 3:
+            //bolding words to emphasize selection
+            self.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSizeBolded)), weight:.bold)
+            self.connectivesPanelState.textColor = UIColor.black
+            
+            // changing font and colour to give it the faded look
+            self.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.subjectPanelState.textColor = UIColor.lightGray
+            self.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.verbPanelState.textColor = UIColor.lightGray
+            self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.objectPanelState.textColor = UIColor.lightGray
+        default:
+            //default will have a faded look
+            self.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.subjectPanelState.textColor = UIColor.lightGray
+            self.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.verbPanelState.textColor = UIColor.lightGray
+            self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.objectPanelState.textColor = UIColor.lightGray
+            self.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
+            self.connectivesPanelState.textColor = UIColor.lightGray
+        }
     }
 }
 

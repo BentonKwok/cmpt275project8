@@ -955,6 +955,14 @@
                                     <action selector="pauseAudioButton:" destination="sKD-UQ-YeW" eventType="touchUpInside" id="n3A-EG-rPj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBC-ow-zZm">
+                                <rect key="frame" x="667" y="360" width="35" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="undo"/>
+                                <connections>
+                                    <action selector="undoButtonHandler:" destination="sKD-UQ-YeW" eventType="touchUpInside" id="P96-BH-Oxi"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8h9-cm-y7o">
                                 <rect key="frame" x="498" y="360" width="120" height="30"/>
                                 <constraints>

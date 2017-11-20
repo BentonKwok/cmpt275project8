@@ -54,15 +54,27 @@ import UIKit
         }
     }
     
+    func removeLastImage() {
+        if (numSubViews != 0) {
+            selectedText.remove(at: selectedText.endIndex - 1)
+            selectedImages[selectedImages.endIndex - 1].removeFromSuperview()
+            selectedImages.remove(at: selectedImages.endIndex - 1)
+            numSubViews = numSubViews - 1
+        }
+    }
+    
+    func getSize() -> Int{
+        return numSubViews
+    }
+    
     //resets the ImageDisplayObject
-    func reset( ){
+    func reset( ) {
         if(numSubViews > 0){
             selectedText.removeAll()
             //remove pictures from the stack
-            for view in selectedImages{
+            for view in selectedImages {
                 view.removeFromSuperview()
             }
-            
             selectedImages.removeAll()
             numSubViews = 0
         }
