@@ -6,6 +6,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         self.view.backgroundColor = UIColor(colorWithHexValue : 0xD6EAF8)
     }
     
+    // The save button on the camera. This will save the user selected photo at the location they specified during the alert notification prompts
     @IBOutlet weak var myImageView: UIImageView!
     
     func saveImage(imageName: String) {
@@ -22,6 +23,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
     }
     
+    //Stores the photo in the user specified location from the notification alert
     @IBAction func storePictureButton(_ sender: UIButton) {
         chooseDirectory()
         let alert=UIAlertController(title: "saved", message: "Your image has been saved", preferredStyle:.alert)
@@ -29,7 +31,8 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
-    
+
+    //Function to prompt the user to enter their designated location for where their photo is to go to
     func chooseDirectory() {
         let alertController = UIAlertController(title: "Directory and Name", message: "Please type a directory and name for the Image : subjects, verbs or objects followed by /'name of image'", preferredStyle: .alert)
         let titleAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
@@ -44,11 +47,10 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                 self.saveImage(imageName:  field.text! + ".jpg")
                 
                 
-            } else {
+            }
                 // user did not fill field
                 //let alertController = UIAlertController(title: "Error", message: "field cannot be left empty", preferredStyle: .alert)
-                
-            }
+            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
@@ -75,6 +77,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         self.dismiss(animated:true,completion:nil)
     }
     
+    // The "My Picture" button for the camera. This button will pull up photos on the device that the user can add to the app
     @IBAction func photoDirectoryButton(_ sender: UIButton) {
         
         let imagePicker = UIImagePickerController()
@@ -84,6 +87,8 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         self.present(imagePicker, animated: true)
         
     }
+    
+    // The "Photo Time!" button for the camera. This button will open up the default camera application on the device.
     @IBAction func cameraButton(_ sender: UIButton) {
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
@@ -100,6 +105,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         // Dispose of any resources that can be recreated.
     }
     
+    // Notifies the user that there isn't a camera available on the current device
     func noCamera(){
         let alertVC = UIAlertController(
             title: "No Camera",
