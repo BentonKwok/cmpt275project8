@@ -84,14 +84,12 @@ class BeginnerLevelViewController: UIViewController,AVAudioPlayerDelegate{
         var objectImages = UtilHelper.getDocumentImageArrays(objectFolderPath, objectTitles)
         var verbImages = UtilHelper.getDocumentImageArrays(verbFolderPath, verbTitles)
         var connectivesImages = UtilHelper.getDocumentImageArrays(connectiveFolderPath, connectiveTitles)
-
         
         //Getting all the user-defined images of each foler and put them in UIImages arrays [UIImage]
         let subjectDocumentImages = UtilHelper.getDocumentImageArrays(subjectFolderDocumentDirectory, subjectDocumentTitles)
         let objectDocumentImages = UtilHelper.getDocumentImageArrays(objectFolderDocumentDirectory, objectDocumentTitles)
         let verbDocumentImages = UtilHelper.getDocumentImageArrays(verbFolderDocumentDirectory, verbDocumentTitles)
         let connectivesDocumentImages = UtilHelper.getDocumentImageArrays(connectiveFolderDocumentDirectory, connectivesDocumentTitles)
-
         
         //Putting all the images titles into allTitles : [String]
         subjectTitles = subjectTitles + subjectDocumentTitles
