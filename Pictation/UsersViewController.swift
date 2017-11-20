@@ -41,11 +41,18 @@ class UsersViewController: UIViewController {
             let result = try context.fetch(request)
             if(result.count != 0){
                 for data in result as! [NSManagedObject] {
-                    if((data.value(forKey: "name") as! String) == "Guest"){
-                        GuestInfo = data
-                    }
-                    else{
-                        UsersInfo.append(data)
+                   // guard (data.value(forKey: "name") as? String) != nil else{
+                   //     return
+                   // }
+                    //if((data.value(forKey: "name") as! String) == "Guest"){
+                    
+                    if (data.value(forKey: "name") as? String) != nil{
+                        if((data.value(forKey: "name") as! String) == "Guest"){
+                            GuestInfo = data
+                        }
+                        else{
+                            UsersInfo.append(data)
+                        }
                     }
                 }
             }
