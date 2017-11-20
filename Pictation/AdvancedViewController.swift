@@ -44,6 +44,9 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
                 collectionViewOutOfBoundClicked = false
             }
         }
+        else if (sentenceImages.getSize() == 0){
+            collectionViewClick = 0
+        }
     }
     
     @IBAction func makeButtonHandler(_ sender: UIButton) {
