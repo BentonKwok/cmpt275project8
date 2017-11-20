@@ -31,13 +31,17 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     }
     
     func chooseDirectory() {
-        let alertController = UIAlertController(title: "Name", message: "Please type a name for your Image", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Directory and Name", message: "Please type a directory and name for the Image : subjects, verbs or objects", preferredStyle: .alert)
         let titleAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
             if let field = alertController.textFields?[0] {
                 // store your data
                 UserDefaults.standard.set(field.text, forKey: "userTitle")    // We can use this forKey to store the name of the picture
                 UserDefaults.standard.synchronize()
-                self.saveImage(imageName: "objects/" + field.text! + ".jpg")
+                let alert=UIAlertController(title: "saved", message: "Your image has been saved", preferredStyle:.alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                self.saveImage(imageName:  field.text! + ".jpg")
                 
                 
             } else {
@@ -49,7 +53,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
         alertController.addTextField { (textField) in
-            textField.placeholder = "Enter name"
+            textField.placeholder = "Directory/ImageName"
         }
         
         

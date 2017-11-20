@@ -24,9 +24,10 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
     
     var collectionViewClick = 0
     var collectionViewOutOfBoundClicked = false
+    
+    // Needed for the extension of collection view
     let picturePanelFontSizeBolded = 20
     let picturePanelFontSize = 14
-    var colorClick = 0
     
     @IBAction func undoButtonHandler(_ sender: UIButton) {
         if (collectionViewClick != 0 && sentenceImages.getSize() != 0) {
@@ -64,7 +65,7 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
                         sentence += self.sentenceImages.selectedText[i]
                         sentence += " "
                     }
-                    else if (sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she") {
+                    else if (sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she" ) {
                         verbWithS = sentenceImages.selectedText[i]
                         verbWithS += "s"
                         sentence += verbWithS
@@ -98,16 +99,16 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
         
         //Resets the panel to display basics
         subjectPanelState.text = Constants.SUBJECT_FOLDER_NAME
-        subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSizeBolded), weight: .bold)
+        subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSizeBolded), weight: .bold)
         subjectPanelState.textColor = UIColor.black
         verbPanelState.text = Constants.VERB_FOLDER_NAME
-        verbPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
+        verbPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSize), weight: .thin)
         verbPanelState.textColor = UIColor.lightGray
         objectPanelState.text = Constants.OBJECT_FOLDER_NAME
-        objectPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
+        objectPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSize), weight: .thin)
         objectPanelState.textColor = UIColor.lightGray
         connectivesPanelState.text = Constants.CONNECTIVES_FOLDER_NAME
-        connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
+        connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSize), weight: .thin)
         connectivesPanelState.textColor = UIColor.lightGray
     }
     
@@ -180,26 +181,26 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
         currentImages = allImages[collectionViewClick]
         currentTitles = allTitles[collectionViewClick]
         
-        //setting display of PicturePanel
+        //Sets display of PicturePanel
         subjectPanelState.text = Constants.SUBJECT_FOLDER_NAME
         subjectPanelState.layer.borderWidth = 2.0
         subjectPanelState.layer.cornerRadius = 8
-        subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSizeBolded), weight: .bold)
+        subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSizeBolded), weight: .bold)
         subjectPanelState.textColor = UIColor.black
         verbPanelState.text = Constants.VERB_FOLDER_NAME
         verbPanelState.layer.borderWidth = 2.0
         verbPanelState.layer.cornerRadius = 8
-        verbPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
+        verbPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSize), weight: .thin)
         verbPanelState.textColor = UIColor.lightGray
         objectPanelState.text = Constants.OBJECT_FOLDER_NAME
         objectPanelState.layer.borderWidth = 2.0
         objectPanelState.layer.cornerRadius = 8
-        objectPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
+        objectPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSize), weight: .thin)
         objectPanelState.textColor = UIColor.lightGray
         connectivesPanelState.text = Constants.CONNECTIVES_FOLDER_NAME
         connectivesPanelState.layer.borderWidth = 2.0
         connectivesPanelState.layer.cornerRadius = 8
-        connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
+        connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSize), weight: .thin)
         connectivesPanelState.textColor = UIColor.lightGray
     }
     
@@ -241,7 +242,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    //@IBAction func pauseAudioButton(_ sender: UIButton) {
     @IBAction func pauseAudioButton(_ sender: UIButton) {
         self.mySynthesizer.pauseSpeaking(at: .word)
         wasPaused = true;
@@ -259,7 +259,7 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
     
 }
 
-// HEX Value to UIColor conversion
+// HEX Value to UIColor converter
 extension UIColor{
     convenience init(colorWithHexValue value: Int, alpha:CGFloat = 1.0){
         self.init(
