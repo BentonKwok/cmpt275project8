@@ -1,7 +1,7 @@
 import UIKit
 import AVFoundation
 
-class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
+class IntermediateViewController: UIViewController, AVAudioPlayerDelegate{
     //MARK: Properties
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
@@ -29,6 +29,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     // Needed for extension of collection view
     let picturePanelFontSizeBolded = 20 
     let picturePanelFontSize = 14
+  
     
    // @IBAction func makeButtonHandler(_ sender: UIButton) {
     @IBAction func makeButtonHandler(_ sender: UIButton) {
@@ -70,6 +71,30 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
             outputSentenceText.font = Settings.sharedValues.sentencePanelFont
             outputSentenceText.text = sentence
         }
+        
+        //save the new generated sentences into the core data
+        let sentences = suggestedSentencesCoreDataSingleton.suggestedSentences.fetchSuggestedSentences();
+        
+        var storedBefore = false
+        for i in sentences!
+        {
+            if outputSentenceText.text as String! == (i.suggestedSentences as String!)
+            {
+                print("it is saved before")
+                print(outputSentenceText.text as String!)
+                storedBefore = true
+                break
+            }
+            
+        }
+        if(storedBefore == false)
+        {
+        suggestedSentencesCoreDataSingleton.suggestedSentences.saveGeneratedSentences(suggestedSentences: outputSentenceText.text as String!)
+            print(outputSentenceText.text as String!)
+            
+        }
+
+        
     }
 
 
@@ -95,6 +120,8 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
         objectPanelState.text = Constants.OBJECT_FOLDER_NAME
         objectPanelState.font = UIFont.systemFont(ofSize: CGFloat(picturePanelFontSize), weight: .thin)
         objectPanelState.textColor = UIColor.lightGray
+        
+      
     }
     
     //Settings button handler
@@ -105,7 +132,6 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Sets background color of Picture Panel ViewController
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         
         //Add Settings button to navigation bar
@@ -300,6 +326,7 @@ extension IntermediateViewController : UICollectionViewDataSource {
             self.subjectPanelState.textColor = UIColor.lightGray
             self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
             self.objectPanelState.textColor = UIColor.lightGray
+
             
         case 2://object
             //bolding words to emphasize selection
@@ -311,7 +338,7 @@ extension IntermediateViewController : UICollectionViewDataSource {
             self.subjectPanelState.textColor = UIColor.lightGray
             self.verbPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
             self.verbPanelState.textColor = UIColor.lightGray
-
+      
         default:
             //default will have a faded look
             self.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)

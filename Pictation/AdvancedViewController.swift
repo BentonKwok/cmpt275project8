@@ -1,7 +1,7 @@
 import UIKit
 import AVFoundation
 
-class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
+class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
     //MARK: Properties
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var outputSentenceText: UITextField!
@@ -50,6 +50,124 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
+    @IBAction func selectSentenceButton(_ sender: UIButton)
+    {
+       outputSentenceText.text = selectedSentenceSavedInTextBox.text
+    }
+    @IBOutlet weak var selectSentencePickerView: UIPickerView!
+
+    @IBOutlet weak var selectedSentenceSavedInTextBox: UITextField!
+    var suggestedSentenceListInPickerView = ["  ","  ","  ","  ","  "]
+    var sentenceListFromMatchingTappedImageWithCoreData = [""]
+    var indexOfSelectedImageText = 0
+    var sentenceGeneratedFromCollectedWords : String = ""
+    var sentenceRange = 30
+    var wordsInCollectionView = [""]
+    
+    func updateWordsInCollectionView(word:String,appendWord:Bool)
+    {
+        if(appendWord == true)
+        {
+            wordsInCollectionView.append(word)
+        }
+        else
+        {
+            if(wordsInCollectionView.count >= 1)
+            {
+              wordsInCollectionView.removeLast(wordsInCollectionView.count-1)
+            }
+        }
+    }
+    func sentenceRangeBasedOnFirstImage(collectedWordsSoFar: String)
+    {
+        let sentences = suggestedSentencesCoreDataSingleton.suggestedSentences.fetchSuggestedSentences()
+        var j = 0
+        for i in sentences!
+        {
+            if(i.suggestedSentences != nil && j <= sentenceRange)
+            {
+                if (((i.suggestedSentences as String!) .range(of: collectedWordsSoFar)) != nil){
+                    sentenceListFromMatchingTappedImageWithCoreData.append(i.suggestedSentences as String!)
+                    j = j + 1
+                }
+            }
+        }
+        if(sentenceListFromMatchingTappedImageWithCoreData[0] == "")
+        {
+            sentenceListFromMatchingTappedImageWithCoreData.remove(at: 0)
+            sentenceRange = j
+        }
+        else
+        {
+            sentenceRange = j + 1
+        }
+        
+        refreshSuggestedSentencePickerView(&sentenceListFromMatchingTappedImageWithCoreData)
+    }
+    
+    func refreshSuggestedSentencePickerView(_ stringArray: inout [String])
+    {
+        var randomIndex = 0;
+        for i in 0...4
+        {
+            if (i<stringArray.count)
+            {
+                randomIndex = Int(arc4random_uniform(UInt32(stringArray.count)))
+                suggestedSentenceListInPickerView[i]=stringArray[randomIndex]
+            }
+            else
+            {
+                suggestedSentenceListInPickerView[i] = " "
+            }
+        }
+        selectSentencePickerView.reloadAllComponents()
+    }
+    
+    func narrowTheRangeOfSuggestedSentences(_ stringArray: inout [String], _ matchWithWord: String)
+    {
+        var i = 0
+        var newRangeOfSuggestedSentence = [""]
+        //  var indexNeededToBeRemoved = [0]
+        while (i < stringArray.count)
+        {
+            
+            if (stringArray[i].range(of: matchWithWord) != nil)
+            {
+                newRangeOfSuggestedSentence.append(stringArray[i])
+            }
+            i = i + 1
+            
+        }
+        sentenceRange = i
+        if(newRangeOfSuggestedSentence[0]=="")
+        {
+            newRangeOfSuggestedSentence.remove(at: 0)
+            sentenceRange -= 1
+        }
+        
+        refreshSuggestedSentencePickerView(&stringArray)
+        
+    }
+    
+    
+    func numberOfComponents(in selectSentencePickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ selectSentencePickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return suggestedSentenceListInPickerView.count
+    }
+    func pickerView(_ selectSentencePickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
+        return suggestedSentenceListInPickerView[row]
+    }
+    
+    func pickerView(_ selectSentencePickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+        
+        selectedSentenceSavedInTextBox.text = suggestedSentenceListInPickerView[row] as String
+    }
+    
+    
+    
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         var verbWithS = ""
         let addWantTo = "want to"
@@ -84,6 +202,35 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
             outputSentenceText.font = Settings.sharedValues.sentencePanelFont
             outputSentenceText.text = sentence
         }
+        //save the new generated sentences into the core data
+        let sentences = suggestedSentencesCoreDataSingleton.suggestedSentences.fetchSuggestedSentences();
+        
+        var storedBefore = false
+        for i in sentences!
+        {
+            if outputSentenceText.text as String! == (i.suggestedSentences as String!)
+            {
+                print("it is saved before")
+                print(outputSentenceText.text as String!)
+                storedBefore = true
+                break
+            }
+            
+        }
+        if(storedBefore == false)
+        {
+            suggestedSentencesCoreDataSingleton.suggestedSentences.saveGeneratedSentences(suggestedSentences: outputSentenceText.text as String!)
+            print(outputSentenceText.text as String!)
+            
+        }
+        
+        indexOfSelectedImageText = 0
+        sentenceGeneratedFromCollectedWords = ""
+        suggestedSentenceListInPickerView = ["  ","  ","  ","  ","  "]
+        sentenceListFromMatchingTappedImageWithCoreData=[""]
+        sentenceRange = 30
+        selectSentencePickerView.reloadAllComponents()
+        
     }
     
     @IBAction func restartButtonHandler(_ sender: UIButton) {
@@ -110,6 +257,14 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
         connectivesPanelState.text = Constants.CONNECTIVES_FOLDER_NAME
         connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat(Constants.picturePanelFontSize), weight: .thin)
         connectivesPanelState.textColor = UIColor.lightGray
+        
+        
+        indexOfSelectedImageText = 0
+        sentenceGeneratedFromCollectedWords = ""
+        suggestedSentenceListInPickerView = ["  ","  ","  ","  ","  "]
+        sentenceListFromMatchingTappedImageWithCoreData=[""]
+        sentenceRange = 30
+        selectSentencePickerView.reloadAllComponents()
     }
     
     //Settings button handler
@@ -119,7 +274,10 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //PickerView
+        selectSentencePickerView.isHidden = false
+        selectSentencePickerView.delegate = self
+        selectSentencePickerView.dataSource = self
         //Sets background color of Picture Panel ViewController
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         
@@ -341,6 +499,10 @@ extension AdvancedViewController : UICollectionViewDataSource {
             self.objectPanelState.textColor = UIColor.lightGray
             self.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
             self.connectivesPanelState.textColor = UIColor.lightGray
+
+             sentenceRangeBasedOnFirstImage(collectedWordsSoFar: self.sentenceImages.selectedText[self.indexOfSelectedImageText as Int!] as String!)
+           //  self.indexOfSelectedImageText += 1
+            
         case 2://object
             //bolding words to emphasize selection
             self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSizeBolded)), weight:.bold)
@@ -353,6 +515,8 @@ extension AdvancedViewController : UICollectionViewDataSource {
             self.verbPanelState.textColor = UIColor.lightGray
             self.connectivesPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
             self.connectivesPanelState.textColor = UIColor.lightGray
+        narrowTheRangeOfSuggestedSentences(&self.sentenceListFromMatchingTappedImageWithCoreData,self.sentenceImages.selectedText[self.indexOfSelectedImageText as Int!] as String!)
+
             
         case 3:
             //bolding words to emphasize selection
@@ -366,6 +530,10 @@ extension AdvancedViewController : UICollectionViewDataSource {
             self.verbPanelState.textColor = UIColor.lightGray
             self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
             self.objectPanelState.textColor = UIColor.lightGray
+            print("I am in case 3 now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            
+        narrowTheRangeOfSuggestedSentences(&self.sentenceListFromMatchingTappedImageWithCoreData,self.sentenceImages.selectedText[self.indexOfSelectedImageText as Int!] as String!)
+
         default:
             //default will have a faded look
             self.subjectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)

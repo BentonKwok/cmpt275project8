@@ -72,9 +72,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
-                if((data.value(forKey: "name") as! String) == CURRENT_USER){
-                    UserInfo = data
-                    break
+                if(data.value(forKey: "name") != nil)
+                {
+                    if((data.value(forKey: "name") as! String) == CURRENT_USER){
+                        UserInfo = data
+                        break
+                    }
                 }
             }
             if( UserInfo == nil){
