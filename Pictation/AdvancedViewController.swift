@@ -81,9 +81,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
     func sentenceRangeBasedOnFirstImage(collectedWordsSoFar: String)
     {
         let sentences = suggestedSentencesCoreDataSingleton.suggestedSentences.fetchSuggestedSentences()
-        print("sentences is : ")
-        print(sentences)
-        print("::::::::::::::::::::")
         var j = 0
         for i in sentences!
         {
@@ -108,7 +105,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
                 sentenceRange = j + 1
             }
         }
-        
         refreshSuggestedSentencePickerView(&sentenceListFromMatchingTappedImageWithCoreData)
     }
     
@@ -117,12 +113,14 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
         var randomIndex = 0;
         for i in 0...4
         {
+            //if the number of sentences within the array<= 5, we will just display all of them
             if (stringArray.count<=5 && i<stringArray.count)
             {
-                //randomIndex = Int(arc4random_uniform(UInt32(stringArray.count)))
                 suggestedSentenceListInPickerView[i]=stringArray[i]
             }
-            else if(stringArray.count>6 && i<stringArray.count)   //will generate random index number if # of suggested sentence > 6. This allows for the user to see different suggested sentences when there are matches.
+            //if the number of sentences within array >= 6
+            //will generate random index number if # of suggested sentence > 6. This allows for the user to see different suggested sentences when there are matches.
+            else if(stringArray.count>=6 && i<stringArray.count)
             {
                 randomIndex = Int(arc4random_uniform(UInt32(stringArray.count)))
                 suggestedSentenceListInPickerView[i]=stringArray[randomIndex]
@@ -228,7 +226,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
                 storedBefore = true
                 break
             }
-            
         }
         if(storedBefore == false)
         {
