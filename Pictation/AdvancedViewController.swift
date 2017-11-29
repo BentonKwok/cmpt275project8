@@ -92,16 +92,19 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
                 }
             }
         }
-        if(sentenceListFromMatchingTappedImageWithCoreData[0] == "")
-        {
-            sentenceListFromMatchingTappedImageWithCoreData.remove(at: 0)
-            sentenceRange = j
-        }
-        else
-        {
-            sentenceRange = j + 1
-        }
         
+        if(sentenceListFromMatchingTappedImageWithCoreData.count > 0)
+        {
+            if(sentenceListFromMatchingTappedImageWithCoreData[0] == "")
+            {
+                sentenceListFromMatchingTappedImageWithCoreData.remove(at: 0)
+                sentenceRange = j
+            }
+            else
+            {
+                sentenceRange = j + 1
+            }
+        }
         refreshSuggestedSentencePickerView(&sentenceListFromMatchingTappedImageWithCoreData)
     }
     
@@ -110,7 +113,14 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
         var randomIndex = 0;
         for i in 0...4
         {
-            if (i<stringArray.count)
+            //if the number of sentences within the array<= 5, we will just display all of them
+            if (stringArray.count<=5 && i<stringArray.count)
+            {
+                suggestedSentenceListInPickerView[i]=stringArray[i]
+            }
+            //if the number of sentences within array >= 6
+            //will generate random index number if # of suggested sentence > 6. This allows for the user to see different suggested sentences when there are matches.
+            else if(stringArray.count>=6 && i<stringArray.count)
             {
                 randomIndex = Int(arc4random_uniform(UInt32(stringArray.count)))
                 suggestedSentenceListInPickerView[i]=stringArray[randomIndex]
@@ -119,6 +129,7 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
             {
                 suggestedSentenceListInPickerView[i] = " "
             }
+            
         }
         selectSentencePickerView.reloadAllComponents()
     }
@@ -215,7 +226,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
                 storedBefore = true
                 break
             }
-            
         }
         if(storedBefore == false)
         {
@@ -230,6 +240,7 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
         sentenceListFromMatchingTappedImageWithCoreData=[""]
         sentenceRange = 30
         selectSentencePickerView.reloadAllComponents()
+       // refresh(_ object: suggestedSentencesCoreDataSingleton.suggestedSentences, true)
         
     }
     

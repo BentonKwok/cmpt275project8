@@ -15,6 +15,8 @@
 		5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1478801FB059F000A617DB /* CameraViewController.swift */; };
 		5AFDA9681FC7B13B007F1425 /* suggestedSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */; };
 		90C4FF541FBECF3500AB802D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90C4FF531FBECF3500AB802D /* Assets.xcassets */; };
+		90EFE5081FCE88F600FFDC0A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFE5071FCE88F600FFDC0A /* ColorPickerViewController.swift */; };
+		90EFE50A1FCE8CC600FFDC0A /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90EFE5091FCE8CC600FFDC0A /* Colors.plist */; };
 		C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B336E1FA1161B006CAC0D /* AppDelegate.swift */; };
 		C61B33741FA1161B006CAC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61B33721FA1161B006CAC0D /* Main.storyboard */; };
 		C61B33791FA1161B006CAC0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */; };
@@ -60,6 +62,8 @@
 		5A1478801FB059F000A617DB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suggestedSentences.swift; sourceTree = "<group>"; };
 		90C4FF531FBECF3500AB802D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		90EFE5071FCE88F600FFDC0A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		90EFE5091FCE8CC600FFDC0A /* Colors.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
 		C61B336B1FA1161B006CAC0D /* Pictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pictation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61B336E1FA1161B006CAC0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C61B33731FA1161B006CAC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				45464E911FBF6185000C7040 /* UserTableViewCell.swift */,
 				C61B336E1FA1161B006CAC0D /* AppDelegate.swift */,
 				C61B33721FA1161B006CAC0D /* Main.storyboard */,
+				90EFE5071FCE88F600FFDC0A /* ColorPickerViewController.swift */,
+				90EFE5091FCE8CC600FFDC0A /* Colors.plist */,
 				5A1478801FB059F000A617DB /* CameraViewController.swift */,
 				C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */,
 				452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */,
@@ -294,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90EFE50A1FCE8CC600FFDC0A /* Colors.plist in Resources */,
 				C61B33791FA1161B006CAC0D /* LaunchScreen.storyboard in Resources */,
 				C6D58C1A1FAE948C005C9CF3 /* subjects in Resources */,
 				C6D58C171FAE9484005C9CF3 /* objects in Resources */,
@@ -330,6 +337,7 @@
 				452D39641FAA2A1C00C4850E /* IntermediateViewController.swift in Sources */,
 				C61B336F1FA1161B006CAC0D /* AppDelegate.swift in Sources */,
 				5AFDA9681FC7B13B007F1425 /* suggestedSentences.swift in Sources */,
+				90EFE5081FCE88F600FFDC0A /* ColorPickerViewController.swift in Sources */,
 				45464E921FBF6185000C7040 /* UserTableViewCell.swift in Sources */,
 				C6A0DBCC1FA721E200E15AD1 /* myCell.swift in Sources */,
 				CD4C4FF51FBA430200F271ED /* UsersViewController.swift in Sources */,
