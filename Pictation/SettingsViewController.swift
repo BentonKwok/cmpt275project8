@@ -16,14 +16,16 @@ class Settings {
     var sentencePanelFont = UIFont(name: "Helvetica-Bold", size: 30)
 }
 
-class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate  {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ColorPickerDelegate  {
     //MARK: Properties
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var levelSelect: UISegmentedControl!
-    @IBOutlet weak var BGColourButton: UIButton!
     @IBOutlet weak var fontSizeSelect: UISegmentedControl!
-    //    @IBOutlet weak var fontStyle: UIButton!
+    @IBOutlet var changeColorButton: UIButton!
+    @IBAction func changeColorButtonClicked(_ sender: UIButton) {
+        self.showColorPicker(viewFromSource: sender)
+    }
     
     //MARK: User Settings Properties
     let BEGINNER_LEVEL: Int = 0
@@ -32,26 +34,84 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     var UserInfo : NSManagedObject?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    // color counter
-    var colorClick = 0
-    //All background coulour options are stored
-    let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
+//    color counter
+//    var colorClick = 0
+//    All background colour options are stored
+//    let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
+    
+    // class varible maintain selected color value
+    var selectedColor: UIColor = UIColor.blue
+    var selectedColorHex: String = "0000FF"
+    
+    //MARK: Popover delegate functions
+    //Overrides iPhone behaviour where it would present popovers as full screen options instead
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        // show popover box for iPhone and iPad both
+        return UIModalPresentationStyle.none
+    }
+    
+    //MARK: Color picker delegate functions
+    //Called by color picker after color selected
+    func colorPickerDidColorSelected(selectedUIColor: UIColor, selectedHexColor: String) {
+        
+        // update color value within class variable
+        self.selectedColor = selectedUIColor
+        self.selectedColorHex = selectedHexColor
+        
+        // set preview background to selected color
+        Settings.sharedValues.viewBackgroundColor = selectedUIColor
+        UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
+        changeColorButton.backgroundColor = selectedUIColor
+        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
+    }
+    
+    //MARK: Utility Functions
+    //Setting up color picker from UIButton and presenting it as a popover
+    private func showColorPicker(viewFromSource: UIButton){
+        // initialise color picker view controller
+        let colorPickerVc = storyboard?.instantiateViewController(withIdentifier: "sbColorPicker") as! ColorPickerViewController
+        
+        // set modal presentation style
+        colorPickerVc.modalPresentationStyle = .popover
+        
+        // set max. size
+        colorPickerVc.preferredContentSize = CGSize(width: 265, height: 400)
+        
+        // set color picker deleagate to current view controller
+        // must write delegate method to handle selected color
+        colorPickerVc.colorPickerDelegate = self
+        
+        // show popover
+        if let popoverController = colorPickerVc.popoverPresentationController {
+            // set source view
+            popoverController.sourceView = viewFromSource
+            
+            // show popover from button
+            popoverController.sourceRect = viewFromSource.bounds
+            
+            // show popover arrow at feasible direction
+            popoverController.permittedArrowDirections = .up
+            
+            // set popover delegate self
+            popoverController.delegate = self
+        }
+        //show color popover
+        present(colorPickerVc, animated: true, completion: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Sets up background colour and BGColourButton
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
-        BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
-        for i in 0...color.endIndex{
-            colorClick = i
-            if(color[i].toHexString() == Settings.sharedValues.viewBackgroundColor.toHexString()){
-                break
-            }
-        }
-        BGColourButton.layer.cornerRadius = 5
-        BGColourButton.layer.borderWidth = 1
-        BGColourButton.layer.borderColor = UIColor.black.cgColor
+        changeColorButton.layer.cornerRadius = 10
+//        for i in 0...color.endIndex{
+//            colorClick = i
+//            if(color[i].toHexString() == Settings.sharedValues.viewBackgroundColor.toHexString()){
+//                break
+//            }
+//        }
         
         self.nameTextField.delegate = self
         logoutButton.backgroundColor = UIColor.red
@@ -149,26 +209,16 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     }
     
     ///Changes the baclground colour when the background colour button is pressed
-    @IBAction func backgroundColorChange(_ sender: UIButton) {
-        colorClick += 1
-        if (colorClick >= 4){
-            colorClick = 0
-        }
-        Settings.sharedValues.viewBackgroundColor = color[colorClick]
-        UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
-        // Setting all background color values to the new viewBackgroundColor value
-        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
-        BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
-    }
-    // Trying to make the font style show up as a popover. No success
-//    @IBAction func FontStyleButton(_ sender: UIButton) {
-//        let tableViewController = UITableViewController()
-//        tableViewController.modalPresentationStyle = UIModalTransitionStyle.popover
-//        tableViewController.preferredContentSize = CGSize(width: 400, height: 400)
-//
-//        present(tableViewController, animated: true, completion: nil)
-//
-//        let popoverPresentationController =
+//    @IBAction func backgroundColorChange(_ sender: UIButton) {
+//        colorClick += 1
+//        if (colorClick >= 4){
+//            colorClick = 0
+//        }
+//        Settings.sharedValues.viewBackgroundColor = color[colorClick]
+//        UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
+//        //Setting all background color values to the new viewBackgroundColor value
+//        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
+//        //BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
 //    }
     
     // MARK: - Navigation
