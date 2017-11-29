@@ -116,13 +116,16 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
         Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: ((CGFloat(10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int)+20))))
         
         if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.BEGINNER_LEVEL){
-            performSegue(withIdentifier: "usersToBeginner", sender: self)
+            //performSegue(withIdentifier: "usersToBeginner", sender: self)
+            LoginAlert.userPasswordAlert(viewController: self, password: "password", segue: "usersToBeginner")
         }
         else if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.INTERMEDIATE_LEVEL){
-            performSegue(withIdentifier: "userToIntermediate", sender: self)
+            //performSegue(withIdentifier: "userToIntermediate", sender: self)
+            LoginAlert.userPasswordAlert(viewController: self, password: "password", segue: "userToIntermediate")
         }
         else{
-            performSegue(withIdentifier: "userToAdvanced", sender: self)
+            //performSegue(withIdentifier: "userToAdvanced", sender: self)
+            LoginAlert.userPasswordAlert(viewController: self, password: "password", segue: "userToAdvanced")
         }
     }
     

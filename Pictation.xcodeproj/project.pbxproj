@@ -11,6 +11,7 @@
 		45464E901FBF587C000C7040 /* UserDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45464E8E1FBF587B000C7040 /* UserDataModel.xcdatamodeld */; };
 		45464E921FBF6185000C7040 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45464E911FBF6185000C7040 /* UserTableViewCell.swift */; };
 		45672A811FA8F15300BCC811 /* ImageDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45672A801FA8F15200BCC811 /* ImageDisplay.swift */; };
+		45A86A5E1FCE0A75009C33F5 /* LoginAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A86A5D1FCE0A75009C33F5 /* LoginAlert.swift */; };
 		5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1478801FB059F000A617DB /* CameraViewController.swift */; };
 		5AFDA9681FC7B13B007F1425 /* suggestedSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */; };
 		90C4FF541FBECF3500AB802D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90C4FF531FBECF3500AB802D /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		45464E8F1FBF587B000C7040 /* UserDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserDataModel.xcdatamodel; sourceTree = "<group>"; };
 		45464E911FBF6185000C7040 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		45672A801FA8F15200BCC811 /* ImageDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDisplay.swift; sourceTree = "<group>"; };
+		45A86A5D1FCE0A75009C33F5 /* LoginAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlert.swift; sourceTree = "<group>"; };
 		5A1478801FB059F000A617DB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suggestedSentences.swift; sourceTree = "<group>"; };
 		90C4FF531FBECF3500AB802D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				C6A9C0111FBD132E0041DBCE /* Constants.swift */,
 				C61B33771FA1161B006CAC0D /* LaunchScreen.storyboard */,
 				C61B337A1FA1161B006CAC0D /* Info.plist */,
+				45A86A5D1FCE0A75009C33F5 /* LoginAlert.swift */,
 			);
 			path = Pictation;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				C6A9C0121FBD132E0041DBCE /* Constants.swift in Sources */,
 				C6A9C01A1FC2A2920041DBCE /* AdvancedViewController.swift in Sources */,
 				C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */,
+				45A86A5E1FCE0A75009C33F5 /* LoginAlert.swift in Sources */,
 				5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */,
 				CD5593F51FBA22BB008C5301 /* SettingsViewController.swift in Sources */,
 				C6A9C0101FBD10130041DBCE /* UtilHelper.swift in Sources */,
