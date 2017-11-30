@@ -14,7 +14,6 @@
 		45A86A5E1FCE0A75009C33F5 /* LoginAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A86A5D1FCE0A75009C33F5 /* LoginAlert.swift */; };
 		5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1478801FB059F000A617DB /* CameraViewController.swift */; };
 		5AFDA9681FC7B13B007F1425 /* suggestedSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */; };
-		905854D81FCFEDC300BDA631 /* Starjedi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 905854D71FCFEDC300BDA631 /* Starjedi.ttf */; };
 		90C4FF541FBECF3500AB802D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90C4FF531FBECF3500AB802D /* Assets.xcassets */; };
 		90EFE5081FCE88F600FFDC0A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFE5071FCE88F600FFDC0A /* ColorPickerViewController.swift */; };
 		90EFE50A1FCE8CC600FFDC0A /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90EFE5091FCE8CC600FFDC0A /* Colors.plist */; };
@@ -62,9 +61,7 @@
 		45A86A5D1FCE0A75009C33F5 /* LoginAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlert.swift; sourceTree = "<group>"; };
 		5A1478801FB059F000A617DB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suggestedSentences.swift; sourceTree = "<group>"; };
-		905854D71FCFEDC300BDA631 /* Starjedi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Starjedi.ttf; path = ../../../../Downloads/star_jedi/starjedi/Starjedi.ttf; sourceTree = "<group>"; };
 		905854DB1FCFEDD900BDA631 /* Starjhol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Starjhol.ttf; sourceTree = "<group>"; };
-		905854DC1FCFEDF200BDA631 /* Starjout.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Starjout.ttf; path = ../../../../Downloads/star_jedi/starjout/Starjout.ttf; sourceTree = "<group>"; };
 		90C4FF531FBECF3500AB802D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90EFE5071FCE88F600FFDC0A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		90EFE5091FCE8CC600FFDC0A /* Colors.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
@@ -122,8 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				905854DB1FCFEDD900BDA631 /* Starjhol.ttf */,
-				905854DC1FCFEDF200BDA631 /* Starjout.ttf */,
-				905854D71FCFEDC300BDA631 /* Starjedi.ttf */,
 			);
 			path = "Font Styles";
 			sourceTree = "<group>";
@@ -319,7 +314,6 @@
 				C61B33791FA1161B006CAC0D /* LaunchScreen.storyboard in Resources */,
 				C6D58C1A1FAE948C005C9CF3 /* subjects in Resources */,
 				C6D58C171FAE9484005C9CF3 /* objects in Resources */,
-				905854D81FCFEDC300BDA631 /* Starjedi.ttf in Resources */,
 				C61B33741FA1161B006CAC0D /* Main.storyboard in Resources */,
 				90C4FF541FBECF3500AB802D /* Assets.xcassets in Resources */,
 				C6D58C181FAE9484005C9CF3 /* verbs in Resources */,
