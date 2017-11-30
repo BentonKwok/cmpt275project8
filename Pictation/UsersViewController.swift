@@ -30,6 +30,8 @@ class UsersViewController: UIViewController {
         
         //Add Done button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+        //disable the back button for this view
+        navigationItem.hidesBackButton = true
         
         //Retrieve the user names to be used in
         let context = appDelegate.persistentContainer.viewContext
@@ -43,7 +45,15 @@ class UsersViewController: UIViewController {
                 for data in result as! [NSManagedObject] {
                     if (data.value(forKey: "name") as? String) != nil{
                         if((data.value(forKey: "name") as! String) == "Guest"){
+                            /**************************
+                            * if Guest is broken whe  you got setting:
+                            * 1. Comment out GuestInfo = data
+                            * 2. Uncomment context.delete(data)
+                            * 3. Run the app and click all the way to settings then stop the app
+                            * 4. undo the comment changes you made and now the app should work
+                            ***************************/
                             GuestInfo = data
+                            //context.delete(data)
                         }
                         else{
                             UsersInfo.append(data)
@@ -53,12 +63,7 @@ class UsersViewController: UIViewController {
             }
             //Creates a Guest Account if none exists
             if(GuestInfo == nil){
-                let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
-                GuestInfo = NSManagedObject(entity: entity!, insertInto: context)
-                GuestInfo.setValue("Guest", forKey: "name")
-                GuestInfo.setValue(BEGINNER_LEVEL, forKey: "commlevel")
-                GuestInfo.setValue("0xD6EAF8", forKey: "bg_colour")
-                GuestInfo.setValue(1, forKey: "fontsize")
+                GuestInfo = initGuestInfo()
                 do {
                     let context = appDelegate.persistentContainer.viewContext
                     try context.save()
@@ -94,7 +99,24 @@ class UsersViewController: UIViewController {
             performSegue(withIdentifier: "userToAdvanced", sender: self)
         }
     }
-  
+    
+    //Used to initialize NSManagedObjects for Guest to store the User Data
+    func initGuestInfo( ) -> NSManagedObject{
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
+        let UserData = NSManagedObject(entity: entity!, insertInto: context)
+        UserData.setValue(CURRENT_USER, forKey: "name")
+        UserData.setValue(BEGINNER_LEVEL, forKey: "commlevel")
+        UserData.setValue(true, forKey: "passwordEnable")
+        UserData.setValue("", forKey: "securityQuestion")
+        UserData.setValue("", forKey: "securityAnswer")
+        UserData.setValue("", forKey: "password")
+        UserData.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
+        UserData.setValue(1, forKey: "fontsize")
+        
+        return UserData
+    }
+
 }
 
 //MARK: Table View for Users
@@ -116,16 +138,28 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
         Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: ((CGFloat(10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int)+20))))
         
         if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.BEGINNER_LEVEL){
-            //performSegue(withIdentifier: "usersToBeginner", sender: self)
-            LoginAlert.userPasswordAlert(viewController: self, password: "password", segue: "usersToBeginner")
+            if(!(UsersInfo[indexPath.row].value(forKey: "passwordEnable") as! Bool)){
+                performSegue(withIdentifier: "usersToBeginner", sender: self)
+            }
+            else{
+                LoginAlert.userPasswordAlert(viewController: self, user: UsersInfo[indexPath.row], segue: "usersToBeginner")
+            }
         }
         else if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.INTERMEDIATE_LEVEL){
-            //performSegue(withIdentifier: "userToIntermediate", sender: self)
-            LoginAlert.userPasswordAlert(viewController: self, password: "password", segue: "userToIntermediate")
+            if(!(UsersInfo[indexPath.row].value(forKey: "passwordEnable") as! Bool)){
+                performSegue(withIdentifier: "userToIntermediate", sender: self)
+            }
+            else{
+                LoginAlert.userPasswordAlert(viewController: self, user: UsersInfo[indexPath.row], segue: "userToIntermediate")
+            }
         }
         else{
-            //performSegue(withIdentifier: "userToAdvanced", sender: self)
-            LoginAlert.userPasswordAlert(viewController: self, password: "password", segue: "userToAdvanced")
+            if(!(UsersInfo[indexPath.row].value(forKey: "passwordEnable") as! Bool)){
+                performSegue(withIdentifier: "userToAdvanced", sender: self)
+            }
+            else{
+                LoginAlert.userPasswordAlert(viewController: self, user: UsersInfo[indexPath.row], segue: "userToAdvanced")
+            }
         }
     }
     
@@ -137,6 +171,12 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
             context.delete(UsersInfo[indexPath.row])
             UsersInfo.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.automatic)
+            do {
+                let context = appDelegate.persistentContainer.viewContext
+                try context.save()
+            } catch {
+                print("Failed saving")
+            }
         }
     }
     

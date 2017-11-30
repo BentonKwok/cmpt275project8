@@ -38,7 +38,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         let titleAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
             if let field = alertController.textFields?[0] {
                 // store your data
-                UserDefaults.standard.set(field.text, forKey: "userTitle")    // We can use this forKey to store the name of the picture
+                UserDefaults.standard.set(field.text, forKey: "userTitle")    // We can use this forKey to store the name of the picture ***** possibly append username here *****
                 UserDefaults.standard.synchronize()
                 let alert=UIAlertController(title: "saved", message: "Your image has been saved", preferredStyle:.alert)
                 let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)

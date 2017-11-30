@@ -18,10 +18,12 @@ class Settings {
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ColorPickerDelegate  {
     //MARK: Properties
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var levelSelect: UISegmentedControl!
     @IBOutlet weak var fontSizeSelect: UISegmentedControl!
+    @IBOutlet weak var passwordSwitch: UISwitch!
     @IBOutlet var changeColorButton: UIButton!
     @IBAction func changeColorButtonClicked(_ sender: UIButton) {
         self.showColorPicker(viewFromSource: sender)
@@ -32,12 +34,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     let INTERMEDIATE_LEVEL: Int = 1
     let ADVANCED_LEVEL: Int = 2
     var UserInfo : NSManagedObject?
+    var newUser : Bool = false
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-//    color counter
-//    var colorClick = 0
-//    All background colour options are stored
-//    let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
     
     // class varible maintain selected color value
     var selectedColor: UIColor = UIColor.blue
@@ -105,13 +103,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         
         //Sets up background colour and BGColourButton
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
-        changeColorButton.layer.cornerRadius = 10
-//        for i in 0...color.endIndex{
-//            colorClick = i
-//            if(color[i].toHexString() == Settings.sharedValues.viewBackgroundColor.toHexString()){
-//                break
-//            }
-//        }
+        changeColorButton.layer.cornerRadius = 1
         
         self.nameTextField.delegate = self
         logoutButton.backgroundColor = UIColor.red
@@ -119,6 +111,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             nameTextField.text = CURRENT_USER
             if(CURRENT_USER == "Guest"){
                 nameTextField.isUserInteractionEnabled = false
+                passwordSwitch.isUserInteractionEnabled = false
+                passwordTextField.isUserInteractionEnabled = false
+                passwordTextField.placeholder = "No Password for Guest"
             }
         }
         //Add Done button to navigation bar
@@ -141,30 +136,44 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
                 }
             }
             if( UserInfo == nil){
-                let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
-                UserInfo = NSManagedObject(entity: entity!, insertInto: context)
-                UserInfo?.setValue(CURRENT_USER, forKey: "name")
-                UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
-                UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
-                UserInfo?.setValue(1, forKey: "fontsize")
+                UserInfo = initUserInfo()
+                newUser = true
             }
             
         } catch {
-            let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
-            UserInfo = NSManagedObject(entity: entity!, insertInto: context)
-            UserInfo?.setValue(CURRENT_USER, forKey: "name")
-            UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
-            UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
-            UserInfo?.setValue(1, forKey: "fontsize")
+            UserInfo = initUserInfo()
+            newUser = true
         }
         
         //set up the containers in the table to match stored user settings
         fontSizeSelect.selectedSegmentIndex = UserInfo?.value(forKey: "fontsize") as! Int
         nameTextField.text = (UserInfo?.value(forKey: "name") as! String)
+        passwordTextField.text = (UserInfo?.value(forKey: "password") as! String)
+        passwordTextField.isSecureTextEntry = true
+        passwordSwitch.setOn((UserInfo?.value(forKey: "passwordEnable") as! Bool), animated: false)
         levelSelect.selectedSegmentIndex = UserInfo?.value(forKey: "commlevel") as! Int
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UserInfo?.value(forKey: "bg_colour") as! String)
+        changeColorButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
+        
+        //diable user interaction on textfield if password is disabled
+        passwordTextField.isUserInteractionEnabled = passwordSwitch.isOn
     }
-
+    
+    //handles the switch tap
+    @IBAction func passwordSwtichTapped(_ sender: UISwitch) {
+        UserInfo?.setValue(passwordSwitch.isOn, forKey: "passwordEnable")
+        passwordTextField.isUserInteractionEnabled = passwordSwitch.isOn
+        
+        if(((UserInfo?.value(forKey: "securityQuestion") as! String) == "") || ((UserInfo?.value(forKey: "securityQuestion") as! String) == "")){
+            //create a popup to prompt the user to enter a security question and answer
+            LoginAlert.userSecurityQuestionAlert(viewController: self, user: UserInfo!, passwordSwitch: passwordSwitch, passwordTextField: passwordTextField)
+        }
+    }
+    
+    @IBAction func securityQuestionButtonTapped(_ sender: UIButton) {
+        LoginAlert.userSecurityQuestionAlert(viewController: self, user: UserInfo!, passwordSwitch: nil, passwordTextField: passwordTextField)
+    }
+    
     //dismiss keyboard when enter is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -199,6 +208,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserInfo?.setValue(nameTextField.text, forKey: "name")
         UserInfo?.setValue(fontSizeSelect.selectedSegmentIndex, forKey: "fontsize")
+        UserInfo?.setValue(passwordTextField.text, forKey: "password")
+        UserInfo?.setValue(passwordSwitch.isOn, forKey: "passwordEnable")
         Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: (CGFloat((10*fontSizeSelect.selectedSegmentIndex)+20)))
         do {
             let context = appDelegate.persistentContainer.viewContext
@@ -229,5 +240,20 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         // Pass the selected object to the new view controller.
     }
     */
+    func initUserInfo( ) -> NSManagedObject{
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
+        UserInfo = NSManagedObject(entity: entity!, insertInto: context)
+        UserInfo?.setValue(CURRENT_USER, forKey: "name")
+        UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
+        UserInfo?.setValue(false, forKey: "passwordEnable")
+        UserInfo?.setValue("", forKey: "securityQuestion")
+        UserInfo?.setValue("", forKey: "securityAnswer")
+        UserInfo?.setValue("", forKey: "password")
+        UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
+        UserInfo?.setValue(1, forKey: "fontsize")
+        
+        return UserInfo!
+    }
 
 }
