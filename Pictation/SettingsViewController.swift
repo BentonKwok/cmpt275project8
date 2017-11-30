@@ -14,6 +14,7 @@ class Settings {
     static let sharedValues = Settings()
     var viewBackgroundColor = UIColor(colorWithHexValue: 0xD6EAF8)
     var sentencePanelFont = UIFont(name: "Helvetica-Bold", size: 30)
+    var systemFont = UIFont(name: "Helvetica-Bold", size: 30)
 }
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ColorPickerDelegate  {
@@ -26,6 +27,20 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     @IBAction func changeColorButtonClicked(_ sender: UIButton) {
         self.showColorPicker(viewFromSource: sender)
     }
+    @IBOutlet weak var fontStyleSelect: UIButton!
+    @IBAction func fontStyleChanged(_ sender: UIButton) {
+        fontStyleClick += 1
+        if(fontStyleClick >= 7){
+            fontStyleClick = 0
+        }
+        fontStyleSelect.titleLabel?.font = UIFont(name: fontStyleList[fontStyleClick], size: 20)
+        Settings.sharedValues.systemFont = UIFont(name: fontStyleList[fontStyleClick], size: 20)
+        //        //Setting all background color values to the new viewBackgroundColor value
+        //        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
+        //        //BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
+    }
+
+    
     
     //MARK: User Settings Properties
     let BEGINNER_LEVEL: Int = 0
@@ -34,14 +49,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     var UserInfo : NSManagedObject?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-//    color counter
-//    var colorClick = 0
-//    All background colour options are stored
-//    let color = [UIColor.white, UIColor.black, UIColor(colorWithHexValue: 0xD6EAF8), UIColor.blue]
-    
-    // class varible maintain selected color value
+    //MARK: Color Select Variables
     var selectedColor: UIColor = UIColor.blue
     var selectedColorHex: String = "0000FF"
+    
+    //MARK: Font Styles
+    var fontStyleList = ["StarJedi", "Helvetica", "Zapfino", "Menlo", "Didot", "Avenir", "Snell"]
+    var fontStyleClick = 0
     
     //MARK: Popover delegate functions
     //Overrides iPhone behaviour where it would present popovers as full screen options instead
@@ -99,19 +113,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         present(colorPickerVc, animated: true, completion: nil)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Sets up background colour and BGColourButton
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         changeColorButton.layer.cornerRadius = 10
-//        for i in 0...color.endIndex{
-//            colorClick = i
-//            if(color[i].toHexString() == Settings.sharedValues.viewBackgroundColor.toHexString()){
-//                break
-//            }
-//        }
+
         
         self.nameTextField.delegate = self
         logoutButton.backgroundColor = UIColor.red
@@ -123,6 +131,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         }
         //Add Done button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(doneTapped))
+        
+        //Displaying current system font
+        //fontStyleSelect.setTitle("Font Style", for: .normal)
+        //fontStyleSelect.titleLabel?.font = UIFont(name: "StarJedi", size: 20)
         
         //Retrieve the user settings
         let context = appDelegate.persistentContainer.viewContext
@@ -147,6 +159,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
                 UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
                 UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
                 UserInfo?.setValue(1, forKey: "fontsize")
+                //UserInfo?.setValue(1, forKey: "fontstyle")
             }
             
         } catch {
@@ -156,6 +169,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             UserInfo?.setValue(BEGINNER_LEVEL, forKey: "commlevel")
             UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
             UserInfo?.setValue(1, forKey: "fontsize")
+            //UserInfo?.setValue(Settings.sharedValues.sentencePanelFont, forKey: "fontstyle")
         }
         
         //set up the containers in the table to match stored user settings
@@ -208,18 +222,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         }
     }
     
-    ///Changes the baclground colour when the background colour button is pressed
-//    @IBAction func backgroundColorChange(_ sender: UIButton) {
-//        colorClick += 1
-//        if (colorClick >= 4){
-//            colorClick = 0
-//        }
-//        Settings.sharedValues.viewBackgroundColor = color[colorClick]
-//        UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
-//        //Setting all background color values to the new viewBackgroundColor value
-//        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
-//        //BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
-//    }
+
     
     // MARK: - Navigation
 

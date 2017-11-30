@@ -31,33 +31,47 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     //Function to prompt the user to enter their designated location for where their photo is to go to
     func chooseDirectory() {
-        let alertController = UIAlertController(title: "Directory and Name", message: "Please type a directory and name for the Image : subjects, verbs or objects followed by /'name of image'", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Name", message: "Please enter a name for your image", preferredStyle: .alert)
         let titleAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
             if let field = alertController.textFields?[0] {
                 // store your data
                 UserDefaults.standard.set(field.text, forKey: "userTitle")    // We can use this forKey to store the name of the picture
                 UserDefaults.standard.synchronize()
-                let alert=UIAlertController(title: "saved", message: "Your image has been saved", preferredStyle:.alert)
-                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-                alert.addAction(okAction)
+                
+                let alert=UIAlertController(title: "Diretcory", message: "Choose a Directory", preferredStyle:.alert)
+                
+                let subjectsAlert = UIAlertAction(title: "Subjects",style: .default, handler: {ACTION in self.saveImage(imageName: "subjects/"+field.text!+".jpg")})
+                
+                let verbsAlert = UIAlertAction(title: "Verbs",style: .default, handler: {ACTION in self.saveImage(imageName: "verbs/"+field.text!+".jpg")})
+                
+                let objectsAlert = UIAlertAction(title: "Objects",style: .default, handler: {ACTION in self.saveImage(imageName: "objects/"+field.text!+".jpg")})
+                
+                let cancelAction1 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+                
+                alert.addAction(subjectsAlert)
+                alert.addAction(verbsAlert)
+                alert.addAction(objectsAlert)
+                alert.addAction(cancelAction1)
+                
                 self.present(alert, animated: true, completion: nil)
-                self.saveImage(imageName:  field.text! + ".jpg")
+                //self.saveImage(imageName:  field.text! + ".jpg")
                 
                 
             }
-                // user did not fill field
-                //let alertController = UIAlertController(title: "Error", message: "field cannot be left empty", preferredStyle: .alert)
+            // user did not fill field
+            //let alertCon = UIAlertAction(title: "Error", style: .cancel, handler: nil)
+            
             
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
         alertController.addTextField { (textField) in
-            textField.placeholder = "Directory/ImageName"
+            textField.placeholder = "ImageName"
         }
-        
         
         alertController.addAction(titleAction)
         alertController.addAction(cancelAction)
