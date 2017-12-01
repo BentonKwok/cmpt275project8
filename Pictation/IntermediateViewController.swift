@@ -89,7 +89,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate{
         }
         if(storedBefore == false)
         {
-        suggestedSentencesCoreDataSingleton.suggestedSentences.saveGeneratedSentences(suggestedSentences: outputSentenceText.text as String!)
+        _ = suggestedSentencesCoreDataSingleton.suggestedSentences.saveGeneratedSentences(suggestedSentences: outputSentenceText.text as String!)
             print(outputSentenceText.text as String!)
             
         }

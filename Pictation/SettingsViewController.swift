@@ -14,7 +14,7 @@ class Settings {
     static let sharedValues = Settings()
     var viewBackgroundColor = UIColor(colorWithHexValue: 0xD6EAF8)
     var sentencePanelFont = UIFont(name: "Helvetica-Bold", size: 30)
-    var systemFont = UIFont(name: "Helvetica-Bold", size: 30)
+    //var systemFont = UIFont(name: "Helvetica-Bold", size: 30)
 }
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ColorPickerDelegate  {
@@ -36,7 +36,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             fontStyleClick = 0
         }
         fontStyleSelect.titleLabel?.font = UIFont(name: fontStyleList[fontStyleClick], size: 20)
-        Settings.sharedValues.systemFont = UIFont(name: fontStyleList[fontStyleClick], size: 20)
+        //Settings.sharedValues.systemFont = UIFont(name: fontStyleList[fontStyleClick], size: 20)
         //        //Setting all background color values to the new viewBackgroundColor value
         //        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         //        //BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
@@ -176,6 +176,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         levelSelect.selectedSegmentIndex = UserInfo?.value(forKey: "commlevel") as! Int
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UserInfo?.value(forKey: "bg_colour") as! String)
         changeColorButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
+        fontStyleSelect.titleLabel?.font = UIFont(name: UserInfo?.value(forKey: "fontstyle") as! String, size: 20)
+     //   fontStyleClick = fontStyleList.index(of: (UserInfo?.value(forKey: "fontstyle") as! String))!
+        
+        for _ in fontStyleList{
+            if((UserInfo?.value(forKey: "fontstyle") as! String) == fontStyleList[fontStyleClick]){
+                break
+            }
+            fontStyleClick += 1
+        }
         
         //diable user interaction on textfield if password is disabled
         passwordTextField.isUserInteractionEnabled = passwordSwitch.isOn
@@ -232,7 +241,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         UserInfo?.setValue(fontSizeSelect.selectedSegmentIndex, forKey: "fontsize")
         UserInfo?.setValue(passwordTextField.text, forKey: "password")
         UserInfo?.setValue(passwordSwitch.isOn, forKey: "passwordEnable")
-        Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: (CGFloat((10*fontSizeSelect.selectedSegmentIndex)+20)))
+        UserInfo?.setValue(fontStyleList[fontStyleClick], forKey: "fontstyle")
+        Settings.sharedValues.sentencePanelFont = UIFont(name: (UserInfo?.value(forKey: "fontstyle") as! String), size: (CGFloat((10*fontSizeSelect.selectedSegmentIndex)+20)))
+        
         do {
             let context = appDelegate.persistentContainer.viewContext
             try context.save()
@@ -264,6 +275,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserInfo?.setValue(1, forKey: "fontsize")
         UserInfo?.setValue("", forKey: "userPictures")
+        UserInfo?.setValue("Helvetica-Bold", forKey: "fontstyle")
         
         return UserInfo!
     }

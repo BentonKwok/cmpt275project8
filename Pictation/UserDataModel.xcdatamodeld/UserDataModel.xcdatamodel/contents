@@ -4,6 +4,7 @@
         <attribute name="bg_colour" optional="YES" attributeType="String" defaultValueString="0xD6EAF8" syncable="YES"/>
         <attribute name="commlevel" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="fontsize" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="fontstyle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="passwordEnable" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -13,6 +14,6 @@
         <attribute name="userPictures" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Users" positionX="-54" positionY="-9" width="128" height="195"/>
+        <element name="Users" positionX="-54" positionY="-9" width="128" height="210"/>
     </elements>
 </model>

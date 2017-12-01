@@ -86,8 +86,9 @@ class UsersViewController: UIViewController {
 
     //Handles the pressing of the guest button
     @IBAction func guestButtonPress(_ sender: UIButton) {
-        CURRENT_USER = guestButton.titleLabel!.text!
+        CURRENT_USER = "Guest"
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : GuestInfo.value(forKey: "bg_colour") as! String)
+        Settings.sharedValues.sentencePanelFont = UIFont(name: (GuestInfo.value(forKey: "fontstyle") as! String), size: (CGFloat((10*(GuestInfo.value(forKey : "fontsize") as! Int))+20)))
         
         if((GuestInfo.value(forKey: "commlevel") as! Int) == BEGINNER_LEVEL){
             performSegue(withIdentifier: "usersToBeginner", sender: self)
@@ -114,6 +115,7 @@ class UsersViewController: UIViewController {
         UserData.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserData.setValue(1, forKey: "fontsize")
         UserData.setValue("", forKey: "userPictures")
+        UserData.setValue("Helvetica", forKey: "fontstyle")
         
         return UserData
     }
@@ -136,7 +138,8 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         CURRENT_USER = (UsersInfo[indexPath.row].value(forKey: "name") as! String)
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UsersInfo[indexPath.row].value(forKey: "bg_colour") as! String)
-        Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: ((CGFloat(10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int)+20))))
+        Settings.sharedValues.sentencePanelFont = UIFont(name: (UsersInfo[indexPath.row].value(forKey: "fontstyle") as! String), size: (CGFloat((10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int))+20)))
+      //  Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: ((CGFloat(10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int)+20))))
         
         if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.BEGINNER_LEVEL){
             if(!(UsersInfo[indexPath.row].value(forKey: "passwordEnable") as! Bool)){

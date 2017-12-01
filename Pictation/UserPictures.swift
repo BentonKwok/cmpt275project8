@@ -43,7 +43,6 @@ class UserPictures{
     func thisUserPictures( pictureNames : [String]) -> [String]{
         var filteredPictures = [String]()
         for pictureName in pictureNames{
-            print(pictureName)
             if(pictures?.range(of: pictureName) != nil){
                 filteredPictures.append(pictureName)
             }
