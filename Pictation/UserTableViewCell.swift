@@ -12,6 +12,8 @@ import CoreData
 private let reuseIdentifier = "UserCell"
 
 class UserTableViewCell: UITableViewCell {
-    @IBOutlet weak var buttonCell: UIButton!
     
+    func setLabel(name: String){
+        textLabel?.text = name
+    }
 }

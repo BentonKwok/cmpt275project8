@@ -128,8 +128,8 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
     /* Sets the cells in the table view to the names of all the users stored in core data. */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath as IndexPath) as! UserTableViewCell
-        cell.buttonCell.setTitle((UsersInfo[indexPath.row].value(forKey: "name") as! String), for: .normal)
-        cell.buttonCell.contentHorizontalAlignment = .center
+        cell.setLabel(name: (UsersInfo[indexPath.row].value(forKey: "name") as! String))
+        cell.textLabel?.textAlignment = .center
         
         return cell
     }
@@ -139,8 +139,6 @@ extension UsersViewController : UITableViewDelegate, UITableViewDataSource{
         CURRENT_USER = (UsersInfo[indexPath.row].value(forKey: "name") as! String)
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UsersInfo[indexPath.row].value(forKey: "bg_colour") as! String)
         Settings.sharedValues.sentencePanelFont = UIFont(name: (UsersInfo[indexPath.row].value(forKey: "fontstyle") as! String), size: (CGFloat((10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int))+20)))
-      //  Settings.sharedValues.sentencePanelFont = UIFont(name: "Helvetica-Bold", size: ((CGFloat(10*(UsersInfo[indexPath.row].value(forKey : "fontsize") as! Int)+20))))
-        
         if((UsersInfo[indexPath.row].value(forKey: "commlevel") as! Int) == self.BEGINNER_LEVEL){
             if(!(UsersInfo[indexPath.row].value(forKey: "passwordEnable") as! Bool)){
                 performSegue(withIdentifier: "usersToBeginner", sender: self)
