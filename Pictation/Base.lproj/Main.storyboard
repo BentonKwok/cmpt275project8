@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1188,13 +1188,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dE-DA-ePb">
-                                <rect key="frame" x="4" y="328" width="760" height="68"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="760" id="7XW-DN-k3P"/>
-                                    <constraint firstAttribute="height" constant="68" id="cTm-eZ-e7N"/>
-                                </constraints>
-                            </pickerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n76-3f-xg9">
                                 <rect key="frame" x="0.0" y="524" width="768" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1236,6 +1229,20 @@
                                     <outlet property="delegate" destination="sKD-UQ-YeW" id="iWu-Aq-SbH"/>
                                 </connections>
                             </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dWg-RY-Xte">
+                                <rect key="frame" x="189" y="328" width="504" height="105"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="suggestedSentenceCell" id="ixH-iO-hRU">
+                                        <rect key="frame" x="0.0" y="28" width="504" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ixH-iO-hRU" id="JwF-z7-ff9">
+                                            <rect key="frame" x="0.0" y="0.0" width="504" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1254,7 +1261,6 @@
                             <constraint firstItem="tEk-bw-w55" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="440" id="Dc1-sC-iWI"/>
                             <constraint firstItem="fBC-ow-zZm" firstAttribute="leading" secondItem="OXQ-aS-2YR" secondAttribute="trailing" constant="27" id="F6y-hW-pip"/>
                             <constraint firstItem="Bpz-Ff-uJD" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="12" id="FS4-XP-wll"/>
-                            <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="8dE-DA-ePb" secondAttribute="trailing" constant="4" id="FfR-CC-X9A"/>
                             <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="trh-9b-JuG" secondAttribute="trailing" constant="252" id="FwV-ZN-ufV"/>
                             <constraint firstItem="n76-3f-xg9" firstAttribute="top" secondItem="Nmt-Wg-KCA" secondAttribute="bottom" constant="34" id="GGC-Kg-rgf"/>
                             <constraint firstItem="trh-9b-JuG" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="122" id="GHL-n7-gFE"/>
@@ -1264,7 +1270,6 @@
                             <constraint firstItem="OXQ-aS-2YR" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="116" id="KLI-my-qLL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vpx-CH-0cN" secondAttribute="trailing" constant="162" id="KRR-pH-7MX"/>
                             <constraint firstItem="trh-9b-JuG" firstAttribute="leading" secondItem="2fW-Ig-law" secondAttribute="leading" constant="51" id="L30-qn-iJz"/>
-                            <constraint firstItem="8dE-DA-ePb" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="308" id="LCW-KH-6f2"/>
                             <constraint firstItem="8a8-wy-drq" firstAttribute="leading" secondItem="t9i-7a-ze1" secondAttribute="trailing" constant="8" id="MIQ-Pn-PHm"/>
                             <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="Nmt-Wg-KCA" secondAttribute="trailing" constant="279" id="Mnq-MJ-qWL"/>
                             <constraint firstItem="n76-3f-xg9" firstAttribute="trailing" secondItem="2fW-Ig-law" secondAttribute="trailing" id="OzD-gy-8B5"/>
@@ -1280,12 +1285,15 @@
                             <constraint firstAttribute="trailing" secondItem="hVr-eN-PVO" secondAttribute="trailing" constant="489" id="U9f-B7-H7b"/>
                             <constraint firstItem="t9i-7a-ze1" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="274" id="UaP-sj-1WX"/>
                             <constraint firstItem="OPK-px-xDX" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="207" id="XG1-5d-sJZ"/>
+                            <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="dWg-RY-Xte" secondAttribute="trailing" constant="75" id="YkO-Cr-VYC"/>
                             <constraint firstItem="hVr-eN-PVO" firstAttribute="leading" secondItem="YbZ-Ob-vbf" secondAttribute="trailing" constant="8" symbolic="YES" id="bXG-ND-EFM"/>
                             <constraint firstItem="cNd-8o-HgD" firstAttribute="leading" secondItem="tEk-bw-w55" secondAttribute="trailing" id="bfA-TU-hyL"/>
                             <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="OPK-px-xDX" secondAttribute="trailing" constant="262" id="bgL-eg-0ho"/>
                             <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="OXQ-aS-2YR" secondAttribute="trailing" constant="131" id="cAN-7j-XVS"/>
                             <constraint firstItem="Nmt-Wg-KCA" firstAttribute="leading" secondItem="cNd-8o-HgD" secondAttribute="trailing" id="dow-X5-KQp"/>
+                            <constraint firstItem="dWg-RY-Xte" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="308" id="eId-ek-wbq"/>
                             <constraint firstItem="yeM-CH-7UF" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="208" id="gyY-Vb-WHf"/>
+                            <constraint firstItem="dWg-RY-Xte" firstAttribute="leading" secondItem="2fW-Ig-law" secondAttribute="leading" constant="189" id="h4I-WW-A4y"/>
                             <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="fBC-ow-zZm" secondAttribute="trailing" constant="49" id="hOU-Px-Tn8"/>
                             <constraint firstItem="n76-3f-xg9" firstAttribute="leading" secondItem="2fW-Ig-law" secondAttribute="leading" id="i66-d5-634"/>
                             <constraint firstItem="8h9-cm-y7o" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="440" id="jTe-Ll-iNg"/>
@@ -1296,6 +1304,7 @@
                             <constraint firstItem="cNd-8o-HgD" firstAttribute="top" secondItem="2fW-Ig-law" secondAttribute="top" constant="440" id="td7-0w-VPS"/>
                             <constraint firstItem="hVr-eN-PVO" firstAttribute="top" secondItem="trh-9b-JuG" secondAttribute="bottom" constant="59" id="tp2-vY-cU4"/>
                             <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="Bpz-Ff-uJD" secondAttribute="trailing" constant="20" id="vaV-bO-fdN"/>
+                            <constraint firstItem="n76-3f-xg9" firstAttribute="top" secondItem="dWg-RY-Xte" secondAttribute="bottom" constant="91" id="vgE-Jk-FDb"/>
                             <constraint firstItem="2fW-Ig-law" firstAttribute="trailing" secondItem="YbZ-Ob-vbf" secondAttribute="trailing" constant="533" id="zqG-yd-ogf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2fW-Ig-law"/>
@@ -1306,10 +1315,10 @@
                         <outlet property="objectPanelState" destination="Nmt-Wg-KCA" id="bk1-Cc-DbW"/>
                         <outlet property="outputSentenceText" destination="trh-9b-JuG" id="aZh-kB-DBb"/>
                         <outlet property="rateLabel" destination="hVr-eN-PVO" id="OHs-Ev-hCd"/>
-                        <outlet property="selectSentencePickerView" destination="8dE-DA-ePb" id="jVp-Gq-1Bx"/>
                         <outlet property="selectedSentenceSavedInTextBox" destination="8a8-wy-drq" id="bcu-M5-bCg"/>
                         <outlet property="sentenceImages" destination="Bpz-Ff-uJD" id="e9v-P2-Pzw"/>
                         <outlet property="subjectPanelState" destination="tEk-bw-w55" id="EkG-Jx-mKz"/>
+                        <outlet property="suggestedSentenceDisplay" destination="dWg-RY-Xte" id="YEN-lN-mBf"/>
                         <outlet property="verbPanelState" destination="cNd-8o-HgD" id="r2h-Mk-fGr"/>
                         <segue destination="b3d-vN-0LF" kind="show" identifier="settingsFromAdvanced" id="hbu-cj-QHu"/>
                     </connections>
@@ -1330,7 +1339,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="1vI-ev-IrH"/>
         <segue reference="xxE-eh-9xa"/>
-        <segue reference="Keq-Pd-tLt"/>
+        <segue reference="hbu-cj-QHu"/>
         <segue reference="2U3-2p-Ijy"/>
         <segue reference="rv6-lD-qnG"/>
     </inferredMetricsTieBreakers>
