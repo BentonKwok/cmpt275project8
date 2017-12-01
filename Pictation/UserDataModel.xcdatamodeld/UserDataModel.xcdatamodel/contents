@@ -10,8 +10,9 @@
         <attribute name="securityAnswer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="securityQuestion" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="suggestedSentences" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userPictures" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Users" positionX="-54" positionY="-9" width="128" height="180"/>
+        <element name="Users" positionX="-54" positionY="-9" width="128" height="195"/>
     </elements>
 </model>

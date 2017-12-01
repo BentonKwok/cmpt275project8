@@ -34,6 +34,9 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     //Function to prompt the user to enter their designated location for where their photo is to go to
     func chooseDirectory() {
+        //used to keep track of which user added which pictures
+        let userPictures : UserPictures = UserPictures()
+        
         let alertController = UIAlertController(title: "Name", message: "Please enter a name for your image", preferredStyle: .alert)
         let titleAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
             if let field = alertController.textFields?[0] {
@@ -43,11 +46,11 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                 
                 let alert=UIAlertController(title: "Diretcory", message: "Choose a Directory", preferredStyle:.alert)
                 
-                let subjectsAlert = UIAlertAction(title: "Subjects",style: .default, handler: {ACTION in self.saveImage(imageName: "subjects/"+field.text!+".jpg")})
+                let subjectsAlert = UIAlertAction(title: "Subjects",style: .default, handler: {ACTION in self.saveImage(imageName: "subjects/"+userPictures.addPictureToUser(newPicture: field.text!)+".jpg")})
                 
-                let verbsAlert = UIAlertAction(title: "Verbs",style: .default, handler: {ACTION in self.saveImage(imageName: "verbs/"+field.text!+".jpg")})
+                let verbsAlert = UIAlertAction(title: "Verbs",style: .default, handler: {ACTION in self.saveImage(imageName: "verbs/"+userPictures.addPictureToUser(newPicture: field.text!)+".jpg")})
                 
-                let objectsAlert = UIAlertAction(title: "Objects",style: .default, handler: {ACTION in self.saveImage(imageName: "objects/"+field.text!+".jpg")})
+                let objectsAlert = UIAlertAction(title: "Objects",style: .default, handler: {ACTION in self.saveImage(imageName: "objects/"+userPictures.addPictureToUser(newPicture: field.text!)+".jpg")})
                 
                 let cancelAction1 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
                 

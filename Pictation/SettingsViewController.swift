@@ -263,6 +263,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         UserInfo?.setValue("", forKey: "password")
         UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserInfo?.setValue(1, forKey: "fontsize")
+        UserInfo?.setValue("", forKey: "userPictures")
         
         return UserInfo!
     }

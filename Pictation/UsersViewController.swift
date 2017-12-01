@@ -113,6 +113,7 @@ class UsersViewController: UIViewController {
         UserData.setValue("", forKey: "password")
         UserData.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserData.setValue(1, forKey: "fontsize")
+        UserData.setValue("", forKey: "userPictures")
         
         return UserData
     }

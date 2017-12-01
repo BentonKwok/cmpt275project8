@@ -292,6 +292,9 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
         //Sets background color of Picture Panel ViewController
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         
+        //used to keep track of which user added which pictures
+        let userPictures : UserPictures = UserPictures()
+        
         //Add Settings button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsTapped))
         
@@ -320,9 +323,9 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UIPickerV
         let connectiveTitles = UtilHelper.getTitleArrays(connectiveFolderPath)
         
         //Getting all the user-defined images' file names of each folder and put them in String arrays [String]
-        let subjectDocumentTitles = UtilHelper.getTitleArrays(subjectFolderDocumentDirectory)
-        let objectDocumentTitles = UtilHelper.getTitleArrays(objectFolderDocumentDirectory)
-        let verbDocumentTitles = UtilHelper.getTitleArrays(verbFolderDocumentDirectory)
+        let subjectDocumentTitles = userPictures.thisUserPictures( pictureNames: UtilHelper.getTitleArrays(subjectFolderDocumentDirectory))
+        let objectDocumentTitles = userPictures.thisUserPictures( pictureNames: UtilHelper.getTitleArrays(objectFolderDocumentDirectory))
+        let verbDocumentTitles = userPictures.thisUserPictures( pictureNames: UtilHelper.getTitleArrays(verbFolderDocumentDirectory))
         let connectivesDocumentTitles = UtilHelper.getTitleArrays(connectiveFolderDocumentDirectory)
         
         //Getting all the images of each foler and put them in UIImages arrays [UIImage]
