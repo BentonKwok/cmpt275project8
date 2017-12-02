@@ -462,6 +462,9 @@ extension AdvancedViewController : UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[collectionViewClick % 4][indexPath.row], for: .normal)
+        cell.cellNameAdvanced.text = UtilHelper.removeLastComponentOfString(allTitles[collectionViewClick % 4][indexPath.row], ".jpg")
+        cell.cellNameAdvanced.textAlignment = .center
+
         cell.layer.borderWidth = 4
         cell.layer.borderColor = UIColor.darkGray.cgColor
         cell.layer.cornerRadius = 8

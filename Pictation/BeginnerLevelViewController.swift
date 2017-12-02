@@ -179,6 +179,8 @@ extension BeginnerLevelViewController : UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[indexPath.row], for: .normal)
+        cell.cellName.text = UtilHelper.removeLastComponentOfString(allTitles[indexPath.row], ".jpg")
+        cell.cellName.textAlignment = .center
         cell.layer.borderWidth = 4
         cell.layer.borderColor = UIColor.darkGray.cgColor
         cell.layer.cornerRadius = 8
