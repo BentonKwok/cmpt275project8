@@ -62,17 +62,17 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
     
     //Table View display of suggested sentences
     @IBOutlet weak var suggestedSentenceDisplay: UITableView!
-    var suggestedSentenceList = [" ", " ", " ", " "," "] // display only 5
+    var suggestedSentenceList: [String] = []
     
-    //Table View functions for suggested sentences
+    //Table View delegate functions for Suggested Sentence display
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if suggestedSentenceList.count == 0{
+        if (suggestedSentenceList.isEmpty){
             suggestedSentenceDisplay.isHidden = true
         }
-        else{
+        else {
             suggestedSentenceDisplay.isHidden = false
         }
         return suggestedSentenceList.count
@@ -81,17 +81,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "suggestedSentenceCell", for: indexPath)
         cell.textLabel?.text = suggestedSentenceList[indexPath.row] as String
-        //Trying to check if cell is empty and if it is, hide
-        //        if(cell.textLabel?.text == " "){
-        //            cell.isHidden = true
-        //            cell.contentView.backgroundColor = Settings.sharedValues.viewBackgroundColor
-        //        }
-        //        else{
-        //            cell.isHidden = false
-        //        }
-        if(suggestedSentenceList[indexPath.row] as String == " "){
-            cell.contentView.backgroundColor = Settings.sharedValues.viewBackgroundColor
-        }
         return cell
     }
     
@@ -99,14 +88,20 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         let cell = tableView.cellForRow(at: indexPath)
         selectedSentenceSavedInTextBox.text = cell?.textLabel?.text
     }
-    //Picker view display of suggested sentences
-    //@IBOutlet weak var selectSentencePickerView: UIPickerView!
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(suggestedSentenceList[indexPath.row] as String == " "){
+            return 0
+        }
+        else{
+            return UITableViewAutomaticDimension
+        }
+    }
 
-    //Display of chosen selected sentence
+    // Displays chosen Sentence Suggestion
     @IBOutlet weak var selectedSentenceSavedInTextBox: UITextField!
     
     //MARK: Variables to set up suggested sentence data display
-    var suggestedSentenceListInPickerView = ["  ","  ","  ","  ","  "]
     var sentenceListFromMatchingTappedImageWithCoreData = [""]
     var indexOfSelectedImageText = 0
     var sentenceGeneratedFromCollectedWords : String = ""
@@ -115,26 +110,22 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
     
     func updateWordsInCollectionView(word:String,appendWord:Bool)
     {
-        if(appendWord == true)
-        {
+        if(appendWord == true){
             wordsInCollectionView.append(word)
         }
-        else
-        {
-            if(wordsInCollectionView.count >= 1)
-            {
+        else{
+            if(wordsInCollectionView.count >= 1){
               wordsInCollectionView.removeLast(wordsInCollectionView.count-1)
             }
         }
     }
+    
     func sentenceRangeBasedOnFirstImage(collectedWordsSoFar: String)
     {
         let sentences = suggestedSentencesCoreDataSingleton.suggestedSentences.fetchSuggestedSentences()
         var j = 0
-        for i in sentences!
-        {
-            if(i.suggestedSentences != nil && j <= sentenceRange)
-            {
+        for i in sentences!{
+            if(i.suggestedSentences != nil && j <= sentenceRange){
                 if (((i.suggestedSentences as String!) .range(of: collectedWordsSoFar)) != nil){
                     sentenceListFromMatchingTappedImageWithCoreData.append(i.suggestedSentences as String!)
                     j = j + 1
@@ -142,50 +133,44 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
             }
         }
         
-        if(sentenceListFromMatchingTappedImageWithCoreData.count > 0)
-        {
-            if(sentenceListFromMatchingTappedImageWithCoreData[0] == "")
-            {
+        if(sentenceListFromMatchingTappedImageWithCoreData.count > 0){
+            if(sentenceListFromMatchingTappedImageWithCoreData[0] == ""){
                 sentenceListFromMatchingTappedImageWithCoreData.remove(at: 0)
                 sentenceRange = j
             }
-            else
-            {
+            else{
                 sentenceRange = j + 1
             }
         }
-        refreshSuggestedSentencePickerView(&sentenceListFromMatchingTappedImageWithCoreData)
+        refreshSuggestedSentenceTableView(&sentenceListFromMatchingTappedImageWithCoreData)
     }
     
-    //need to rename
-    func refreshSuggestedSentencePickerView(_ stringArray: inout [String])
-    {
+    // MARK: Refereshing TableView of sentence suggestion
+    func refreshSuggestedSentenceTableView(_ stringArray: inout [String]){
+        //Fills the suggested sentence array with white space strings if empty.
+        if(suggestedSentenceList.isEmpty){
+            suggestedSentenceList = [" ", " ", " ", " ", " "]
+        }
         var randomIndex = 0;
-        for i in 0...4
-        {
+        for i in 0...4{
             //if the number of sentences within the array<= 5, we will just display all of them
-            if (stringArray.count<=5 && i<stringArray.count)
-            {
+            if (stringArray.count<=5 && i<stringArray.count){
                 suggestedSentenceList[i] = stringArray[i] // table view
-                suggestedSentenceListInPickerView[i]=stringArray[i] // picker view
             }
             //if the number of sentences within array >= 6
             //will generate random index number if # of suggested sentence > 6. This allows for the user to see different suggested sentences when there are matches.
-            else if(stringArray.count>=6 && i<stringArray.count)
-            {
+            else if(stringArray.count>=6 && i<stringArray.count){
                 randomIndex = Int(arc4random_uniform(UInt32(stringArray.count)))
                 suggestedSentenceList[i] = stringArray[randomIndex] // table view
-                //suggestedSentenceListInPickerView[i]=stringArray[randomIndex] // picker view
             }
-            else
-            {
+            else{
                 suggestedSentenceList[i] = " " // table view
-                //suggestedSentenceListInPickerView[i] = " " // picker view
             }
-            
+        }
+        if(suggestedSentenceList == [" ", " ", " ", " ", " "]){
+            suggestedSentenceList.removeAll()
         }
         suggestedSentenceDisplay.reloadData() //reloads data of table view
-        //selectSentencePickerView.reloadAllComponents() // reloads data of picker view
     }
     
     func narrowTheRangeOfSuggestedSentences(_ stringArray: inout [String], _ matchWithWord: String)
@@ -193,44 +178,19 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         var i = 0
         var newRangeOfSuggestedSentence = [""]
         //  var indexNeededToBeRemoved = [0]
-        while (i < stringArray.count)
-        {
-            
-            if (stringArray[i].range(of: matchWithWord) != nil)
-            {
+        while (i < stringArray.count){
+            if (stringArray[i].range(of: matchWithWord) != nil){
                 newRangeOfSuggestedSentence.append(stringArray[i])
             }
             i = i + 1
-            
         }
         sentenceRange = i
-        if(newRangeOfSuggestedSentence[0]=="")
-        {
+        if(newRangeOfSuggestedSentence[0]==""){
             newRangeOfSuggestedSentence.remove(at: 0)
             sentenceRange -= 1
         }
-        
-        refreshSuggestedSentencePickerView(&stringArray)
-        
+        refreshSuggestedSentenceTableView(&stringArray)
     }
-    
-    
-    func numberOfComponents(in selectSentencePickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ selectSentencePickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return suggestedSentenceListInPickerView.count
-    }
-    func pickerView(_ selectSentencePickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
-        return suggestedSentenceListInPickerView[row]
-    }
-    
-    func pickerView(_ selectSentencePickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        
-        selectedSentenceSavedInTextBox.text = suggestedSentenceListInPickerView[row] as String
-    }
-    
     
     
     @IBAction func makeButtonHandler(_ sender: UIButton) {
@@ -271,18 +231,15 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         let sentences = suggestedSentencesCoreDataSingleton.suggestedSentences.fetchSuggestedSentences();
         
         var storedBefore = false
-        for i in sentences!
-        {
-            if outputSentenceText.text as String! == (i.suggestedSentences as String!)
-            {
+        for i in sentences!{
+            if outputSentenceText.text as String! == (i.suggestedSentences as String!){
                 print("it is saved before")
                 print(outputSentenceText.text as String!)
                 storedBefore = true
                 break
             }
         }
-        if(storedBefore == false)
-        {
+        if(storedBefore == false){
             _ = suggestedSentencesCoreDataSingleton.suggestedSentences.saveGeneratedSentences(suggestedSentences: outputSentenceText.text as String!)
             print(outputSentenceText.text as String!)
             
@@ -290,12 +247,10 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         
         indexOfSelectedImageText = 0
         sentenceGeneratedFromCollectedWords = ""
-        suggestedSentenceListInPickerView = ["  ","  ","  ","  ","  "] // array for picker view
-        suggestedSentenceList = ["  ","  ","  ","  ","  "] // array for table view
+        suggestedSentenceList.removeAll()
         sentenceListFromMatchingTappedImageWithCoreData=[""]
         sentenceRange = 30
         suggestedSentenceDisplay.reloadData()
-        //selectSentencePickerView.reloadAllComponents()
        // refresh(_ object: suggestedSentencesCoreDataSingleton.suggestedSentences, true)
         
     }
@@ -328,12 +283,10 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         //Reloading Picker & Table View of Suggested sentences
         indexOfSelectedImageText = 0
         sentenceGeneratedFromCollectedWords = ""
-        suggestedSentenceListInPickerView = ["  ","  ","  ","  ","  "] // array for picker view
-        suggestedSentenceList = ["  ","  ","  ","  ","  "] // array for table view
+        suggestedSentenceList.removeAll()
         sentenceListFromMatchingTappedImageWithCoreData=[""]
         sentenceRange = 30
         suggestedSentenceDisplay.reloadData()
-        //selectSentencePickerView.reloadAllComponents() //picker view
         
     }
     
@@ -344,14 +297,11 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //PickerView
-        //selectSentencePickerView.isHidden = false
-        //selectSentencePickerView.delegate = self
-        //selectSentencePickerView.dataSource = self
         
         //Table View
         suggestedSentenceDisplay.delegate = self
         suggestedSentenceDisplay.dataSource = self
+        suggestedSentenceDisplay.backgroundColor = Settings.sharedValues.viewBackgroundColor
         
         //Sets background color of Picture Panel ViewController
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
@@ -456,18 +406,15 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         voiceRate = Double(sender.value / 100.0)
     }
     @IBAction func stopAudioButton(_ sender: UIButton) {
-        
         self.mySynthesizer.stopSpeaking(at: .immediate)
     }
     
     @IBAction func playAudioButton(_ sender: UIButton) {
-        if(wasPaused==true)
-        {
+        if(wasPaused==true){
             self.mySynthesizer.continueSpeaking()
             wasPaused=false;
         }
-        else
-        {
+        else{
             myUtterence = AVSpeechUtterance(string: outputSentenceText.text!);
             // myUtterence.rate = AVSpeechUtteranceMinimumSpeechRate
             myUtterence.rate = Float(voiceRate)
@@ -482,17 +429,6 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         self.mySynthesizer.pauseSpeaking(at: .word)
         wasPaused = true;
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
 }
 
 // HEX Value to UIColor converter
@@ -547,7 +483,7 @@ extension AdvancedViewController : UICollectionViewDataSource {
             collectionView.reloadData()
             self?.setSelectedStateStyle(viewClicked: (self?.collectionViewClick)! % 4)
             }
-        
+
         return cell
     }
     
@@ -579,7 +515,6 @@ extension AdvancedViewController : UICollectionViewDataSource {
             self.connectivesPanelState.textColor = UIColor.lightGray
 
              sentenceRangeBasedOnFirstImage(collectedWordsSoFar: self.sentenceImages.selectedText[self.indexOfSelectedImageText as Int!] as String!)
-           //  self.indexOfSelectedImageText += 1
             
         case 2://object
             //bolding words to emphasize selection
@@ -608,7 +543,6 @@ extension AdvancedViewController : UICollectionViewDataSource {
             self.verbPanelState.textColor = UIColor.lightGray
             self.objectPanelState.font = UIFont.systemFont(ofSize: CGFloat((self.picturePanelFontSize)), weight:.thin)
             self.objectPanelState.textColor = UIColor.lightGray
-            print("I am in case 3 now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             
         narrowTheRangeOfSuggestedSentences(&self.sentenceListFromMatchingTappedImageWithCoreData,self.sentenceImages.selectedText[self.indexOfSelectedImageText as Int!] as String!)
 
