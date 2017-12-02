@@ -15,7 +15,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBAction func DiscussionLink(_ sender: UIButton) {
         
-        if let url = NSURL(string:"https://www.google.com"){
+        if let url = NSURL(string:"https://sites.google.com/site/cmpt275project08pictation/"){
             UIApplication.shared.open(url as URL)
         }
     }
@@ -23,18 +23,15 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBAction func SendAction(_ sender: UIButton) {
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            
             self.present(mailComposeViewController, animated: true, completion: nil)
-            
-            
         }else{
             self.showSendMailErrorAlert()
-            
         }
         
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -46,15 +43,12 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients(["edleung@sfu.ca"])
+        mailComposerVC.setToRecipients(["edleung@sfu.ca", "aahuja@sfu.ca", "jamesonr@sfu.ca", "meihuiy@sfu.ca","bentonk@sfu.ca"])
         
         mailComposerVC.setSubject("Pictation - User Messages")
         mailComposerVC.setMessageBody("This is the message body", isHTML: false)
         
         return mailComposerVC
-        
-        
-        
     }
     
     

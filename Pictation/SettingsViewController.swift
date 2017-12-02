@@ -36,10 +36,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             fontStyleClick = 0
         }
         fontStyleSelect.titleLabel?.font = UIFont(name: fontStyleList[fontStyleClick], size: 20)
-        //Settings.sharedValues.systemFont = UIFont(name: fontStyleList[fontStyleClick], size: 20)
-        //        //Setting all background color values to the new viewBackgroundColor value
-        //        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
-        //        //BGColourButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
     }
 
     
