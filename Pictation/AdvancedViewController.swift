@@ -196,6 +196,9 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
     @IBAction func makeButtonHandler(_ sender: UIButton) {
         var verbWithS = ""
         let addWantTo = "want to"
+        let addWantsTo = "wants to"
+        let addOn = "on"
+        let addFor = "for"
         //A check to make sure selectedText is not accessed when it doesn't have elements yet
         if (currenctSelectedWord != "" && sentenceImages.getSize() != 0) {
             var sentence : String = ""
@@ -212,6 +215,18 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
                         verbWithS = sentenceImages.selectedText[i]
                         verbWithS += "s"
                         sentence += verbWithS
+                        sentence += " "
+                    }
+                    else if (sentenceImages.selectedText[i-1] == "paint" || sentenceImages.selectedText[i-1] == "read"){
+                        sentence += addOn
+                        sentence += " "
+                        sentence += self.sentenceImages.selectedText[i]
+                        sentence += " "
+                    }
+                    else if (sentenceImages.selectedText[i-1] == "wait"){
+                        sentence += addFor
+                        sentence += " "
+                        sentence += self.sentenceImages.selectedText[i]
                         sentence += " "
                     }
                     else {
