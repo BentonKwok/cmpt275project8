@@ -283,6 +283,8 @@ extension IntermediateViewController : UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
         cell.buttonCell.setBackgroundImage(allImages[collectionViewClick][indexPath.row], for: .normal)
+        cell.cellNameIntermediate.text = UtilHelper.removeLastComponentOfString(allTitles[collectionViewClick][indexPath.row], ".jpg")
+        cell.cellNameIntermediate.textAlignment = .center
         cell.layer.borderWidth = 4
         cell.layer.borderColor = UIColor.darkGray.cgColor
         cell.layer.cornerRadius = 8
