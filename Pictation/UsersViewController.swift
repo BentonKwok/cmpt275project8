@@ -52,11 +52,11 @@ class UsersViewController: UIViewController {
                             * 3. Run the app and click all the way to settings then stop the app
                             * 4. undo the comment changes you made and now the app should work
                             ***************************/
-                            GuestInfo = data
+                            GuestInfo = fillFields(UserData: data)
                             //context.delete(data)
                         }
                         else{
-                            UsersInfo.append(data)
+                            UsersInfo.append(fillFields(UserData: data))
                         }
                     }
                 }
@@ -71,7 +71,6 @@ class UsersViewController: UIViewController {
                     print("Failed saving")
                 }
             }
-           // context.delete(GuestInfo)
         } catch {
             print("Error Loading User Data")
         }
@@ -106,9 +105,9 @@ class UsersViewController: UIViewController {
         let context = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
         let UserData = NSManagedObject(entity: entity!, insertInto: context)
-        UserData.setValue(CURRENT_USER, forKey: "name")
+        UserData.setValue("Guest", forKey: "name")
         UserData.setValue(BEGINNER_LEVEL, forKey: "commlevel")
-        UserData.setValue(true, forKey: "passwordEnable")
+        UserData.setValue(false, forKey: "passwordEnable")
         UserData.setValue("", forKey: "securityQuestion")
         UserData.setValue("", forKey: "securityAnswer")
         UserData.setValue("", forKey: "password")

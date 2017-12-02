@@ -49,7 +49,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     let INTERMEDIATE_LEVEL: Int = 1
     let ADVANCED_LEVEL: Int = 2
     var UserInfo : NSManagedObject?
-    var newUser : Bool = false
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // class varible maintain selected color value
@@ -119,6 +118,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Overriding the back button
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.cancel(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+        
         //Sets up background colour and BGColourButton
         self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
         changeColorButton.layer.cornerRadius = 1
@@ -137,10 +141,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         //Add Done button to navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(doneTapped))
         
-        //Displaying current system font
-        //fontStyleSelect.setTitle("Font Style", for: .normal)
-        //fontStyleSelect.titleLabel?.font = UIFont(name: "StarJedi", size: 20)
-        
         //Retrieve the user settings
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
@@ -151,20 +151,18 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
             for data in result as! [NSManagedObject] {
                 if(data.value(forKey: "name") != nil)
                 {
-                    if((data.value(forKey: "name") as! String) == CURRENT_USER){
-                        UserInfo = data
+                    if((data.value(forKey: "name") as? String) == CURRENT_USER){
+                        UserInfo = fillFields(UserData: data)
                         break
                     }
                 }
             }
             if( UserInfo == nil){
                 UserInfo = initUserInfo()
-                newUser = true
             }
             
         } catch {
             UserInfo = initUserInfo()
-            newUser = true
         }
         
         //set up the containers in the table to match stored user settings
@@ -177,8 +175,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         Settings.sharedValues.viewBackgroundColor = UIColor(hexString : UserInfo?.value(forKey: "bg_colour") as! String)
         changeColorButton.backgroundColor = Settings.sharedValues.viewBackgroundColor
         fontStyleSelect.titleLabel?.font = UIFont(name: UserInfo?.value(forKey: "fontstyle") as! String, size: 20)
-     //   fontStyleClick = fontStyleList.index(of: (UserInfo?.value(forKey: "fontstyle") as! String))!
         
+        fontStyleClick = 0
         for _ in fontStyleList{
             if((UserInfo?.value(forKey: "fontstyle") as! String) == fontStyleList[fontStyleClick]){
                 break
@@ -209,6 +207,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    //back button is pressed undo all changes made to settings
+    @objc func cancel(sender: UIBarButtonItem) {
+        let context = appDelegate.persistentContainer.viewContext
+        context.rollback()
+        
+        _ = navigationController?.popViewController(animated: true)
     }
     
     //Done button handler
@@ -275,7 +281,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UIPopo
         UserInfo?.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
         UserInfo?.setValue(1, forKey: "fontsize")
         UserInfo?.setValue("", forKey: "userPictures")
-        UserInfo?.setValue("Helvetica-Bold", forKey: "fontstyle")
+        UserInfo?.setValue("Helvetica", forKey: "fontstyle")
         
         return UserInfo!
     }
