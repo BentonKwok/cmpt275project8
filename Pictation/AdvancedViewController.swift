@@ -2,8 +2,7 @@ import UIKit
 import AVFoundation
 
 
-class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate//, UIPickerViewDataSource,UIPickerViewDelegate
-{
+class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate{
     
     //MARK: Properties
     @IBOutlet weak var collectionView: UICollectionView!
@@ -120,6 +119,7 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
         }
     }
     
+    // MARK:
     func sentenceRangeBasedOnFirstImage(collectedWordsSoFar: String)
     {
         let sentences = suggestedSentencesCoreDataSingleton.suggestedSentences.fetchSuggestedSentences()

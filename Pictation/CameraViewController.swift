@@ -3,7 +3,7 @@ import UIKit
 class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(colorWithHexValue : 0xD6EAF8)
+        self.view.backgroundColor = Settings.sharedValues.viewBackgroundColor
     }
     
     // The save button on the camera. This will save the user selected photo at the location they specified during the alert notification prompts
