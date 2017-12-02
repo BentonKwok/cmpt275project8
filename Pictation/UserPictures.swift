@@ -26,7 +26,7 @@ class UserPictures{
             for data in result as! [NSManagedObject] {
                 if (data.value(forKey: "name") as? String) != nil{
                     if((data.value(forKey: "name") as! String) == CURRENT_USER){
-                        User = data
+                        User = fillFields(UserData: data)
                         break
                     }
                 }
@@ -69,4 +69,41 @@ class UserPictures{
         
         return newPicture
     }
+}
+
+//returns an NSManaged object where none of the fields are nil
+func fillFields(UserData: NSManagedObject) -> NSManagedObject {
+    let filledUserData = UserData
+    
+    if (filledUserData.value(forKey: "name") as? String) == nil{
+        filledUserData.setValue(CURRENT_USER, forKey: "name")
+    }
+    if (filledUserData.value(forKey: "commlevel") as? Int) == nil{
+        filledUserData.setValue(0, forKey: "commlevel")
+    }
+    if (filledUserData.value(forKey: "passwordEnable") as? Bool) == nil{
+        filledUserData.setValue(false, forKey: "passwordEnable")
+    }
+    if (filledUserData.value(forKey: "securityQuestion") as? String) == nil{
+        filledUserData.setValue("", forKey: "securityQuestion")
+    }
+    if (filledUserData.value(forKey: "securityAnswer") as? String) == nil{
+        filledUserData.setValue("", forKey: "securityAnswer")
+    }
+    if (filledUserData.value(forKey: "password") as? String) == nil{
+        filledUserData.setValue("", forKey: "password")
+    }
+    if (filledUserData.value(forKey: "bg_colour") as? String) == nil{
+        filledUserData.setValue(Settings.sharedValues.viewBackgroundColor.toHexString(), forKey: "bg_colour")
+    }
+    if (filledUserData.value(forKey: "fontsize") as? Int) == nil{
+        filledUserData.setValue(1, forKey: "fontsize")
+    }
+    if (filledUserData.value(forKey: "userPictures") as? String) == nil{
+        filledUserData.setValue("", forKey: "userPictures")
+    }
+    if (filledUserData.value(forKey: "fontstyle") as? String) == nil{
+        filledUserData.setValue("Helvetica", forKey: "fontstyle")
+    }
+    return filledUserData
 }
