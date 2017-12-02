@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mQD-dW-LLM">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -802,6 +802,15 @@
                                                         <action selector="logout:" destination="b3d-vN-0LF" eventType="touchUpInside" id="zwd-OO-8bP"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g49-9M-Nai">
+                                                    <rect key="frame" x="709" y="7" width="32" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.99401025109447949" green="1" blue="0.86228774635635763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="Help"/>
+                                                    <connections>
+                                                        <segue destination="gEU-MM-AzZ" kind="show" id="kmr-yu-PRB"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="pdr-xx-sAw" secondAttribute="bottom" id="7Lv-jU-GKD"/>
@@ -1327,6 +1336,339 @@
             </objects>
             <point key="canvasLocation" x="453.90625" y="375.5859375"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Zkc-QF-ngD">
+            <objects>
+                <viewController id="gEU-MM-AzZ" customClass="ViewController" customModule="Pictation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ymu-mM-RXw">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequently Asked Questions (FAQs)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pG-d5-q5o">
+                                <rect key="frame" x="0.0" y="86" width="768" height="20.5"/>
+                                <color key="backgroundColor" red="0.63052552939999995" green="0.088459096850000002" blue="0.31155881289999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="RCR-BO-XKa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" red="0.91593807940000005" green="0.97690361739999998" blue="0.96886020900000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="0.97818094489999996" green="0.96034175160000002" blue="0.029263785109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boM-JT-5L2">
+                                <rect key="frame" x="0.0" y="150" width="768" height="525"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">
+
+1. What is the purpose of making profiles?</string>
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">To save pictures privately and to hide it from other users.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="36" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="2. How to make a sentence?">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">The sentence formation is divided into three sub categories i.e. Subjects, Verbs and Objects. The user is prompted to select an image from Subjects category followed by Verb category and finally selecting an Object before clicking the MAKE button.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="36" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="3. How can I adjust text to speech’s speed?">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">There is a Speech rate bar in all Beginner, Intermediate and Advanced modes. You can simply adjust the speed by scrolling left or right on the speech rate bar.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="36" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">4. How can I add more picture?
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">Go to settings and click camera, choose a source for your picture (i.e. Camera or Photo Library) and assign a name to the image and finally save it in a specific image category
+(i.e. Subjects, Verbs or Objects).
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="36" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="5. How can I change background colour?">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">Go to settings and pick a colour from the colour palette and click Save that will change the background colour.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="36" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="6. How can I leave any comments to the developers of the application?">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">To leave comments, you can simply email to the developers using the link given below or join a discussion using our google discussion page.
+
+
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="36" headIndent="36" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="18" headIndent="18" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tW5-vg-cfJ">
+                                <rect key="frame" x="0.0" y="650" width="768" height="33"/>
+                                <color key="backgroundColor" red="0.63052552939999995" green="0.088459096850000002" blue="0.31155881289999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="JJV-IK-fHU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" red="0.91593807940000005" green="0.97690361739999998" blue="0.96886020900000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="0.97818094489999996" green="0.96034175160000002" blue="0.029263785109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" text="Email" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-IP-SyP">
+                                <rect key="frame" x="20" y="705" width="58" height="30"/>
+                                <color key="backgroundColor" red="0.50370109080000003" green="0.073570601639999997" blue="0.24938359860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" text="Discussions" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iAL-wO-ALF">
+                                <rect key="frame" x="20" y="847" width="99" height="30"/>
+                                <color key="backgroundColor" red="0.50370109080000003" green="0.073570601639999997" blue="0.24938359860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9H-FD-0jt">
+                                <rect key="frame" x="20" y="759" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="COf-AT-eVh"/>
+                                    <constraint firstAttribute="height" constant="30" id="F18-SO-IJi"/>
+                                </constraints>
+                                <state key="normal" title="Send an Email"/>
+                                <connections>
+                                    <action selector="SendAction:" destination="gEU-MM-AzZ" eventType="touchUpInside" id="uV3-fI-gGl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osP-rd-vGM">
+                                <rect key="frame" x="20" y="898" width="112" height="30"/>
+                                <state key="normal" title="Start Discussion"/>
+                                <connections>
+                                    <action selector="DiscussionLink:" destination="gEU-MM-AzZ" eventType="touchUpInside" id="8Ou-Oe-Noc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9883034825" green="0.98478966950000002" blue="0.9596365094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tW5-vg-cfJ" firstAttribute="trailing" secondItem="94A-mZ-59y" secondAttribute="trailing" id="0wL-jH-tSX"/>
+                            <constraint firstItem="U9H-FD-0jt" firstAttribute="top" secondItem="Yu7-IP-SyP" secondAttribute="bottom" constant="24" id="4r8-27-ow7"/>
+                            <constraint firstItem="U9H-FD-0jt" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" constant="20" id="5BO-dl-FMB"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" id="6CV-cO-Cwd"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="trailing" secondItem="Yu7-IP-SyP" secondAttribute="trailing" constant="690" id="6Mr-m2-Uld"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="trailing" secondItem="94A-mZ-59y" secondAttribute="trailing" id="Cy9-UK-WeA"/>
+                            <constraint firstItem="osP-rd-vGM" firstAttribute="top" secondItem="iAL-wO-ALF" secondAttribute="bottom" constant="21" id="E9k-TM-c5z"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" id="EYg-h9-khc"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" id="FTC-xZ-BkU"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="trailing" secondItem="94A-mZ-59y" secondAttribute="trailing" id="G7z-kb-X5E"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="top" secondItem="94A-mZ-59y" secondAttribute="top" constant="53" id="Gx5-CY-kMN"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="trailing" secondItem="94A-mZ-59y" secondAttribute="trailing" id="H2x-lW-LmW"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="top" secondItem="4pG-d5-q5o" secondAttribute="bottom" constant="43.5" id="H36-JE-B0j"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="bottom" secondItem="U9H-FD-0jt" secondAttribute="bottom" constant="235" id="H75-RQ-EhS"/>
+                            <constraint firstItem="tW5-vg-cfJ" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" id="JaN-7p-IPE"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" id="Lww-5R-wFJ"/>
+                            <constraint firstItem="U9H-FD-0jt" firstAttribute="top" secondItem="Yu7-IP-SyP" secondAttribute="bottom" constant="8" id="N0s-pd-NgI"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="top" secondItem="4pG-d5-q5o" secondAttribute="bottom" constant="42.5" id="N4b-p0-jn8"/>
+                            <constraint firstItem="U9H-FD-0jt" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" constant="20" id="RYN-6d-2JG"/>
+                            <constraint firstItem="osP-rd-vGM" firstAttribute="top" secondItem="iAL-wO-ALF" secondAttribute="bottom" constant="21" id="SIc-IN-1VV"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="trailing" secondItem="94A-mZ-59y" secondAttribute="trailing" id="Scn-e0-Wt0"/>
+                            <constraint firstItem="osP-rd-vGM" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" constant="20" id="T2E-NL-xek"/>
+                            <constraint firstItem="Yu7-IP-SyP" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" constant="20" id="TVM-p6-RCU"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="trailing" secondItem="94A-mZ-59y" secondAttribute="trailing" id="TWS-5X-dIi"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="bottom" secondItem="U9H-FD-0jt" secondAttribute="bottom" constant="219" id="TYs-ZD-sKR"/>
+                            <constraint firstItem="Yu7-IP-SyP" firstAttribute="top" secondItem="tW5-vg-cfJ" secondAttribute="bottom" constant="22" id="Tl7-xd-MhX"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="top" secondItem="94A-mZ-59y" secondAttribute="top" id="UFa-K3-Cq7"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="trailing" secondItem="iAL-wO-ALF" secondAttribute="trailing" constant="649" id="Ufd-r1-VAr"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="top" secondItem="4pG-d5-q5o" secondAttribute="bottom" constant="42.5" id="ZGz-s2-LWQ"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="bottom" secondItem="osP-rd-vGM" secondAttribute="bottom" constant="96" id="ZTU-hR-nId"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="top" secondItem="4pG-d5-q5o" secondAttribute="bottom" constant="43" id="aDW-aD-V14"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="top" secondItem="94A-mZ-59y" secondAttribute="top" constant="66" id="aEN-Xu-Nw4"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="trailing" secondItem="U9H-FD-0jt" secondAttribute="trailing" constant="651" id="cW1-9y-q9z"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" id="dIg-NL-fPO"/>
+                            <constraint firstItem="iAL-wO-ALF" firstAttribute="top" secondItem="U9H-FD-0jt" secondAttribute="bottom" constant="42" id="er5-rs-Yhs"/>
+                            <constraint firstItem="boM-JT-5L2" firstAttribute="trailing" secondItem="94A-mZ-59y" secondAttribute="trailing" id="hTC-FZ-lqc"/>
+                            <constraint firstItem="U9H-FD-0jt" firstAttribute="top" secondItem="Yu7-IP-SyP" secondAttribute="bottom" constant="24" id="hsV-ge-dBK"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="trailing" secondItem="U9H-FD-0jt" secondAttribute="trailing" constant="651" id="l8R-q5-WlF"/>
+                            <constraint firstItem="94A-mZ-59y" firstAttribute="trailing" secondItem="osP-rd-vGM" secondAttribute="trailing" constant="636" id="mWY-dO-h2c"/>
+                            <constraint firstItem="tW5-vg-cfJ" firstAttribute="top" secondItem="boM-JT-5L2" secondAttribute="bottom" constant="8" id="mqZ-wQ-9ZE"/>
+                            <constraint firstItem="tW5-vg-cfJ" firstAttribute="top" secondItem="boM-JT-5L2" secondAttribute="bottom" constant="8" id="nKJ-Z6-Van"/>
+                            <constraint firstItem="Yu7-IP-SyP" firstAttribute="top" secondItem="tW5-vg-cfJ" secondAttribute="bottom" constant="22" id="oUR-FU-gda"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="top" secondItem="94A-mZ-59y" secondAttribute="top" constant="66" id="ofM-uS-8Yw"/>
+                            <constraint firstItem="iAL-wO-ALF" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" constant="20" id="qrn-Qe-cjt"/>
+                            <constraint firstItem="4pG-d5-q5o" firstAttribute="leading" secondItem="94A-mZ-59y" secondAttribute="leading" id="rcf-P6-IAA"/>
+                            <constraint firstItem="tW5-vg-cfJ" firstAttribute="top" secondItem="boM-JT-5L2" secondAttribute="bottom" constant="8" id="t7L-MJ-hmy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="94A-mZ-59y"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VfD-Yy-j5F" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3280" y="-641"/>
+        </scene>
     </scenes>
     <resources>
         <image name="create" width="100" height="100"/>
@@ -1337,10 +1679,10 @@
         <image name="undo" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="arg-PJ-QV9"/>
+        <segue reference="1vI-ev-IrH"/>
         <segue reference="xxE-eh-9xa"/>
         <segue reference="LBc-jJ-fQO"/>
-        <segue reference="qUM-3B-JQM"/>
-        <segue reference="uai-St-tLF"/>
+        <segue reference="2U3-2p-Ijy"/>
+        <segue reference="rv6-lD-qnG"/>
     </inferredMetricsTieBreakers>
 </document>

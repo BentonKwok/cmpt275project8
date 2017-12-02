@@ -15,6 +15,7 @@
 		45A86A5E1FCE0A75009C33F5 /* LoginAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A86A5D1FCE0A75009C33F5 /* LoginAlert.swift */; };
 		5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1478801FB059F000A617DB /* CameraViewController.swift */; };
 		5AFDA9681FC7B13B007F1425 /* suggestedSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */; };
+		86FF03C11FD2705C00F066F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FF03C01FD2705C00F066F3 /* ViewController.swift */; };
 		9085FED91FD15A010011FFBE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9085FED81FD159560011FFBE /* QuartzCore.framework */; };
 		90C4FF541FBECF3500AB802D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90C4FF531FBECF3500AB802D /* Assets.xcassets */; };
 		90EFE5081FCE88F600FFDC0A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFE5071FCE88F600FFDC0A /* ColorPickerViewController.swift */; };
@@ -64,6 +65,7 @@
 		45A86A5D1FCE0A75009C33F5 /* LoginAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlert.swift; sourceTree = "<group>"; };
 		5A1478801FB059F000A617DB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5AFDA9671FC7B13B007F1425 /* suggestedSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suggestedSentences.swift; sourceTree = "<group>"; };
+		86FF03C01FD2705C00F066F3 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		905854DB1FCFEDD900BDA631 /* Starjhol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Starjhol.ttf; sourceTree = "<group>"; };
 		9085FED81FD159560011FFBE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		90C4FF531FBECF3500AB802D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				C61B33721FA1161B006CAC0D /* Main.storyboard */,
 				90EFE5071FCE88F600FFDC0A /* ColorPickerViewController.swift */,
 				90EFE5091FCE8CC600FFDC0A /* Colors.plist */,
+				86FF03C01FD2705C00F066F3 /* ViewController.swift */,
 				5A1478801FB059F000A617DB /* CameraViewController.swift */,
 				C666C3A71FA3086700C6E562 /* BeginnerLevelViewController.swift */,
 				452D39631FAA2A1C00C4850E /* IntermediateViewController.swift */,
@@ -369,6 +372,7 @@
 				C6A9C0121FBD132E0041DBCE /* Constants.swift in Sources */,
 				C6A9C01A1FC2A2920041DBCE /* AdvancedViewController.swift in Sources */,
 				452B62D21FD0D130008D71CB /* UserPictures.swift in Sources */,
+				86FF03C11FD2705C00F066F3 /* ViewController.swift in Sources */,
 				C666C3A81FA3086700C6E562 /* BeginnerLevelViewController.swift in Sources */,
 				45A86A5E1FCE0A75009C33F5 /* LoginAlert.swift in Sources */,
 				5A1478811FB059F000A617DB /* CameraViewController.swift in Sources */,
