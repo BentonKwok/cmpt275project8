@@ -41,15 +41,7 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate{
             for i in 0...(self.sentenceImages.selectedText.count-1){
                 if i >= 1
                 {
-                    // Grammer correction for the sentence combinations be are able to currently able to offer
-                    if (sentenceImages.selectedText[i-1] == "I" ||  sentenceImages.selectedText[i-1] == "me" || sentenceImages.selectedText[i-1] == "we" ||  sentenceImages.selectedText[i-1] == "they")
-                    {
-                        sentence += addWantTo
-                        sentence += " "
-                        sentence += self.sentenceImages.selectedText[i]
-                        sentence += " "
-                    }
-                    else if sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she"
+                    if sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she"
                     {
                         verbWithS = sentenceImages.selectedText[i]
                         verbWithS += "s"
@@ -93,8 +85,6 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate{
             print(outputSentenceText.text as String!)
             
         }
-
-        
     }
 
 
@@ -251,17 +241,6 @@ class IntermediateViewController: UIViewController, AVAudioPlayerDelegate{
         self.mySynthesizer.pauseSpeaking(at: .word)
         wasPaused = true;
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
 }
 
 /// Collection View data

@@ -205,13 +205,13 @@ class AdvancedViewController: UIViewController, AVAudioPlayerDelegate, UITableVi
             for i in 0...(self.sentenceImages.selectedText.count-1) {
                 if i >= 1 {
                     // Grammer correction for the sentence combinations be are able to currently able to offer
-                    if (sentenceImages.selectedText[i-1] == "I" ||  sentenceImages.selectedText[i-1] == "me" || sentenceImages.selectedText[i-1] == "we" ||  sentenceImages.selectedText[i-1] == "they") {
-                        sentence += addWantTo
-                        sentence += " "
-                        sentence += self.sentenceImages.selectedText[i]
-                        sentence += " "
-                    }
-                    else if (sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she" ) {
+//                    if (sentenceImages.selectedText[i-1] == "I" ||  sentenceImages.selectedText[i-1] == "me" || sentenceImages.selectedText[i-1] == "we" ||  sentenceImages.selectedText[i-1] == "they") {
+//                        sentence += addWantTo
+//                        sentence += " "
+//                        sentence += self.sentenceImages.selectedText[i]
+//                        sentence += " "
+//                    }
+                    if (sentenceImages.selectedText[i-1] == "he" || sentenceImages.selectedText[i-1] == "she" ) {
                         verbWithS = sentenceImages.selectedText[i]
                         verbWithS += "s"
                         sentence += verbWithS
